@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour {
         if (dotManager.finishCheckAfterDestroy && finishMoveRandomPointBack) {
             finishMoveRandomPointBack = false;
             dotManager.finishCheckAfterDestroy = false;
-            UpdateColorNumber ();
+            // UpdateColorNumber ();
             GenerateRings ();
             uIManager.CheckAndShowWatchAdOption ();
         }

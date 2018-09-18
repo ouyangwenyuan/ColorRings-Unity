@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class CSVReader : MonoBehaviour {
 
+	public Text _display;
 	private void OnGUI () {
-		if (GUILayout.Button ("Load")) {
-			Load ();
-		}
 		if (GUILayout.Button ("Save")) {
 			Save ();
+		}
+		if (GUILayout.Button ("Load")) {
+			Load ();
 		}
 	}
 
@@ -28,7 +29,7 @@ public class CSVReader : MonoBehaviour {
 		_loadPath = Application.dataPath + "/Load/";
 		_savePath = Application.dataPath + "/Save/";
 		Load ();
-		DontDestroyOnLoad(this);
+		// DontDestroyOnLoad (this);
 	}
 
 	/// <summary>
@@ -50,27 +51,25 @@ public class CSVReader : MonoBehaviour {
 		_table = CSVTable.CreateTable (_fileName, content);
 
 		// 添加测试
-		Test ();
+		// Test ();
 		toObject ();
 	}
 
 	//cloumnName
-		private string[] cloumnName = { "_id", "Levelname", "targetScore", "targetCombo", "targetRingColor", "targetRingCount", "totalColorCount", "usedTime" };
+	private string[] cloumnName = { "_id", "Levelname", "targetScore", "targetCombo", "targetRingColor", "targetRingCount", "totalColorCount", "usedTime" };
 	public static List<GameLevelData> gameLevelDatas = new List<GameLevelData> ();
 	private void toObject () {
 		List<string> keys = CSVTable._idValues; // ids 
-		Debug.Log ("keyCount +" + (keys.Count - 1));
-		int levelCount = 20; //ids count
-		//目前 level 和id 为自然数。所以直接遍历自然数，如果不为自然数，遍历keys；
-		for (int i = 1; i <= levelCount; i++) {
-			GameLevelData levelData = new GameLevelData ();
-			levelData.level = i;
-			levelData._id = i.ToString ();
+		for (int i = 0; i < keys.Count; i++) {
+			GameLevelData levelData = ScriptableObject.CreateInstance<GameLevelData> ();
+			levelData.level = int.Parse (keys[i]);
+			levelData._id = keys[i];
 			levelData.Levelname = _table[levelData._id]["Levelname"];
 			levelData.targetScore = int.Parse (_table[levelData._id]["targetScore"]);
 			levelData.targetCombo = int.Parse (_table[levelData._id]["targetCombo"]);
-			levelData.targetRingColor = int.Parse (_table[levelData._id]["targetRingColor"]);
-			levelData.targetRingCount = int.Parse (_table[levelData._id]["targetRingCount"]);
+			levelData.targetRingColors = _table[levelData._id]["targetRingColor"].Split (';');
+			levelData.targetRingCounts = _table[levelData._id]["targetRingCount"].Split (';');
+			Debug.Log ("targetRingColors count= " + levelData.targetRingColors.Length + ",targetRingCounts =" + levelData.targetRingCounts.Length);
 			levelData.totalColorCount = int.Parse (_table[levelData._id]["totalColorCount"]);
 			levelData.usedTime = int.Parse (_table[levelData._id]["usedTime"]);
 			gameLevelDatas.Add (levelData);
@@ -109,23 +108,40 @@ public class CSVReader : MonoBehaviour {
 	/// </summary>
 	private void Test () {
 		// 显示所有数据（以调试格式显示)
-		Debug.Log (_table.ToString ());
+		// Debug.Log (_table.ToString ());
+		List<string> keys = CSVTable._idValues; // ids 
+		Debug.Log ("keyCount +" + (keys.Count) + ",_table.Atrribute count = " + _table.AtrributeKeys.Count);
 
 		// 显示所有数据（以存储格式显示）
 		string text = "_table:" + _table.Name; //_table.GetContent ();
-		List<string> ids = new List<string> ();
+		// List<string> ids = new List<string> ();
+		foreach (string item in keys) {
+			text += item;
+			text += "|";
+		}
+		Debug.Log ("keys= " + text);
+		text = "\n===========\n";
+		List<string> Atrributes = new List<string> ();
 		foreach (string key in _table.AtrributeKeys) {
+			Atrributes.Add (key);
 			text += key;
 			text += "|";
 		}
-		text += "\n======================\n";
-		for (int i = 1; i <= 20; i++) {
-			// foreach (string key in _table.AtrributeKeys) {
-			// 	text += _table[i.ToString ()][key];
-			// 	text += "|";
-			// }
-			text += "\n";
+		Debug.Log ("AtrributeKeys= " + text);
+
+		// text += "\n======================\n";
+		// for (int i = 1; i <= 20; i++) {
+		// 	foreach (string key in _table.AtrributeKeys) {
+		// 		text += _table[i.ToString ()][key];
+		// 		text += "|";
+		// 	}
+		// 	text += "\n";
+		// }
+
+		if (_display) {
+			_display.text = _table.ToString ();
 		}
+
 		// // 拿到某一数据
 		// _display.text += "\n" + "1001的年龄: " + _table["1001"]["年龄"];
 		// // 拿到数据对象
@@ -152,5 +168,4 @@ public class CSVReader : MonoBehaviour {
 		// _display.text += "\n" + "还剩下:" + "\n" + _table.GetContent ();
 	}
 
-	
 }

@@ -8,8 +8,10 @@ public class GameLevelData : ScriptableObject {
 	public string Levelname;
 	public int targetScore;
 	public int targetCombo;
-	public int targetRingColor;
-	public int targetRingCount;
+	// public int targetRingColor;
+	// public int targetRingCount;
+	public string[] targetRingColors;
+	public string[] targetRingCounts;
 	public int usedTime;
 	public int totalColorCount;
 	// [Header ("Width")]
@@ -22,4 +24,6 @@ public class GameLevelData : ScriptableObject {
 	// public string posRings; //1,x,2,y,4,z-0,0|1,x,2,y,4,z-2,2
 	// [Header ("Blocks")]
 	// public string posBlocks; //0,0,x|1,0,y 
+
+	
 }

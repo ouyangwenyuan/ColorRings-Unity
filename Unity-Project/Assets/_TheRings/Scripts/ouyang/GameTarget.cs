@@ -8,9 +8,9 @@ public class GameTarget : MonoBehaviour {
 	public Text TimeText; //在UI里显示时间
 	// Use this for initialization
 	void Start () {
-		int currentLevel = GameRunState.currentLevel.GetValue ();
+		int currentLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
 		GameLevelData levelData = CSVReader.gameLevelDatas[currentLevel - 1];
-		TotalTime = levelData.usedTime * 60;
+		TotalTime = levelData.usedTime;
 		StartCoroutine (startTime ());
 	}
 
@@ -41,7 +41,7 @@ public class GameTarget : MonoBehaviour {
 
 				//游戏结束
 				GameManager.Instance.gameOver = true;
-				
+
 			}
 
 			mumite = TotalTime / 60; //输出显示分

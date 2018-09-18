@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SgLib;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 struct Line {
     public Vector2 Position { get; set; }
@@ -51,13 +52,13 @@ public class DotManager : MonoBehaviour {
     private void Start () {
         //
         if (gameType == 0) {
-            int currentLevel = GameRunState.currentLevel.GetValue ();
+            int currentLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
             GameLevelData levelData = CSVReader.gameLevelDatas[currentLevel - 1];
-            targetRingColor = levelData.targetRingColor;
+            targetRingColor = int.Parse (levelData.targetRingColors[0]);
             targetScore = levelData.targetScore;
             targetRing.GetComponent<Image> ().color = UIManager.ringColors[targetRingColor];
             targetComboCount.text = levelData.targetCombo + "";
-            targetRingCount.text = levelData.targetRingCount + "";
+            targetRingCount.text = levelData.targetRingCounts + "";
         }
 
     }
@@ -125,7 +126,7 @@ public class DotManager : MonoBehaviour {
         yield return null;
 
         //Caculate score and change ring time
-        int scoreAdded = combo * listDestroyRing.Count;
+        int scoreAdded = combo * listDestroyRing.Count * 10;
         if (combo > 1) {
             cameraControler.ShakeCamera ();
             ShowComboText (comboText.length);
@@ -140,10 +141,15 @@ public class DotManager : MonoBehaviour {
             ScoreManager.Instance.AddScore (scoreAdded);
             SoundManager.Instance.PlaySound (SoundManager.Instance.lineDestroy);
             if (gameType == 0) {
-                if (ScoreManager.Instance.Score >= targetScore / 10) {
+                if (ScoreManager.Instance.Score >= targetScore) {
                     GameManager.Instance.gameOver = true;
                     // 过关进入下一关
-                    GameRunState.currentLevel.ChangeValue (1);
+                    // GameRunState.currentLevel.ChangeValue (1);
+                    int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
+                    PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
+                    Debug.Log (",reallevel=" + curLevel + 1);
+                    SceneManager.LoadScene ("MapScene");
+
                 }
             }
         }
