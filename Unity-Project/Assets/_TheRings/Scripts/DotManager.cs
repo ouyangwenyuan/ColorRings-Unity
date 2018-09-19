@@ -14,14 +14,14 @@ struct Line {
 
 public class DotManager : MonoBehaviour {
     public int gameType = 0; // 0- level mode ,1 - mess mode , 2 - score mode
-    public Image targetRing;
-    public Text targetRingCount;
-    public Text targetComboCount;
-    int targetComboTotalCnt;
-    int targetRingTotalCnt;
-    int targetRingColor;
+    public Text levelTx;
+    public GameObject TargetContainer;
+    TargetItem scoreItem;
+    TargetItem comboItem;
+    TargetItem[] ringItems;
+    int currentLevel;
     int targetScore;
-
+    int targetComboTotalCnt;
     public GameObject lineObject;
     [HideInInspector]
     public int combo;
@@ -52,22 +52,33 @@ public class DotManager : MonoBehaviour {
     private void Start () {
         //
         if (gameType == 0) {
-            int currentLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
+            // int currentLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
+            currentLevel = GameState.levelindex;
+            levelTx.text = currentLevel + "";
             GameLevelData levelData = CSVReader.gameLevelDatas[currentLevel - 1];
-            targetRingColor = int.Parse (levelData.targetRingColors[0]);
-            targetScore = levelData.targetScore;
-            targetRing.GetComponent<Image> ().color = UIManager.ringColors[targetRingColor];
-            targetComboCount.text = levelData.targetCombo + "";
-            targetRingCount.text = levelData.targetRingCounts + "";
+            targetScore = int.Parse (levelData.targetScore);
+
+            scoreItem = Instantiate (UIManager.Instance.targetItem);
+            scoreItem.setData ("score", levelData.targetScore);
+            scoreItem.transform.parent = TargetContainer.transform;
+
+            comboItem = Instantiate (UIManager.Instance.targetItem);
+            comboItem.setData ("combo", levelData.targetCombo);
+            comboItem.transform.parent = TargetContainer.transform;
+
+            ringItems = new TargetItem[levelData.targetRingCounts.Length];
+            for (int i = 0; i < levelData.targetRingCounts.Length; i++) {
+                TargetItem ringItem = Instantiate (UIManager.Instance.targetItem);
+                ringItem.setData ("", levelData.targetRingCounts[i], int.Parse (levelData.targetRingColors[i]));
+                ringItem.transform.parent = TargetContainer.transform;
+                ringItems[i] = ringItem;
+            }
+
         }
 
     }
     // Update is called once per frame
     void Update () {
-        if (gameType == 0) {
-            targetComboCount.text = targetComboTotalCnt.ToString ();
-            targetRingCount.text = targetRingTotalCnt.ToString ();
-        }
 
         if (GameManager.Instance.finishDrop) //Finish drop -> check all ring at that dot, caculate combo and destroy rings
         {
@@ -87,6 +98,11 @@ public class DotManager : MonoBehaviour {
                 HideCombo ();
             }
             StartCoroutine (DestroyRings ());
+        }
+
+        if (gameType == 0) {
+            comboItem.setValue (targetComboTotalCnt);
+
         }
 
     }
@@ -115,10 +131,17 @@ public class DotManager : MonoBehaviour {
         for (int i = 0; i < dots.Length; i++) {
             for (int j = 0; j < dots[i].transform.childCount; j++) {
                 if (dots[i].transform.GetChild (j).GetComponent<RingController> ().destroyed) {
-                    if (dots[i].transform.GetChild (j).GetComponent<SpriteRenderer> ().color == UIManager.ringColors[targetRingColor]) {
-                        targetRingTotalCnt++;
-                    }
+
                     listDestroyRing.Add (dots[i].transform.GetChild (j).gameObject);
+                }
+            }
+        }
+        if (gameType == 0 && listDestroyRing.Count > 0) {
+            for (int j = 0; j < listDestroyRing.Count; j++) {
+                for (int i = 0; i < ringItems.Length; i++) {
+                    if (listDestroyRing[j].GetComponent<SpriteRenderer> ().color == ringItems[i].icon.color) {
+                        ringItems[i].changeValue (1);
+                    }
                 }
             }
         }
@@ -139,16 +162,20 @@ public class DotManager : MonoBehaviour {
 
         if (scoreAdded > 0) {
             ScoreManager.Instance.AddScore (scoreAdded);
+
             SoundManager.Instance.PlaySound (SoundManager.Instance.lineDestroy);
             if (gameType == 0) {
+                scoreItem.setValue (ScoreManager.Instance.Score);
                 if (ScoreManager.Instance.Score >= targetScore) {
-                    GameManager.Instance.gameOver = true;
+                    // GameManager.Instance.gameOver = true;
                     // 过关进入下一关
                     // GameRunState.currentLevel.ChangeValue (1);
                     int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
-                    PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
+                    if (currentLevel == curLevel) {
+                        PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
+                    }
+                    UIManager.Instance.ShowSuccessUI();
                     Debug.Log (",reallevel=" + curLevel + 1);
-                    SceneManager.LoadScene ("MapScene");
 
                 }
             }
@@ -362,5 +389,14 @@ public class DotManager : MonoBehaviour {
         }
 
         listLine.Clear ();
+    }
+
+    public void backMap () {
+        SceneManager.LoadScene ("MapScene");
+    }
+
+    public void toNextLevel () {
+        int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
+        GameState.toGameScene (curLevel);
     }
 }

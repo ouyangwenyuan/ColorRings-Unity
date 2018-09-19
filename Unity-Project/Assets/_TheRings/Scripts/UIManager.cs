@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour {
     public GameObject mainCanvas;
     public GameObject pauseCanvas;
     public GameObject settingsCanvas;
+    public GameObject passLevelCanvas;
     public Text txtScore;
     public Text txtCombo;
     public Text txtComboText;
@@ -50,6 +51,7 @@ public class UIManager : MonoBehaviour {
     public GameObject bigRing;
     public GameObject normalRing;
     public GameObject smallRing;
+    public TargetItem targetItem;
     //target check
     public static Color[] ringColors = { Color.red, Color.magenta, Color.cyan, Color.green, Color.yellow, Color.blue, Color.gray, Color.black, Color.white };
 
@@ -185,6 +187,10 @@ public class UIManager : MonoBehaviour {
 
     public void ShowSettingsUI () {
         settingsCanvas.SetActive (true);
+    }
+
+    public void ShowSuccessUI () {
+        passLevelCanvas.SetActive (true);
     }
 
     public void HideSettingsUI () {

@@ -7,11 +7,15 @@ public class GameTarget : MonoBehaviour {
 
 	public Text TimeText; //在UI里显示时间
 	// Use this for initialization
+	public Image percentageImg;
+	private int percentage;
 	void Start () {
 		int currentLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
 		GameLevelData levelData = CSVReader.gameLevelDatas[currentLevel - 1];
-		TotalTime = levelData.usedTime;
+		TotalTime = int.Parse (levelData.usedTime);
+		percentage = TotalTime;
 		StartCoroutine (startTime ());
+		percentageImg.fillAmount = (float) TotalTime / (float) percentage;
 	}
 
 	// Update is called once per frame
@@ -48,7 +52,8 @@ public class GameTarget : MonoBehaviour {
 
 			second = TotalTime % 60; //输出显示秒
 
-			string length = mumite.ToString ();
+			// string length = mumite.ToString ();
+			percentageImg.fillAmount = (float) TotalTime / (float) percentage;
 			if (second >= 10) {
 
 				TimeText.text = "0" + mumite + ":" + second;

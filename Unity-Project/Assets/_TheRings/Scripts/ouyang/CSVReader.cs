@@ -26,8 +26,8 @@ public class CSVReader : MonoBehaviour {
 
 	// Bind Component
 	void Awake () {
-		_loadPath = Application.dataPath + "/Load/";
-		_savePath = Application.dataPath + "/Save/";
+		_loadPath = Application.streamingAssetsPath + "/Load/";
+		_savePath = Application.streamingAssetsPath + "/Save/";
 		Load ();
 		// DontDestroyOnLoad (this);
 	}
@@ -65,13 +65,13 @@ public class CSVReader : MonoBehaviour {
 			levelData.level = int.Parse (keys[i]);
 			levelData._id = keys[i];
 			levelData.Levelname = _table[levelData._id]["Levelname"];
-			levelData.targetScore = int.Parse (_table[levelData._id]["targetScore"]);
-			levelData.targetCombo = int.Parse (_table[levelData._id]["targetCombo"]);
+			levelData.targetScore = _table[levelData._id]["targetScore"];
+			levelData.targetCombo = _table[levelData._id]["targetCombo"];
 			levelData.targetRingColors = _table[levelData._id]["targetRingColor"].Split (';');
 			levelData.targetRingCounts = _table[levelData._id]["targetRingCount"].Split (';');
 			Debug.Log ("targetRingColors count= " + levelData.targetRingColors.Length + ",targetRingCounts =" + levelData.targetRingCounts.Length);
-			levelData.totalColorCount = int.Parse (_table[levelData._id]["totalColorCount"]);
-			levelData.usedTime = int.Parse (_table[levelData._id]["usedTime"]);
+			levelData.totalColorCount = _table[levelData._id]["totalColorCount"];
+			levelData.usedTime = _table[levelData._id]["usedTime"];
 			gameLevelDatas.Add (levelData);
 		}
 		if (_display) {
