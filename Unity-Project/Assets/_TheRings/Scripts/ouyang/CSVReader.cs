@@ -74,6 +74,9 @@ public class CSVReader : MonoBehaviour {
 			levelData.usedTime = int.Parse (_table[levelData._id]["usedTime"]);
 			gameLevelDatas.Add (levelData);
 		}
+		if (_display) {
+			_display.text = _table.ToString ();
+		}
 	}
 
 	/// <summary>
