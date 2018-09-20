@@ -11,10 +11,10 @@ public enum GameUIState {
     GameOver
 }
 
-public enum RingType {
-    BIG_RING,
-    NORMAL_RING,
-    SMALL_RING
+public class RingType {
+    public const int BIG_RING = 4;
+    public const int NORMAL_RING = 2;
+    public const int SMALL_RING = 1;
 }
 
 public class GameManager : MonoBehaviour {
@@ -335,6 +335,15 @@ public class GameManager : MonoBehaviour {
         finishMoveRing = true;
     }
 
+    public bool AllowDrop2 (GameObject theNearestDot) {
+        
+        int ringType = randomPoint.transform.GetChild (0).GetComponent<RingController> ().ringType;
+        int ringTotal = theNearestDot.GetComponent<DotController>().ringTotal;
+        if ( (ringType&ringTotal) == ringType ){
+            return false;
+        }
+        return true;
+    }
     //Check to allow drop ring to the dot or not
     public bool AllowDrop (GameObject theNearestDot) {
         DotController dotController = theNearestDot.GetComponent<DotController> ();

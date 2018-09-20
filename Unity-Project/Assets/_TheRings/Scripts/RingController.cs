@@ -2,7 +2,7 @@
 public class RingController : MonoBehaviour {
 
     [HideInInspector]
-    public RingType ringType;
+    public int ringType;
     [HideInInspector]
     public int colorIndex;
     [HideInInspector]

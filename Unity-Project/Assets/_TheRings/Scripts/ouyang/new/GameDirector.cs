@@ -465,7 +465,6 @@ public class GameDirector : MonoBehaviour {
 		colorring.colorType = colorIndex;
 		colorring.sizeType = ringsize;
 		colorring.color = ringColors[colorIndex];
-		colorring.type = ColorRing.RingType.big;
 
 	}
 

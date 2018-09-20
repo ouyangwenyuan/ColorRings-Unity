@@ -222,7 +222,7 @@ public class DotManager : MonoBehaviour {
     }
 
     //Check all dot
-    void CheckAllDot () {
+   public void CheckAllDot () {
         for (int i = 0; i < dots.Length; i++) {
             dots[i].GetComponent<DotController> ().CheckRing ();
         }

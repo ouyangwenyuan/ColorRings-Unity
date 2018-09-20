@@ -12,11 +12,11 @@ public class DotController : MonoBehaviour {
     public bool isFullRing;
     [HideInInspector]
     public bool isEmptyRing;
-    [HideInInspector]
+
     public int dotIndex;
-	// Update is called once per frame
-    public void CheckRing()
-    {
+    // Update is called once per frame
+    public int ringTotal;
+    public void CheckRing () {
         hasBigRing = false;
         hasNormalRing = false;
         hasSmallRing = false;
@@ -26,57 +26,62 @@ public class DotController : MonoBehaviour {
 
         if (transform.childCount == 1) //Has one ring
         {
-            RingController ringChildController = transform.GetChild(0).GetComponent<RingController>();
+            RingController ringChildController = transform.GetChild (0).GetComponent<RingController> ();
             if (ringChildController.ringType == RingType.BIG_RING) //Is big ring
             {
                 hasBigRing = true;
-            }
-            else if (ringChildController.ringType == RingType.NORMAL_RING) //Is normal ring
+                ringTotal = 4;
+            } else if (ringChildController.ringType == RingType.NORMAL_RING) //Is normal ring
             {
                 hasNormalRing = true;
-            }
-            else //Is small ring
+                ringTotal = 2;
+            } else //Is small ring
             {
                 hasSmallRing = true;
+                ringTotal = 1;
             }
-        }
-        else if (transform.childCount == 2) //Has two rings
+        } else if (transform.childCount == 2) //Has two rings
         {
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                if (transform.GetChild(i).GetComponent<RingController>().ringType == RingType.BIG_RING)
-                {
+            for (int i = 0; i < transform.childCount; i++) {
+                if (transform.GetChild (i).GetComponent<RingController> ().ringType == RingType.BIG_RING) {
+                    ringTotal += 4;
                     hasBigRing = true;
-                }
-                else if(transform.GetChild(i).GetComponent<RingController>().ringType == RingType.NORMAL_RING)
-                {
+                } else if (transform.GetChild (i).GetComponent<RingController> ().ringType == RingType.NORMAL_RING) {
+                    ringTotal += 2;
                     hasNormalRing = true;
-                }
-                else
-                {
+                } else {
+                    ringTotal += 1;
                     hasSmallRing = true;
                 }
             }
-        }
-        else if (transform.childCount == 3) //Has three rings
+        } else if (transform.childCount == 3) //Has three rings
         {
-            RingController ring_0Controller = transform.GetChild(0).GetComponent<RingController>();
-            RingController ring_1Controller = transform.GetChild(1).GetComponent<RingController>();
-            RingController ring_2Controller = transform.GetChild(2).GetComponent<RingController>();
+            ringTotal = 7;
+            RingController ring_0Controller = transform.GetChild (0).GetComponent<RingController> ();
+            RingController ring_1Controller = transform.GetChild (1).GetComponent<RingController> ();
+            RingController ring_2Controller = transform.GetChild (2).GetComponent<RingController> ();
 
-            if (ring_0Controller.colorIndex == ring_1Controller.colorIndex && ring_1Controller.colorIndex == ring_2Controller.colorIndex)
-            {
+            if (ring_0Controller.colorIndex == ring_1Controller.colorIndex && ring_1Controller.colorIndex == ring_2Controller.colorIndex) {
                 isSameColor = true;
             }
-   
+
             hasBigRing = true;
             hasNormalRing = true;
             hasSmallRing = true;
             isFullRing = true;
-        }
-        else
-        {
+        } else {
+            ringTotal = 0;
             isEmptyRing = true;
         }
+    }
+
+    public string saveString () {
+        string str = "";
+        if (transform.childCount == 0) return str;
+        for (int i = 0; i < transform.childCount; i++) {
+            RingController ringController = transform.GetChild (i).GetComponent<RingController> ();
+            str += ringController.ringType.GetHashCode () + "," + ringController.colorIndex + ",";
+        }
+        return str;
     }
 }
