@@ -336,10 +336,10 @@ public class GameManager : MonoBehaviour {
     }
 
     public bool AllowDrop2 (GameObject theNearestDot) {
-        
+
         int ringType = randomPoint.transform.GetChild (0).GetComponent<RingController> ().ringType;
-        int ringTotal = theNearestDot.GetComponent<DotController>().ringTotal;
-        if ( (ringType&ringTotal) == ringType ){
+        int ringTotal = theNearestDot.GetComponent<DotController> ().ringTotal;
+        if ((ringType & ringTotal) == ringType) {
             return false;
         }
         return true;
@@ -444,5 +444,6 @@ public class GameManager : MonoBehaviour {
         }
 
         finishMoveRandomPointBack = true;
+        Debug.Log (randomPoint + " ,endPos = " + endPos);
     }
 }

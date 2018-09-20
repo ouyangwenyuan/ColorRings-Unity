@@ -180,6 +180,8 @@ public class DotManager : MonoBehaviour {
                     Debug.Log (",reallevel=" + curLevel + 1);
 
                 }
+            }else if(gameType == 2){
+                
             }
         }
 

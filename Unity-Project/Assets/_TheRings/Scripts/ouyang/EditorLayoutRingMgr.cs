@@ -25,9 +25,7 @@ public class EditorLayoutRingMgr : GameManager {
 	private List<RingData> rings = new List<RingData> ();
 	MessGameLevel gamelevel;
 	void Start () {
-		for (int i = 0; i < 27; i++) {
-			generateRandomRing (i);
-		}
+
 	}
 
 	public void clearRings () {
@@ -79,6 +77,10 @@ public class EditorLayoutRingMgr : GameManager {
 			}
 		}
 		print ("rings count =" + rings.Count);
+		int length = int.Parse (levelData.TotalRingCount);
+		for (int i = 0; i < length; i++) {
+			generateRandomRing (i);
+		}
 		toRingObjs ();
 
 		Vector2 theBottomPosition = Camera.main.ViewportToWorldPoint (new Vector2 (0.5f, 0));
@@ -107,15 +109,17 @@ public class EditorLayoutRingMgr : GameManager {
 		string bottomRingstr = "";
 		for (int i = 0; i < dots.Count; i++) {
 			DotController dotctl = dots[i].GetComponent<DotController> ();
-			bottomRingstr += dotctl.saveString () + i + ";";
+			if (!string.IsNullOrEmpty (dotctl.saveString ()))
+				bottomRingstr += dotctl.saveString () + i + ";";
 		}
 		string boardRingstr = "";
 		for (int i = 0; i < dotManager.dots.Length; i++) {
-			DotController dotctl = dots[i].GetComponent<DotController> ();
-			boardRingstr += dotctl.saveString () + i + ";";
+			DotController dotctl = dotManager.dots[i].GetComponent<DotController> ();
+			if (!string.IsNullOrEmpty (dotctl.saveString ()))
+				boardRingstr += dotctl.saveString () + i + ";";
 		}
 		gamelevel.bottomRings = bottomRingstr.Remove (bottomRingstr.Length - 1);
-		gamelevel.boardRings = boardRingstr;
+		gamelevel.boardRings = boardRingstr.Remove (boardRingstr.Length - 1);;
 		string filePath = "Assets/_TheRings/Resources/Levels/Mess/level_" + level + ".asset";
 		CreateOrReplaceAsset (gamelevel, filePath);
 	}
@@ -193,8 +197,8 @@ public class EditorLayoutRingMgr : GameManager {
 						// SoundManager.Instance.PlaySound (SoundManager.Instance.dropRing);
 						dotManager.dotIndex = theNearestDot.GetComponent<DotController> ().dotIndex;
 						// while (randomPoint.transform.childCount > 0) {
-						randomPoint.transform.GetChild (0).transform.parent = theNearestDot.transform;
 						StartCoroutine (MoveRingToTheDot (randomPoint.transform.GetChild (0).gameObject, theNearestDot.transform.position));
+						randomPoint.transform.GetChild (0).transform.parent = theNearestDot.transform;
 						// }
 					}
 				}
@@ -208,8 +212,8 @@ public class EditorLayoutRingMgr : GameManager {
 						// SoundManager.Instance.PlaySound (SoundManager.Instance.dropRing);
 						dotManager.dotIndex = theNearestDot.GetComponent<DotController> ().dotIndex;
 						// while (randomPoint.transform.childCount > 0) {
-						randomPoint.transform.GetChild (0).transform.parent = theNearestDot.transform;
 						StartCoroutine (MoveRingToTheDot (randomPoint.transform.GetChild (0).gameObject, theNearestDot.transform.position));
+						randomPoint.transform.GetChild (0).transform.parent = theNearestDot.transform;
 						// }
 					}
 				}
@@ -299,8 +303,8 @@ public class EditorLayoutRingMgr : GameManager {
 		ring.transform.position = randomPoint.transform.position;
 		ring.transform.parent = randomPoint.transform;
 		finishDrop = true;
-		CheckAllDot();
-		dotManager.CheckAllDot();
+		CheckAllDot ();
+		dotManager.CheckAllDot ();
 	}
 
 	public void toRingObjs () {

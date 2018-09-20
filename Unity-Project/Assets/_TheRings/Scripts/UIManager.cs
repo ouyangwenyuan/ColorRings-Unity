@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour {
     public GameObject pauseCanvas;
     public GameObject settingsCanvas;
     public GameObject passLevelCanvas;
+    public GameObject failLevelCanvas;
     public Text txtScore;
     public Text txtCombo;
     public Text txtComboText;
@@ -193,7 +194,12 @@ public class UIManager : MonoBehaviour {
     public void ShowSuccessUI () {
         passLevelCanvas.SetActive (true);
     }
-
+    public void ShowFailUI () {
+        failLevelCanvas.SetActive (true);
+    }
+    public void HideFailUI () {
+        failLevelCanvas.SetActive (false);
+    }
     public void HideSettingsUI () {
         settingsCanvas.SetActive (false);
     }
