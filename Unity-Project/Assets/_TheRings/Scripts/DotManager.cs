@@ -74,6 +74,8 @@ public class DotManager : MonoBehaviour {
                 ringItems[i] = ringItem;
             }
 
+        } else if(gameType == 3){
+
         }
 
     }
@@ -84,7 +86,7 @@ public class DotManager : MonoBehaviour {
         {
             GameManager.Instance.finishDrop = false;
             dots[dotIndex].GetComponent<DotController> ().CheckRing ();
-
+            if(gameType == 3) {return;}
             CaculateCombo ();
             if (combo > 1) {
                 // == 2 ? targetComboTotalCnt + 2 : targetComboTotalCnt + 1;

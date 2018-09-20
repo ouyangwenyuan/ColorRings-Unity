@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour {
     public GameObject bigRing;
     public GameObject normalRing;
     public GameObject smallRing;
+    public GameObject dotPoint;
     public TargetItem targetItem;
     //target check
     public static Color[] ringColors = { Color.red, Color.magenta, Color.cyan, Color.green, Color.yellow, Color.blue, Color.gray, Color.black, Color.white };
@@ -98,16 +99,16 @@ public class UIManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        txtScore.text = ScoreManager.Instance.Score.ToString ();
-        txtBestScore.text = ScoreManager.Instance.HighScore.ToString ();
-        txtChangeRing.text = CoinManager.Instance.Coins.ToString ();
+        // txtScore.text = ScoreManager.Instance.Score.ToString ();
+        // txtBestScore.text = ScoreManager.Instance.HighScore.ToString ();
+        // txtChangeRing.text = CoinManager.Instance.Coins.ToString ();
 
         if (gameManager.gameOver && !hasCheckedGameOver) {
             hasCheckedGameOver = true;
             Invoke ("ShowGameOverUI", 1f);
         }
 
-        UpdateMuteButtons ();
+        // UpdateMuteButtons ();
     }
 
     void OnScoreUpdated (int newScore) {

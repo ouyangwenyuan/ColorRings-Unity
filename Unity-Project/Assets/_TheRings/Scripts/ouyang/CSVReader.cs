@@ -16,13 +16,16 @@ public class CSVReader : MonoBehaviour {
 		}
 	}
 
+	private string _fileName = "LevelData";
+	private string _messFileName = "MessLevelData";
+
 	string _loadPath;
 	string _savePath;
-
-	[SerializeField] private string _fileName = "LevelData";
 	private const string EXTENSION = ".csv";
 
 	private CSVTable _table;
+
+	private CSVTable _messTable;
 
 	// Bind Component
 	void Awake () {
@@ -47,19 +50,27 @@ public class CSVReader : MonoBehaviour {
 		string content = sr.ReadToEnd ();
 		sr.Close ();
 		sr.Dispose ();
-
 		_table = CSVTable.CreateTable (_fileName, content);
-
 		// 添加测试
-		// Test ();
+
 		toObject ();
+
+		sr = File.OpenText (_loadPath + _messFileName + EXTENSION);
+		content = sr.ReadToEnd ();
+		sr.Close ();
+		sr.Dispose ();
+		_messTable = CSVTable.CreateTable (_messFileName, content);
+		print ("content1  =" + _messTable.ToString ());
+		// Test ();
+		toMessObject ();
 	}
 
 	//cloumnName
 	private string[] cloumnName = { "_id", "Levelname", "targetScore", "targetCombo", "targetRingColor", "targetRingCount", "totalColorCount", "usedTime" };
 	public static List<GameLevelData> gameLevelDatas = new List<GameLevelData> ();
+	public static List<GameLevelData> gameMessLevelDatas = new List<GameLevelData> ();
 	private void toObject () {
-		List<string> keys = CSVTable._idValues; // ids 
+		List<string> keys = _table.IdValues; // ids 
 		for (int i = 0; i < keys.Count; i++) {
 			GameLevelData levelData = ScriptableObject.CreateInstance<GameLevelData> ();
 			levelData.level = int.Parse (keys[i]);
@@ -69,13 +80,30 @@ public class CSVReader : MonoBehaviour {
 			levelData.targetCombo = _table[levelData._id]["targetCombo"];
 			levelData.targetRingColors = _table[levelData._id]["targetRingColor"].Split (';');
 			levelData.targetRingCounts = _table[levelData._id]["targetRingCount"].Split (';');
-			Debug.Log ("targetRingColors count= " + levelData.targetRingColors.Length + ",targetRingCounts =" + levelData.targetRingCounts.Length);
+			// Debug.Log ("targetRingColors count= " + levelData.targetRingColors.Length + ",targetRingCounts =" + levelData.targetRingCounts.Length);
 			levelData.totalColorCount = _table[levelData._id]["totalColorCount"];
 			levelData.usedTime = _table[levelData._id]["usedTime"];
 			gameLevelDatas.Add (levelData);
 		}
 		if (_display) {
 			_display.text = _table.ToString ();
+		}
+	}
+
+	private void toMessObject () {
+		List<string> keys = _messTable.IdValues; // ids 
+		for (int i = 0; i < keys.Count; i++) {
+			GameLevelData levelData = ScriptableObject.CreateInstance<GameLevelData> ();
+			levelData.level = int.Parse (keys[i]);
+			levelData._id = keys[i];
+			levelData.Levelname = _messTable[levelData._id]["Levelname"];
+			levelData.RingColorCount = _messTable[levelData._id]["Ring-Color-Count"].Split (';');
+			levelData.totalColorCount = _messTable[levelData._id]["TotalColorCount"];
+			levelData.TotalRingCount = _messTable[levelData._id]["TotalRingCount"];
+			gameMessLevelDatas.Add (levelData);
+		}
+		if (_display) {
+			_display.text = _messTable.ToString ();
 		}
 	}
 
@@ -112,11 +140,11 @@ public class CSVReader : MonoBehaviour {
 	private void Test () {
 		// 显示所有数据（以调试格式显示)
 		// Debug.Log (_table.ToString ());
-		List<string> keys = CSVTable._idValues; // ids 
-		Debug.Log ("keyCount +" + (keys.Count) + ",_table.Atrribute count = " + _table.AtrributeKeys.Count);
+		List<string> keys = _messTable.IdValues; // ids 
+		Debug.Log ("keyCount +" + (keys.Count) + ",_table.Atrribute count = " + _messTable.AtrributeKeys.Count);
 
 		// 显示所有数据（以存储格式显示）
-		string text = "_table:" + _table.Name; //_table.GetContent ();
+		string text = "_table:" + _messTable.Name; //_table.GetContent ();
 		// List<string> ids = new List<string> ();
 		foreach (string item in keys) {
 			text += item;
@@ -125,7 +153,7 @@ public class CSVReader : MonoBehaviour {
 		Debug.Log ("keys= " + text);
 		text = "\n===========\n";
 		List<string> Atrributes = new List<string> ();
-		foreach (string key in _table.AtrributeKeys) {
+		foreach (string key in _messTable.AtrributeKeys) {
 			Atrributes.Add (key);
 			text += key;
 			text += "|";

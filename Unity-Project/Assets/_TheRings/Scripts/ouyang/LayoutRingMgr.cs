@@ -11,7 +11,7 @@ public class LayoutRingMgr : GameManager {
 	void Start () {
 		// RingList = this.gameObject;
 		for (int i = 0; i < 27; i++) {
-			generateRandomRing(i);
+			generateRandomRing (i);
 		}
 	}
 	private int[] ringType = { 1, 2, 4 };
@@ -33,6 +33,7 @@ public class LayoutRingMgr : GameManager {
 		ring.layer = 9;
 		int colorIndex = Random.Range (0, initialColorNumber);
 		ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+		ring.GetComponent<RingController> ().colorIndex = colorIndex;
 	}
 
 	// Update is called once per frame

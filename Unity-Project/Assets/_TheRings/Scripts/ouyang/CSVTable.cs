@@ -23,7 +23,8 @@ public class CSVTable : IEnumerable {
 	public List<string> AtrributeKeys { get { return _atrributeKeys; } }
 	private List<string> _atrributeKeys;
 
-	public static List<string> _idValues = new List<string>();
+	public List<string> IdValues { get { return _idValues; } }
+	private List<string> _idValues = new List<string> ();
 
 	/// <summary>
 	/// 存储表中所有数据对象
@@ -39,6 +40,7 @@ public class CSVTable : IEnumerable {
 
 		// init 
 		_atrributeKeys = new List<string> (attributeKeys);
+		_idValues = new List<string> ();
 		_dataObjDic = new Dictionary<string, CSVDataObject> ();
 	}
 
@@ -200,7 +202,6 @@ public class CSVTable : IEnumerable {
 		for (int i = 1; i < lines.Length; i++) {
 			string[] values = lines[i].Split (',');
 			string major = values[0].Trim ();
-			_idValues.Add(major);
 			Dictionary<string, string> tempAttributeDic = new Dictionary<string, string> ();
 			for (int j = 1; j < values.Length; j++) {
 				string key = keys[j].Trim ();
@@ -209,8 +210,10 @@ public class CSVTable : IEnumerable {
 			}
 			CSVDataObject dataObj = new CSVDataObject (major, tempAttributeDic, keys);
 			table[dataObj.ID] = dataObj;
+			table._idValues.Add(dataObj.ID);
 		}
 
 		return table;
 	}
+
 }
