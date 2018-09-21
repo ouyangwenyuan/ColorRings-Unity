@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6280428b725a0442b96d130a95f60d81, type: 3}
-  m_Name: level_2
+  m_Name: level_6
   m_EditorClassIdentifier: 
-  boardRings: 1,1,0;2,2,1;4,3,2;1,2,4,4,4;4,1,2,4,5;4,3,2,4,6;1,3,7
-  bottomRings: 4,3,0;1,3,2,4,1;1,2,4,4,2;2,3,4,4,3;1,1,4
+  boardRings: 4,1,1;1,1,2;1,1,3;2,2,1,4,4;4,2,1,3,6;2,3,7
+  bottomRings: 2,2,0;1,1,4,3,1;2,1,4,4,2;4,1,3;2,4,4

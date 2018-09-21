@@ -11,5 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6280428b725a0442b96d130a95f60d81, type: 3}
   m_Name: level_0
   m_EditorClassIdentifier: 
-  boardRings: 1,3,0;4,2,1,2,1;2,2,2;2,1,3;2,1,5;2,2,6;4,2,7;2,3,8
-  bottomRings: 1,1,0;4,2,1;2,3,3;1,3,4;1,3,5;1,3,6
+  boardRings: 2,1,0;4,2,1,3,1;2,2,1,3,2;1,3,3;4,2,7;2,1,1,2,8
+  bottomRings: 1,1,2,3,0;1,3,1;4,2,2;2,3,3;2,2,4
