@@ -7,13 +7,9 @@ public class NailPoint : MonoBehaviour {
 	public int x;
 	public int y;
 	public int ringTotal;
-	public ColorRing bigRing;
-	public ColorRing mediumRing;
-	public ColorRing smallRing;
+	public RingController bigRing;
+	public RingController mediumRing;
+	public RingController smallRing;
 
-	public NailPoint (int x, int y) {
-		this.Position = new Vector2 (x, y);
-		this.x = x;
-		this.y = y;
-	}
+	
 }

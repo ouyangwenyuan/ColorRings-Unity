@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 public class RingController : MonoBehaviour {
-
+    public Color color { get; set; }
     public int ringType;
-    [HideInInspector]
     public int colorIndex;
-    [HideInInspector]
     public bool destroyed;
+
+    public int x;
+    public int y;
 }

@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212000011725178304}
   - component: {fileID: 114000010849538804}
   - component: {fileID: 95000013478314952}
-  - component: {fileID: 114179874865147024}
   m_Layer: 0
   m_Name: NormalRing
   m_TagString: Untagged
@@ -71,23 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf55efe92015f7e4ea07bc996c417902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ringType: 1
+  ringType: 2
   colorIndex: 0
   destroyed: 0
---- !u!114 &114179874865147024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012439881286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2af1e9ac61e4c5bb9c67945e153694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  sizeType: 0
-  colorType: 0
+  x: 0
+  y: 0
 --- !u!212 &212000011725178304
 SpriteRenderer:
   m_ObjectHideFlags: 1

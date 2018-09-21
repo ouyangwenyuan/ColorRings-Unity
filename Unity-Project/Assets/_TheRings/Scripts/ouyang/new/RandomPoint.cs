@@ -8,8 +8,8 @@ public class RandomPoint : MonoBehaviour {
 	public int x;
 	public int y;
 	public int ringTotal;
-	public ColorRing bigRing;
-	public ColorRing mediumRing;
-	public ColorRing smallRing;
+	public RingController bigRing;
+	public RingController mediumRing;
+	public RingController smallRing;
 
 }

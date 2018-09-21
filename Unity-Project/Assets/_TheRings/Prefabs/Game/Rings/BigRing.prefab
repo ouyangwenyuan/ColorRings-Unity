@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212000010467344844}
   - component: {fileID: 114000013262380644}
   - component: {fileID: 95000010227362102}
-  - component: {fileID: 114218231925632456}
   m_Layer: 0
   m_Name: BigRing
   m_TagString: Untagged
@@ -74,19 +73,6 @@ MonoBehaviour:
   ringType: 4
   colorIndex: 0
   destroyed: 0
---- !u!114 &114218231925632456
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000013054469478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2af1e9ac61e4c5bb9c67945e153694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sizeType: 0
-  colorType: 0
   x: 0
   y: 0
 --- !u!212 &212000010467344844

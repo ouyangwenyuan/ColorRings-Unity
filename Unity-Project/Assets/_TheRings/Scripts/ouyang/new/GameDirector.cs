@@ -158,60 +158,60 @@ public class GameDirector : MonoBehaviour {
 			foreach (NailPoint item in points) {
 				if (item == clickPoint) { continue; }
 				for (int i = 0; i < item.transform.childCount; i++) {
-					ColorRing ring = item.transform.GetChild (i).GetComponent<ColorRing> ();
-					if (hassmall && clickPoint.smallRing.colorType == ring.colorType) {
+					RingController ring = item.transform.GetChild (i).GetComponent<RingController> ();
+					if (hassmall && clickPoint.smallRing.colorIndex == ring.colorIndex) {
 						smallColors.Add (item);
 						continue;
 					}
-					if (hasmid && clickPoint.mediumRing.colorType == ring.colorType) {
+					if (hasmid && clickPoint.mediumRing.colorIndex == ring.colorIndex) {
 						midColors.Add (item);
 						continue;
 					}
-					if (hasbig && clickPoint.bigRing.colorType == ring.colorType) {
+					if (hasbig && clickPoint.bigRing.colorIndex == ring.colorIndex) {
 						bigColors.Add (item);
 					}
 				}
 			}
 			switch (ringTotal) {
 				case 7:
-					if (clickPoint.mediumRing.colorType == clickPoint.smallRing.colorType && clickPoint.mediumRing.colorType == clickPoint.bigRing.colorType) {
+					if (clickPoint.mediumRing.colorIndex == clickPoint.smallRing.colorIndex && clickPoint.mediumRing.colorIndex == clickPoint.bigRing.colorIndex) {
 						// remove self
 						//remove small
 						bool match = removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						if (!match) {
-							clickPoint.ringTotal -= clickPoint.smallRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.smallRing.ringType;
 							Destroy (clickPoint.smallRing.gameObject);
 							clickPoint.smallRing = null;
 						}
-						clickPoint.ringTotal -= clickPoint.bigRing.sizeType;
+						clickPoint.ringTotal -= clickPoint.bigRing.ringType;
 						Destroy (clickPoint.bigRing.gameObject);
 						clickPoint.bigRing = null;
-						clickPoint.ringTotal -= clickPoint.mediumRing.sizeType;
+						clickPoint.ringTotal -= clickPoint.mediumRing.ringType;
 						Destroy (clickPoint.mediumRing.gameObject);
 						clickPoint.mediumRing = null;
-					} else if (clickPoint.mediumRing.colorType == clickPoint.smallRing.colorType && clickPoint.mediumRing.colorType != clickPoint.bigRing.colorType) {
+					} else if (clickPoint.mediumRing.colorIndex == clickPoint.smallRing.colorIndex && clickPoint.mediumRing.colorIndex != clickPoint.bigRing.colorIndex) {
 						removeRings (midColors, clickPoint, clickPoint.bigRing);
 						bool match = removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						if (match) {
-							clickPoint.ringTotal -= clickPoint.mediumRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.mediumRing.ringType;
 							Destroy (clickPoint.mediumRing.gameObject);
 							clickPoint.mediumRing = null;
 						}
 
 						//remove big
-					} else if (clickPoint.mediumRing.colorType == clickPoint.bigRing.colorType && clickPoint.mediumRing.colorType != clickPoint.smallRing.colorType) {
+					} else if (clickPoint.mediumRing.colorIndex == clickPoint.bigRing.colorIndex && clickPoint.mediumRing.colorIndex != clickPoint.smallRing.colorIndex) {
 						removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						bool match = removeRings (midColors, clickPoint, clickPoint.mediumRing); {
-							clickPoint.ringTotal -= clickPoint.bigRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.bigRing.ringType;
 							Destroy (clickPoint.bigRing.gameObject);
 							clickPoint.bigRing = null;
 						}
 						//remove big
-					} else if (clickPoint.bigRing.colorType == clickPoint.smallRing.colorType && clickPoint.mediumRing.colorType != clickPoint.smallRing.colorType) {
+					} else if (clickPoint.bigRing.colorIndex == clickPoint.smallRing.colorIndex && clickPoint.mediumRing.colorIndex != clickPoint.smallRing.colorIndex) {
 						removeRings (midColors, clickPoint, clickPoint.mediumRing);
 						bool match = removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						if (match) {
-							clickPoint.ringTotal -= clickPoint.bigRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.bigRing.ringType;
 							Destroy (clickPoint.bigRing.gameObject);
 							clickPoint.bigRing = null;
 						}
@@ -222,10 +222,10 @@ public class GameDirector : MonoBehaviour {
 					}
 					break;
 				case 6:
-					if (clickPoint.mediumRing.colorType == clickPoint.bigRing.colorType) {
+					if (clickPoint.mediumRing.colorIndex == clickPoint.bigRing.colorIndex) {
 						bool match = removeRings (midColors, clickPoint, clickPoint.mediumRing);
 						if (match) {
-							clickPoint.ringTotal -= clickPoint.bigRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.bigRing.ringType;
 							Destroy (clickPoint.bigRing.gameObject);
 							clickPoint.bigRing = null;
 						}
@@ -235,10 +235,10 @@ public class GameDirector : MonoBehaviour {
 					}
 					break;
 				case 5:
-					if (clickPoint.bigRing.colorType == clickPoint.smallRing.colorType) {
+					if (clickPoint.bigRing.colorIndex == clickPoint.smallRing.colorIndex) {
 						bool match = removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						if (match) {
-							clickPoint.ringTotal -= clickPoint.bigRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.bigRing.ringType;
 							Destroy (clickPoint.bigRing.gameObject);
 							clickPoint.bigRing = null;
 						}
@@ -251,10 +251,10 @@ public class GameDirector : MonoBehaviour {
 					removeRings (bigColors, clickPoint, clickPoint.bigRing);
 					break;
 				case 3:
-					if (clickPoint.mediumRing.colorType == clickPoint.smallRing.colorType) {
+					if (clickPoint.mediumRing.colorIndex == clickPoint.smallRing.colorIndex) {
 						bool match = removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						if (match) {
-							clickPoint.ringTotal -= clickPoint.mediumRing.sizeType;
+							clickPoint.ringTotal -= clickPoint.mediumRing.ringType;
 							Destroy (clickPoint.mediumRing.gameObject);
 							clickPoint.mediumRing = null;
 						}
@@ -277,7 +277,7 @@ public class GameDirector : MonoBehaviour {
 		}
 	}
 
-	private bool removeRings (HashSet<NailPoint> sameColorRings, NailPoint clickPoint, ColorRing whichRing) {
+	private bool removeRings (HashSet<NailPoint> sameColorRings, NailPoint clickPoint, RingController whichRing) {
 		int x = clickPoint.x;
 		int y = clickPoint.y;
 		List<NailPoint> columnLine = new List<NailPoint> ();
@@ -311,12 +311,12 @@ public class GameDirector : MonoBehaviour {
 		match |= checkedMatch (downLine, 2, whichRing);
 		match |= checkedMatch (upLine, 3, whichRing);
 		if (match) {
-			clickPoint.ringTotal -= whichRing.sizeType;
-			if (whichRing.sizeType == 1) {
+			clickPoint.ringTotal -= whichRing.ringType;
+			if (whichRing.ringType == 1) {
 				clickPoint.smallRing = null;
-			} else if (whichRing.sizeType == 2) {
+			} else if (whichRing.ringType == 2) {
 				clickPoint.mediumRing = null;
-			} else if (whichRing.sizeType == 4) {
+			} else if (whichRing.ringType == 4) {
 				clickPoint.bigRing = null;
 			}
 			Destroy (whichRing.gameObject);
@@ -330,9 +330,9 @@ public class GameDirector : MonoBehaviour {
 	/// </summary>
 	/// <param name="columnLine"></param>
 	/// <param name="matchType"></param>
-	public bool checkedMatch (List<NailPoint> columnLine, int matchType, ColorRing whichRing) {
+	public bool checkedMatch (List<NailPoint> columnLine, int matchType, RingController whichRing) {
 		bool hasMatch = false;
-		print ("whichRing total=" + whichRing.sizeType);
+		print ("whichRing total=" + whichRing.ringType);
 		if (columnLine.Count == 2) {
 			int sum = 1;
 			foreach (NailPoint item in columnLine) {
@@ -344,7 +344,7 @@ public class GameDirector : MonoBehaviour {
 			}
 			print ("sum=" + sum);
 			if (sum == -1 || sum == 2) {
-				destoryRing (columnLine, whichRing.colorType);
+				destoryRing (columnLine, whichRing.colorIndex);
 				hasMatch = true;
 			}
 		} else if (columnLine.Count == 3) {
@@ -358,30 +358,30 @@ public class GameDirector : MonoBehaviour {
 			}
 			print ("sum=" + sum);
 			if (sum == -2 || sum == 2) {
-				destoryRing (columnLine, whichRing.colorType);
+				destoryRing (columnLine, whichRing.colorIndex);
 				hasMatch = true;
 			}
 		} else if (columnLine.Count == 4) {
-			destoryRing (columnLine, whichRing.colorType);
+			destoryRing (columnLine, whichRing.colorIndex);
 			hasMatch = true;
 		};
 
 		return hasMatch;
 	}
 
-	public void destoryRing (List<NailPoint> columnLine, int colorType) {
+	public void destoryRing (List<NailPoint> columnLine, int colorIndex) {
 		foreach (NailPoint item in columnLine) {
 			for (int i = 0; i < item.transform.childCount; i++) {
-				ColorRing ring = item.transform.GetChild (i).GetComponent<ColorRing> ();
-				if (ring.colorType == colorType) {
-					item.ringTotal -= ring.sizeType;
-					if (ring.sizeType == 1) {
+				RingController ring = item.transform.GetChild (i).GetComponent<RingController> ();
+				if (ring.colorIndex == colorIndex) {
+					item.ringTotal -= ring.ringType;
+					if (ring.ringType == 1) {
 						Destroy (item.smallRing.gameObject);
 						item.smallRing = null;
-					} else if (ring.sizeType == 2) {
+					} else if (ring.ringType == 2) {
 						Destroy (item.mediumRing.gameObject);
 						item.mediumRing = null;
-					} else if (ring.sizeType == 4) {
+					} else if (ring.ringType == 4) {
 						Destroy (item.bigRing.gameObject);
 						item.bigRing = null;
 					}
@@ -445,7 +445,7 @@ public class GameDirector : MonoBehaviour {
 		}
 	}
 	private void createRing (int ringsize, RandomPoint pointGenerator) {
-		ColorRing colorring = null;
+		RingController colorring = null;
 		if (ringsize == 1) {
 			colorring = Instantiate (SceneObject.instance.smallRing);
 			pointGenerator.smallRing = colorring;
@@ -462,8 +462,8 @@ public class GameDirector : MonoBehaviour {
 		colorring.transform.parent = randomPoint.transform;
 		int colorIndex = Random.Range (0, initialColorNumber);
 		colorring.GetComponent<SpriteRenderer> ().color = ringColors[colorIndex];
-		colorring.colorType = colorIndex;
-		colorring.sizeType = ringsize;
+		colorring.colorIndex = colorIndex;
+		colorring.ringType = ringsize;
 		colorring.color = ringColors[colorIndex];
 
 	}

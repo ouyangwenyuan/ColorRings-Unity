@@ -86,7 +86,10 @@ public class DotManager : MonoBehaviour {
         {
             GameManager.Instance.finishDrop = false;
             dots[dotIndex].GetComponent<DotController> ().CheckRing ();
-            if(gameType == 3) {return;}
+            if(gameType == 3) {
+                CheckAllDot();
+                return;
+            }
             CaculateCombo ();
             if (combo > 1) {
                 // == 2 ? targetComboTotalCnt + 2 : targetComboTotalCnt + 1;

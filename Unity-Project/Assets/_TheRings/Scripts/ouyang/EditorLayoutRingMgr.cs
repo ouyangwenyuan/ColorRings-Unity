@@ -57,7 +57,7 @@ public class EditorLayoutRingMgr : GameManager {
 
 	public void loadCSVData () {
 		clearRings ();
-		GameLevelData levelData = CSVReader.gameMessLevelDatas[0];
+		GameLevelData levelData = CSVReader.gameMessLevelDatas[level];
 		string[] datas = levelData.RingColorCount;
 		List<RingData> ringstemp = new List<RingData> ();
 		foreach (string item in datas) {

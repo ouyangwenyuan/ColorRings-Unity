@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-public class DotController : MonoBehaviour {
+public class DotController : NailPoint {
     [HideInInspector]
     public bool hasBigRing;
     [HideInInspector]
@@ -14,8 +14,12 @@ public class DotController : MonoBehaviour {
     public bool isEmptyRing;
 
     public int dotIndex;
+
+    public int bigRingColor = -1;
+    public int midRingColor = -1;
+    public int smallRingColor = -1;
+
     // Update is called once per frame
-    public int ringTotal;
     public void CheckRing () {
         hasBigRing = false;
         hasNormalRing = false;
@@ -29,49 +33,72 @@ public class DotController : MonoBehaviour {
             RingController ringChildController = transform.GetChild (0).GetComponent<RingController> ();
             if (ringChildController.ringType == RingType.BIG_RING) //Is big ring
             {
-                hasBigRing = true;
                 ringTotal = 4;
+                bigRingColor = ringChildController.colorIndex;
+                hasBigRing = true;
             } else if (ringChildController.ringType == RingType.NORMAL_RING) //Is normal ring
             {
-                hasNormalRing = true;
                 ringTotal = 2;
+                midRingColor = ringChildController.colorIndex;
+                hasNormalRing = true;
             } else //Is small ring
             {
-                hasSmallRing = true;
                 ringTotal = 1;
+                smallRingColor = ringChildController.colorIndex;
+                hasSmallRing = true;
             }
         } else if (transform.childCount == 2) //Has two rings
         {
             for (int i = 0; i < transform.childCount; i++) {
-                if (transform.GetChild (i).GetComponent<RingController> ().ringType == RingType.BIG_RING) {
+                RingController ring_0Controller = transform.GetChild (i).GetComponent<RingController> ();
+                if (ring_0Controller.ringType == RingType.BIG_RING) {
                     ringTotal += 4;
+                    bigRingColor = ring_0Controller.colorIndex;
                     hasBigRing = true;
-                } else if (transform.GetChild (i).GetComponent<RingController> ().ringType == RingType.NORMAL_RING) {
+                } else if (ring_0Controller.ringType == RingType.NORMAL_RING) {
                     ringTotal += 2;
+                    midRingColor = ring_0Controller.colorIndex;
                     hasNormalRing = true;
                 } else {
                     ringTotal += 1;
+                    smallRingColor = ring_0Controller.colorIndex;
                     hasSmallRing = true;
                 }
             }
         } else if (transform.childCount == 3) //Has three rings
         {
             ringTotal = 7;
-            RingController ring_0Controller = transform.GetChild (0).GetComponent<RingController> ();
-            RingController ring_1Controller = transform.GetChild (1).GetComponent<RingController> ();
-            RingController ring_2Controller = transform.GetChild (2).GetComponent<RingController> ();
 
-            if (ring_0Controller.colorIndex == ring_1Controller.colorIndex && ring_1Controller.colorIndex == ring_2Controller.colorIndex) {
+            for (int i = 0; i < transform.childCount; i++) {
+                RingController ringController = transform.GetChild (i).GetComponent<RingController> ();
+                if (ringController.ringType == RingType.BIG_RING) {
+                    ringTotal += 4;
+                    bigRingColor = ringController.colorIndex;
+                    hasBigRing = true;
+                } else if (ringController.ringType == RingType.NORMAL_RING) {
+                    ringTotal += 2;
+                    midRingColor = ringController.colorIndex;
+                    hasNormalRing = true;
+                } else {
+                    ringTotal += 1;
+                    smallRingColor = ringController.colorIndex;
+                    hasSmallRing = true;
+                }
+            }
+            
+            if (bigRingColor != -1 && bigRingColor == midRingColor && bigRingColor == smallRingColor) {
                 isSameColor = true;
             }
 
-            hasBigRing = true;
-            hasNormalRing = true;
-            hasSmallRing = true;
             isFullRing = true;
-        } else {
+        } else if (transform.childCount == 0) {
             ringTotal = 0;
+            bigRingColor = -1;
+            midRingColor = -1;
+            smallRingColor = -1;
             isEmptyRing = true;
+        } else {
+            Debug.LogError ("一个点超过3个环，逻辑有问题");
         }
     }
 

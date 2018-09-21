@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SceneObject : MonoBehaviour {
 
-	public ColorRing bigRing, midRing, smallRing;
+	public RingController bigRing, midRing, smallRing;
 	public NailPoint nailPoint;
 
 	public static SceneObject instance;
