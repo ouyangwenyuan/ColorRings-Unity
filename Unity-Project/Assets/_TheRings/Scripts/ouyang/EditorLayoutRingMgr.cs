@@ -97,6 +97,74 @@ public class EditorLayoutRingMgr : GameManager {
 		}
 	}
 
+	public void loadLevelData () {
+		gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
+		string[] boardRingStr = gamelevel.boardRings.Split (';');
+		string[] bottomRingStr = gamelevel.bottomRings.Split (';');
+		// RingList = this.gameObject;
+		for (int i = 0; i < bottomRingStr.Length; i++) {
+			generateRandomRing (bottomRingStr[i], i);
+		}
+
+		for (int i = 0; i < boardRingStr.Length; i++) {
+			string[] ringStrs = boardRingStr[i].Split (',');
+			int dotIndex = int.Parse (ringStrs[ringStrs.Length - 1]);
+			GameObject wraper = dotManager.dots[dotIndex];
+			for (int j = 0; j < (ringStrs.Length) / 2; j++) {
+				int ringType = int.Parse (ringStrs[2 * j]);
+				int colorIndex = int.Parse (ringStrs[2 * j + 1]);
+				GameObject ring = null;
+				if (ringType == 1) {
+					ring = Instantiate (UIManager.Instance.smallRing);
+				} else if (ringType == 2) {
+					ring = Instantiate (UIManager.Instance.normalRing);
+				} else if (ringType == 4) {
+					ring = Instantiate (UIManager.Instance.bigRing);
+				}
+				ring.transform.parent = wraper.transform;
+				ring.transform.position = wraper.transform.position; //new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
+				ring.transform.localScale = Vector3.one;
+
+				// ring.layer = 9;
+
+				ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+				ring.GetComponent<RingController> ().colorIndex = colorIndex;
+			}
+		}
+	}
+
+	private void generateRandomRing (string bottomRingStr, int i) {
+		string[] ringStrs = bottomRingStr.Split (',');
+		GameObject wraper = Instantiate (UIManager.Instance.dotPoint);
+		wraper.transform.parent = transform;
+		wraper.transform.position = new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
+		wraper.transform.localScale = Vector3.one;
+		wraper.layer = 9;
+		// wraper.GetComponent<DotController> ().dotIndex = i;
+		for (int j = 0; j < (ringStrs.Length) / 2; j++) {
+			int ringType = int.Parse (ringStrs[2 * j]);
+			int colorIndex = int.Parse (ringStrs[2 * j + 1]);
+			GameObject ring = null;
+			if (ringType == 1) {
+				ring = Instantiate (UIManager.Instance.smallRing);
+			} else if (ringType == 2) {
+				ring = Instantiate (UIManager.Instance.normalRing);
+			} else if (ringType == 4) {
+				ring = Instantiate (UIManager.Instance.bigRing);
+			}
+			ring.transform.parent = wraper.transform;
+			ring.transform.position = wraper.transform.position; //new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
+			ring.transform.localScale = Vector3.one;
+
+			ring.layer = 9;
+
+			ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+			ring.GetComponent<RingController> ().colorIndex = colorIndex;
+		}
+		// bottomRings.Add (wraper);
+
+	}
+
 	public void OnInputValueChanged () {
 		if (messLevel.text == "-") messLevel.text = "";
 		if (!string.IsNullOrEmpty (messLevel.text)) {

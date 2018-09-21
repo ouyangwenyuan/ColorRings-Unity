@@ -169,6 +169,7 @@ public class UIManager : MonoBehaviour {
 
         btnChangeRing.gameObject.SetActive (false);
         btnPause.gameObject.SetActive (false);
+        ShowFailUI();
     }
 
     public void ShowGameplayUI () {

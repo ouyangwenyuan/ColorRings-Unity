@@ -10,8 +10,74 @@ public class LayoutRingMgr : GameManager {
 	// private int ringIndex;
 	private List<GameObject> bottomRings = new List<GameObject> ();
 	MessGameLevel gamelevel;
-	int level;
+	public int level;
 	void Start () {
+		// gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
+		// string[] boardRingStr = gamelevel.boardRings.Split (';');
+		// string[] bottomRingStr = gamelevel.bottomRings.Split (';');
+		// // RingList = this.gameObject;
+		// for (int i = 0; i < bottomRingStr.Length; i++) {
+		// 	generateRandomRing (bottomRingStr[i], i);
+		// }
+
+		// for (int i = 0; i < boardRingStr.Length; i++) {
+		// 	string[] ringStrs = boardRingStr[i].Split (',');
+		// 	int dotIndex = int.Parse (ringStrs[ringStrs.Length - 1]);
+		// 	GameObject wraper = dotManager.dots[dotIndex];
+		// 	for (int j = 0; j < (ringStrs.Length) / 2; j++) {
+		// 		int ringType = int.Parse (ringStrs[2 * j]);
+		// 		int colorIndex = int.Parse (ringStrs[2 * j + 1]);
+		// 		GameObject ring = null;
+		// 		if (ringType == 1) {
+		// 			ring = Instantiate (UIManager.Instance.smallRing);
+		// 		} else if (ringType == 2) {
+		// 			ring = Instantiate (UIManager.Instance.normalRing);
+		// 		} else if (ringType == 4) {
+		// 			ring = Instantiate (UIManager.Instance.bigRing);
+		// 		}
+		// 		ring.transform.parent = wraper.transform;
+		// 		ring.transform.position = wraper.transform.position; //new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
+		// 		ring.transform.localScale = Vector3.one;
+
+		// 		// ring.layer = 9;
+
+		// 		ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+		// 		ring.GetComponent<RingController> ().colorIndex = colorIndex;
+		// 	}
+		// }
+		loadLevelData ();
+	}
+	private int[] ringType = { 1, 2, 4 };
+
+	public void resetGame () {
+		clearRings ();
+		loadLevelData ();
+	}
+	public void clearRings () {
+
+		// for (int i = 0; i < bottomRings.Count; i++) {
+		// 	if (bottomRings[i].transform.childCount > 0) {
+		// 		for (int j = 0; j < bottomRings[i].transform.childCount; j++) {
+		// 			Destroy (bottomRings[i].transform.GetChild (j).gameObject);
+		// 		}
+		// 	}
+		// }
+		// bottomRings.Clear ();
+		for (int i = 0; i < dotManager.dots.Length; i++) {
+			if (dotManager.dots[i].transform.childCount > 0) {
+				for (int j = 0; j < dotManager.dots[i].transform.childCount; j++) {
+					Destroy (dotManager.dots[i].transform.GetChild (j).gameObject);
+				}
+			}
+		}
+
+		// if (randomPoint.transform.childCount > 0) {
+		// 	for (int j = 0; j < randomPoint.transform.childCount; j++) {
+		// 		Destroy (randomPoint.transform.GetChild (j).gameObject);
+		// 	}
+		// }
+	}
+	public void loadLevelData () {
 		gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
 		string[] boardRingStr = gamelevel.boardRings.Split (';');
 		string[] bottomRingStr = gamelevel.bottomRings.Split (';');
@@ -46,7 +112,6 @@ public class LayoutRingMgr : GameManager {
 			}
 		}
 	}
-	private int[] ringType = { 1, 2, 4 };
 
 	private void generateRandomRing (string bottomRingStr, int i) {
 		string[] ringStrs = bottomRingStr.Split (',');

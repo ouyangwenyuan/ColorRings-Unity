@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf55efe92015f7e4ea07bc996c417902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ringType: 0
+  ringType: 4
   colorIndex: 0
   destroyed: 0
 --- !u!114 &114218231925632456
@@ -85,9 +85,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2af1e9ac61e4c5bb9c67945e153694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   sizeType: 0
   colorType: 0
+  x: 0
+  y: 0
 --- !u!212 &212000010467344844
 SpriteRenderer:
   m_ObjectHideFlags: 1
