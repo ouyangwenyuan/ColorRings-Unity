@@ -368,6 +368,7 @@ public class EditorLayoutRingMgr : GameManager {
 
 		}
 		ring.SetActive (true);
+		dotManager.dotIndex = ring.transform.parent.GetComponent<DotController> ().dotIndex;
 		ring.transform.position = randomPoint.transform.position;
 		ring.transform.parent = randomPoint.transform;
 		finishDrop = true;

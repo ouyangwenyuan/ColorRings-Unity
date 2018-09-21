@@ -54,8 +54,8 @@ public class DotManager : MonoBehaviour {
         if (gameType == 0) {
             // int currentLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
             currentLevel = GameState.levelindex;
-            levelTx.text = currentLevel + "";
-            GameLevelData levelData = CSVReader.gameLevelDatas[currentLevel - 1];
+            levelTx.text = GameState.levelindex + ">" + GameState.realLevel;
+            GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
             targetScore = int.Parse (levelData.targetScore);
 
             scoreItem = Instantiate (UIManager.Instance.targetItem);
@@ -74,7 +74,7 @@ public class DotManager : MonoBehaviour {
                 ringItems[i] = ringItem;
             }
 
-        } else if(gameType == 3){
+        } else if (gameType == 3) {
 
         }
 
@@ -86,8 +86,8 @@ public class DotManager : MonoBehaviour {
         {
             GameManager.Instance.finishDrop = false;
             dots[dotIndex].GetComponent<DotController> ().CheckRing ();
-            if(gameType == 3) {
-                CheckAllDot();
+            if (gameType == 3) {
+                CheckAllDot ();
                 return;
             }
             CaculateCombo ();
@@ -179,12 +179,12 @@ public class DotManager : MonoBehaviour {
                     if (currentLevel == curLevel) {
                         PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
                     }
-                    UIManager.Instance.ShowSuccessUI();
+                    UIManager.Instance.ShowSuccessUI ();
                     Debug.Log (",reallevel=" + curLevel + 1);
 
                 }
-            }else if(gameType == 2){
-                
+            } else if (gameType == 2) {
+
             }
         }
 
@@ -227,7 +227,7 @@ public class DotManager : MonoBehaviour {
     }
 
     //Check all dot
-   public void CheckAllDot () {
+    public void CheckAllDot () {
         for (int i = 0; i < dots.Length; i++) {
             dots[i].GetComponent<DotController> ().CheckRing ();
         }

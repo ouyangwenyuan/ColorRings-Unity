@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-public class DotController : NailPoint {
+using UnityEngine.EventSystems;
+public class DotController : NailPoint, IPointerClickHandler, IDragHandler, IPointerDownHandler, IPointerUpHandler {
     [HideInInspector]
     public bool hasBigRing;
     [HideInInspector]
@@ -85,7 +86,7 @@ public class DotController : NailPoint {
                     hasSmallRing = true;
                 }
             }
-            
+
             if (bigRingColor != -1 && bigRingColor == midRingColor && bigRingColor == smallRingColor) {
                 isSameColor = true;
             }
@@ -110,5 +111,21 @@ public class DotController : NailPoint {
             str += ringController.ringType.GetHashCode () + "," + ringController.colorIndex + ",";
         }
         return str;
+    }
+
+    public void OnPointerClick (PointerEventData eventData) {
+
+    }
+
+    public void OnDrag (PointerEventData eventData) {
+
+    }
+
+    public void OnPointerDown (PointerEventData eventData) {
+
+    }
+
+    public void OnPointerUp (PointerEventData eventData) {
+
     }
 }
