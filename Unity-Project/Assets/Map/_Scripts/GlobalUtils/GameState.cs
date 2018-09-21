@@ -45,21 +45,27 @@ public class GameState {
     }
 
     public static int getRealLevel (int mapIndex) {
-        if (mapIndex == 0) return 1;
-
-        if (mapIndex < 10) return mapIndex;
-
-        if (mapIndex >= 10) {
-            int real = levelDatas[mapIndex - 1].RealLevel;
-            if (real == 0) {
-                return levelDatas[mapIndex - 2].RealLevel + 1;
-            }
-            if (real >= CommonConst.default_total_levels) {
-                return CommonConst.default_total_levels;
-            }
-            return real;
-
+        if (mapIndex % 5 == 0) {
+            return mapIndex / 5 - 1;
+        }else{
+            return (mapIndex%5) + (mapIndex/5*4) -1;
         }
+
+        // if (mapIndex == 0) return 1;
+
+        // if (mapIndex < 10) return mapIndex;
+
+        // if (mapIndex >= 10) {
+        //     int real = levelDatas[mapIndex - 1].RealLevel;
+        //     if (real == 0) {
+        //         return levelDatas[mapIndex - 2].RealLevel + 1;
+        //     }
+        //     if (real >= CommonConst.default_total_levels) {
+        //         return CommonConst.default_total_levels;
+        //     }
+        //     return real;
+
+        // }
 
         return 1;
     }

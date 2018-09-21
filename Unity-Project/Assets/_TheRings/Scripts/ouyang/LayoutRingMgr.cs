@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class LayoutRingMgr : GameManager {
 
-	// private GameObject RingList;
+	public Text levelTx;
 	private GameObject clickRing;
-	// private int ringIndex;
 	private List<GameObject> bottomRings = new List<GameObject> ();
 	MessGameLevel gamelevel;
 	public int level;
+	int currentLevel;
 	void Start () {
 		// gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
 		// string[] boardRingStr = gamelevel.boardRings.Split (';');
@@ -45,6 +45,9 @@ public class LayoutRingMgr : GameManager {
 		// 		ring.GetComponent<RingController> ().colorIndex = colorIndex;
 		// 	}
 		// }
+		level = GameState.realLevel;
+		currentLevel = GameState.levelindex;
+		levelTx.text = GameState.levelindex + ">" + GameState.realLevel;
 		loadLevelData ();
 	}
 	private int[] ringType = { 1, 2, 4 };
@@ -238,6 +241,10 @@ public class LayoutRingMgr : GameManager {
 					}
 				}
 				if (success) {
+					int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
+					if (currentLevel == curLevel) {
+						PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
+					}
 					UIManager.Instance.ShowSuccessUI ();
 				} else {
 					UIManager.Instance.ShowFailUI ();
