@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LayoutRingMgr : GameManager {
-
+	public GameObject BottomdotPoint;
 	public Text levelTx;
 	private GameObject clickRing;
 	private List<GameObject> bottomRings = new List<GameObject> ();
@@ -118,7 +118,7 @@ public class LayoutRingMgr : GameManager {
 
 	private void generateRandomRing (string bottomRingStr, int i) {
 		string[] ringStrs = bottomRingStr.Split (',');
-		GameObject wraper = Instantiate (UIManager.Instance.dotPoint);
+		GameObject wraper = Instantiate (BottomdotPoint);
 		wraper.transform.parent = transform;
 		wraper.transform.position = new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
 		wraper.transform.localScale = Vector3.one;

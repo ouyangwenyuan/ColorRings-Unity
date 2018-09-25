@@ -41,12 +41,30 @@ public class DotManager : MonoBehaviour {
     private List<Line> listLine = new List<Line> ();
     private int previousCombo;
     // Use this for initialization
-
+    public int gridSize = 3;
     void Awake () {
-        for (int i = 0; i < dots.Length; i++) {
-            dots[i].GetComponent<DotController> ().dotIndex = i;
-            dots[i].GetComponent<DotController> ().CheckRing ();
+        float unitSize = 3.6f / (gridSize - 1);
+        dots = new GameObject[gridSize * gridSize];
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                int index = i * gridSize + j;
+                GameObject dot = Instantiate (uIManager.dotPoint);
+                DotController dotc = dot.GetComponent<DotController> ();
+                dotc.dotIndex = index;
+                dotc.x = i;
+                dotc.y = j;
+                dotc.transform.position = new Vector3 (unitSize * i, unitSize * j, 0);
+                dotc.transform.localScale = Vector3.one;
+                dotc.transform.parent = this.transform;
+                dots[index] = dot;
+            }
         }
+        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1)/2, 0);
+
+        // for (int i = 0; i < dots.Length; i++) {
+        //     dots[i].GetComponent<DotController> ().dotIndex = i;
+        //     dots[i].GetComponent<DotController> ().CheckRing ();
+        // }
     }
 
     private void Start () {
@@ -240,7 +258,7 @@ public class DotManager : MonoBehaviour {
         {
             previousCombo = combo;
 
-            combo += (ComboLine (0, 1, 2) + ComboLine (0, 4, 8) + ComboLine (0, 5, 6) + ComboDotIndex (dotIndex));
+            combo += (ComboLine (0, 1, 2) + ComboLine (0, 4, 8) + ComboLine (0, 3, 6) + ComboDotIndex (dotIndex));
 
             if (combo == previousCombo) {
                 combo = 0;
@@ -258,7 +276,7 @@ public class DotManager : MonoBehaviour {
         {
             previousCombo = combo;
 
-            combo += (ComboLine (0, 1, 2) + ComboLine (2, 3, 8) + ComboLine (2, 4, 6) + ComboDotIndex (dotIndex));
+            combo += (ComboLine (0, 1, 2) + ComboLine (2, 5, 8) + ComboLine (2, 4, 6) + ComboDotIndex (dotIndex));
 
             if (combo == previousCombo) {
                 combo = 0;
@@ -266,7 +284,7 @@ public class DotManager : MonoBehaviour {
         } else if (dotIndex == 3) //Check line 2_3_8, 3_4_5
         {
             previousCombo = combo;
-            combo += (ComboLine (2, 3, 8) + ComboLine (3, 4, 5) + ComboDotIndex (dotIndex));
+            combo += (ComboLine (0, 3, 6) + ComboLine (3, 4, 5) + ComboDotIndex (dotIndex));
 
             if (combo == previousCombo) {
                 combo = 0;
@@ -282,7 +300,7 @@ public class DotManager : MonoBehaviour {
         } else if (dotIndex == 5) //Check line: 0_5_6, 3_4_5
         {
             previousCombo = combo;
-            combo += (ComboLine (0, 5, 6) + ComboLine (3, 4, 5) + ComboDotIndex (dotIndex));
+            combo += (ComboLine (2, 5, 8) + ComboLine (3, 4, 5) + ComboDotIndex (dotIndex));
 
             if (combo == previousCombo) {
                 combo = 0;
@@ -290,7 +308,7 @@ public class DotManager : MonoBehaviour {
         } else if (dotIndex == 6) //Check line: 0_5_6, 2_4_6, 6_7_8
         {
             previousCombo = combo;
-            combo += (ComboLine (0, 5, 6) + ComboLine (6, 7, 8) + ComboLine (2, 4, 6) + ComboDotIndex (dotIndex));
+            combo += (ComboLine (0, 3, 6) + ComboLine (6, 7, 8) + ComboLine (2, 4, 6) + ComboDotIndex (dotIndex));
 
             if (combo == previousCombo) {
                 combo = 0;
@@ -306,7 +324,7 @@ public class DotManager : MonoBehaviour {
         } else //Check line: 2_3_8, 6_7_8, 0_4_8
         {
             previousCombo = combo;
-            combo += (ComboLine (2, 3, 8) + ComboLine (6, 7, 8) + ComboLine (0, 4, 8) + ComboDotIndex (dotIndex));
+            combo += (ComboLine (2, 5, 8) + ComboLine (6, 7, 8) + ComboLine (0, 4, 8) + ComboDotIndex (dotIndex));
 
             if (combo == previousCombo) {
                 combo = 0;
@@ -370,16 +388,16 @@ public class DotManager : MonoBehaviour {
         Line newLine = new Line ();
         newLine.Position = dots[secondDot].transform.position;
         newLine.Color = UIManager.ringColors[colorIndex];
-        if (secondDot == 5 || secondDot == 3) {
-            newLine.Angle = 0;
-        } else if (secondDot == 1 || secondDot == 7) {
+        if (secondDot == 3 || secondDot == 5) {
             newLine.Angle = 90;
+        } else if (secondDot == 1 || secondDot == 7) {
+            newLine.Angle = 0;
         } else if (secondDot == 4) {
             if (firstDot == 1) {
-                newLine.Angle = 0;
-            } else if (firstDot == 3) {
                 newLine.Angle = 90;
-            } else if (firstDot == 2) {
+            } else if (firstDot == 3) {
+                newLine.Angle = 0;
+            } else if (firstDot == 0) {
                 newLine.Angle = 135;
             } else {
                 newLine.Angle = 45;
