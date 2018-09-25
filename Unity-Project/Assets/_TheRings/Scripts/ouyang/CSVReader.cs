@@ -73,6 +73,7 @@ public class CSVReader : MonoBehaviour {
 		List<string> keys = _table.IdValues; // ids 
 		for (int i = 0; i < keys.Count; i++) {
 			GameLevelData levelData = ScriptableObject.CreateInstance<GameLevelData> ();
+			// Debug.Log (i+" key= " + keys[i]);
 			levelData.level = int.Parse (keys[i]);
 			levelData._id = keys[i];
 			levelData.Levelname = _table[levelData._id]["Levelname"];
@@ -83,6 +84,7 @@ public class CSVReader : MonoBehaviour {
 			// Debug.Log ("targetRingColors count= " + levelData.targetRingColors.Length + ",targetRingCounts =" + levelData.targetRingCounts.Length);
 			levelData.totalColorCount = _table[levelData._id]["totalColorCount"];
 			levelData.usedTime = _table[levelData._id]["usedTime"];
+			levelData.sizeCount = _table[levelData._id]["RingsType"];
 			gameLevelDatas.Add (levelData);
 		}
 		if (_display) {
