@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
-
+    public int gameType = 0; // 0- level mode ,1 - mess mode , 2 - score mode
     private GameUIState _gameState = GameUIState.Prepare;
 
     [Header ("Check to enable premium features (require EasyMobile plugin)")]
@@ -56,8 +56,8 @@ public class GameManager : MonoBehaviour {
     [Header ("Gameplay Config")]
 
     public float ringMovingTime = 0.3f;
-    public int initialColorNumber = 4;
-    public int scoreToAddNewRingColor = 30;
+    private int initialColorNumber = 4;
+    private int scoreToAddNewRingColor = 300;
 
     private List<int> listCreateRings = new List<int> ();
     private GameObject currentRing;
@@ -70,12 +70,20 @@ public class GameManager : MonoBehaviour {
     private int scoreCounter;
     public bool allowDrag;
     public bool finishMoveRandomPointBack;
+    private int totalSize = 7;
+    private int currentLevel;
     public static GameManager Instance;
 
     private void Awake () {
         Instance = this;
     }
     void Start () {
+        if (gameType == 0) {
+            currentLevel = GameState.levelindex;
+            GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
+            totalSize = int.Parse (levelData.sizeCount);
+            initialColorNumber = int.Parse(levelData.totalColorCount);
+        }
 
         GameUIState = GameUIState.Prepare;
         Application.targetFrameRate = 60;
@@ -87,6 +95,7 @@ public class GameManager : MonoBehaviour {
 
         originalRingPostion = theBottomPosition + new Vector2 (0, -1f);
 
+        UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
         //Save the first position of random point
         firstRandomPointPosition = randomPoint.transform.position;
 
@@ -148,8 +157,11 @@ public class GameManager : MonoBehaviour {
         if (dotManager.finishCheckAfterDestroy && finishMoveRandomPointBack) {
             finishMoveRandomPointBack = false;
             dotManager.finishCheckAfterDestroy = false;
-            // UpdateColorNumber ();
-            GenerateRings ();
+            if (gameType == 2) {
+                UpdateColorNumber ();
+                // GenerateRings ();
+            } else if (gameType == 1) { }
+            GenerateRings1 ();
             uIManager.CheckAndShowWatchAdOption ();
         }
     }
@@ -159,7 +171,7 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
 
-        GenerateRings ();
+        GenerateRings1 ();
 
         GameUIState = GameUIState.Playing;
     }
@@ -212,10 +224,80 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
 
-        GenerateRings ();
+        GenerateRings1 ();
         Destroy (theDestroyOb);
     }
 
+    public void GenerateRings1 () {
+        for (int i = 0; i < dotManager.dots.Length; i++) {
+            DotController dotController = dotManager.dots[i].GetComponent<DotController> ();
+            int leftRingSize = totalSize - dotController.ringTotal;
+            Debug.Log ("totoalsize =" + totalSize + "leftring" + leftRingSize);
+            if (leftRingSize == 7) {
+                //
+                AddValueForList (6);
+                AddValueForList (5);
+                AddValueForList (4);
+                AddValueForList (3);
+                AddValueForList (2);
+                AddValueForList (1);
+                break;
+            } else if (leftRingSize == 6) {
+                //
+                AddValueForList (6);
+                AddValueForList (4);
+                AddValueForList (2);
+            } else if (leftRingSize == 5) {
+                //
+                AddValueForList (5);
+                AddValueForList (4);
+                AddValueForList (1);
+            } else if (leftRingSize == 4) {
+                //
+                AddValueForList (4);
+
+            } else if (leftRingSize == 3) {
+                //
+                AddValueForList (3);
+                AddValueForList (2);
+                AddValueForList (1);
+            } else if (leftRingSize == 2) {
+                //
+                AddValueForList (2);
+            } else if (leftRingSize == 1) {
+                //
+                AddValueForList (1);
+            } else {
+                //
+                // AddValueForList (1);
+            }
+        }
+        if (listCreateRings.Count == 0) {
+            SoundManager.Instance.PlaySound (SoundManager.Instance.gameOver);
+            gameOver = true;
+            GameOver ();
+        } else {
+            int listIndex = Random.Range (0, listCreateRings.Count);
+            if (listCreateRings[listIndex] == 1) {
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.smallRing));
+            } else if (listCreateRings[listIndex] == 2) {
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.normalRing));
+            } else if (listCreateRings[listIndex] == 3) {
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.smallRing));
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.normalRing));
+            } else if (listCreateRings[listIndex] == 4) {
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.bigRing));
+            } else if (listCreateRings[listIndex] == 5) {
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.bigRing));
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.smallRing));
+            } else {
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.normalRing));
+                StartCoroutine (CreateAndMoveRing (UIManager.Instance.bigRing));
+            }
+        }
+
+        listCreateRings.Clear ();
+    }
     //Generate Rings
     public void GenerateRings () {
         int createBigRing = 1;
@@ -231,7 +313,7 @@ public class GameManager : MonoBehaviour {
             {
                 AddValueForList (1);
                 AddValueForList (2);
-                AddValueForList (2);
+                AddValueForList (3);
                 AddValueForList (4);
                 AddValueForList (5);
                 AddValueForList (6);
@@ -320,7 +402,6 @@ public class GameManager : MonoBehaviour {
         int colorIndex = Random.Range (0, initialColorNumber);
         currentRing.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
         currentRing.GetComponent<RingController> ().colorIndex = colorIndex;
-
         float t = 0;
         Vector2 startPos = currentRing.transform.position;
         Vector2 endPos = randomPoint.transform.position;
@@ -444,6 +525,6 @@ public class GameManager : MonoBehaviour {
         }
 
         finishMoveRandomPointBack = true;
-        Debug.Log (randomPoint + " ,endPos = " + endPos);
+        // Debug.Log (randomPoint + " ,endPos = " + endPos);
     }
 }

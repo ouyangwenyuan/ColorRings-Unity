@@ -28,23 +28,21 @@ public class DotController : NailPoint, IPointerClickHandler, IDragHandler, IPoi
         isSameColor = false;
         isFullRing = false;
         isEmptyRing = false;
-
+        ringTotal = 0;
         if (transform.childCount == 1) //Has one ring
         {
             RingController ringChildController = transform.GetChild (0).GetComponent<RingController> ();
+            ringTotal += ringChildController.ringType;
             if (ringChildController.ringType == RingType.BIG_RING) //Is big ring
             {
-                ringTotal = 4;
                 bigRingColor = ringChildController.colorIndex;
                 hasBigRing = true;
             } else if (ringChildController.ringType == RingType.NORMAL_RING) //Is normal ring
             {
-                ringTotal = 2;
                 midRingColor = ringChildController.colorIndex;
                 hasNormalRing = true;
             } else //Is small ring
             {
-                ringTotal = 1;
                 smallRingColor = ringChildController.colorIndex;
                 hasSmallRing = true;
             }
@@ -52,16 +50,14 @@ public class DotController : NailPoint, IPointerClickHandler, IDragHandler, IPoi
         {
             for (int i = 0; i < transform.childCount; i++) {
                 RingController ring_0Controller = transform.GetChild (i).GetComponent<RingController> ();
+                ringTotal += ring_0Controller.ringType;
                 if (ring_0Controller.ringType == RingType.BIG_RING) {
-                    ringTotal += 4;
                     bigRingColor = ring_0Controller.colorIndex;
                     hasBigRing = true;
                 } else if (ring_0Controller.ringType == RingType.NORMAL_RING) {
-                    ringTotal += 2;
                     midRingColor = ring_0Controller.colorIndex;
                     hasNormalRing = true;
                 } else {
-                    ringTotal += 1;
                     smallRingColor = ring_0Controller.colorIndex;
                     hasSmallRing = true;
                 }
@@ -73,15 +69,12 @@ public class DotController : NailPoint, IPointerClickHandler, IDragHandler, IPoi
             for (int i = 0; i < transform.childCount; i++) {
                 RingController ringController = transform.GetChild (i).GetComponent<RingController> ();
                 if (ringController.ringType == RingType.BIG_RING) {
-                    ringTotal += 4;
                     bigRingColor = ringController.colorIndex;
                     hasBigRing = true;
                 } else if (ringController.ringType == RingType.NORMAL_RING) {
-                    ringTotal += 2;
                     midRingColor = ringController.colorIndex;
                     hasNormalRing = true;
                 } else {
-                    ringTotal += 1;
                     smallRingColor = ringController.colorIndex;
                     hasSmallRing = true;
                 }

@@ -18,6 +18,7 @@ public class GameLevelData : ScriptableObject {
 	public int levelType;// 0-normal 1-themess
 	public string[] RingColorCount;
 	public string TotalRingCount;
+	public string sizeCount = "6";
 	// [Header ("Width")]
 	// public int mapW;
 	// [Header ("Height")]

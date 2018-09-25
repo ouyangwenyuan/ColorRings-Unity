@@ -184,7 +184,7 @@ public class DotManager : MonoBehaviour {
 
                 }
             } else if (gameType == 2) {
-
+                UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
             }
         }
 
@@ -329,8 +329,11 @@ public class DotManager : MonoBehaviour {
                         RingController thirdDotRingController = dots[thirdDot].transform.GetChild (k).GetComponent<RingController> ();
                         if (thirdDotRingController.colorIndex == colorIndexOfChild) {
                             dots[thirdDot].transform.GetChild (k).GetComponent<RingController> ().destroyed = true;
+                            dots[thirdDot].GetComponent<DotController> ().ringTotal -= dots[thirdDot].transform.GetChild (k).GetComponent<RingController> ().ringType;
                             dots[secondDot].transform.GetChild (j).GetComponent<RingController> ().destroyed = true;
+                            dots[secondDot].GetComponent<DotController> ().ringTotal -= dots[secondDot].transform.GetChild (j).GetComponent<RingController> ().ringType;
                             dots[firstDot].transform.GetChild (i).GetComponent<RingController> ().destroyed = true;
+                            dots[firstDot].GetComponent<DotController> ().ringTotal -= dots[firstDot].transform.GetChild (i).GetComponent<RingController> ().ringType;
                             AddForListLine (firstDot, secondDot, colorIndexOfChild);
                             hasDestroy = true;
                         }
@@ -352,6 +355,7 @@ public class DotManager : MonoBehaviour {
             hasDestroy = true;
             for (int i = 0; i < dots[dotIndex].transform.childCount; i++) {
                 dots[dotIndex].transform.GetChild (i).GetComponent<RingController> ().destroyed = true;
+                dots[dotIndex].GetComponent<DotController> ().ringTotal -= dots[dotIndex].transform.GetChild (i).GetComponent<RingController> ().ringType;
             }
         }
 
