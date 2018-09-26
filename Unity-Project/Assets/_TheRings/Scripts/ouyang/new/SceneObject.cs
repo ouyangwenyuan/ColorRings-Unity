@@ -5,7 +5,7 @@ using UnityEngine;
 public class SceneObject : MonoBehaviour {
 
 	public RingController bigRing, midRing, smallRing;
-	public NailPoint nailPoint;
+	public DotController nailPoint;
 
 	public static SceneObject instance;
 	// Use this for initialization

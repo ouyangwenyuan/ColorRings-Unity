@@ -40,6 +40,7 @@ public class DotManager : MonoBehaviour {
     private List<GameObject> listDestroyRing = new List<GameObject> ();
     private List<Line> listLine = new List<Line> ();
     private int previousCombo;
+    private List<DotController> points;
     // Use this for initialization
     public int gridSize = 3;
     void Awake () {
@@ -59,8 +60,11 @@ public class DotManager : MonoBehaviour {
                 dots[index] = dot;
             }
         }
-        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1)/2, 0);
-
+        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2, 0);
+        points = new List<DotController> ();
+        for (int i = 0; i < dots.Length; i++) {
+            points.Add (dots[i].GetComponent<DotController> ());
+        }
         // for (int i = 0; i < dots.Length; i++) {
         //     dots[i].GetComponent<DotController> ().dotIndex = i;
         //     dots[i].GetComponent<DotController> ().CheckRing ();
@@ -108,10 +112,11 @@ public class DotManager : MonoBehaviour {
                 CheckAllDot ();
                 return;
             }
-            CaculateCombo ();
-            if (combo > 1) {
+            // CaculateCombo ();
+            gameLogic (dotIndex);
+            if (previousCombo > 1) {
                 // == 2 ? targetComboTotalCnt + 2 : targetComboTotalCnt + 1;
-                if (combo == 2) {
+                if (previousCombo == 2) {
                     targetComboTotalCnt += 2;
                 } else {
                     targetComboTotalCnt += 1;
@@ -131,7 +136,7 @@ public class DotManager : MonoBehaviour {
     }
     void ShowCombo () {
         UIManager.Instance.txtCombo.gameObject.SetActive (true);
-        UIManager.Instance.txtCombo.text = "x" + combo.ToString ();
+        UIManager.Instance.txtCombo.text = "x" + previousCombo.ToString ();
     }
 
     void HideCombo () {
@@ -143,7 +148,7 @@ public class DotManager : MonoBehaviour {
     }
 
     IEnumerator ComboText (float waitTime) {
-        UIManager.Instance.txtComboText.text = "combo x" + combo.ToString ();
+        UIManager.Instance.txtComboText.text = "combo x" + previousCombo.ToString ();
         UIManager.Instance.txtComboText.gameObject.SetActive (true);
         yield return new WaitForSeconds (waitTime);
         UIManager.Instance.txtComboText.gameObject.SetActive (false);
@@ -172,8 +177,8 @@ public class DotManager : MonoBehaviour {
         yield return null;
 
         //Caculate score and change ring time
-        int scoreAdded = combo * listDestroyRing.Count * 10;
-        if (combo > 1) {
+        int scoreAdded = previousCombo * listDestroyRing.Count * 10;
+        if (previousCombo > 1) {
             cameraControler.ShakeCamera ();
             ShowComboText (comboText.length);
             Vector2 comboExplodePosition = Camera.main.ScreenToWorldPoint (uIManager.txtCombo.transform.position);
@@ -428,4 +433,316 @@ public class DotManager : MonoBehaviour {
         int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
         GameState.toGameScene (curLevel);
     }
+
+    //ringchecker 
+
+    public void gameLogic (int dotIndex) {
+        combo = 0;
+        DotController clickPoint = dots[dotIndex].GetComponent<DotController> ();
+        clickPoint.CheckRing ();
+        int ringTotal = clickPoint.ringTotal;
+        // bool hassmall = clickPoint.hasSmallRing; //1 == (clickPoint.ringTotal & 1);
+        // bool hasmid = clickPoint.hasNormalRing; //2 == (clickPoint.ringTotal & 2);
+        // bool hasbig = clickPoint.hasBigRing; //4 == (clickPoint.ringTotal & 4);
+        RingController smallring = null, midring = null, bigring = null;
+        for (int i = 0; i < clickPoint.transform.childCount; i++) {
+            RingController temp = clickPoint.transform.GetChild (i).GetComponent<RingController> ();
+            if (temp.ringType == 1) {
+                smallring = temp;
+            } else if (temp.ringType == 2) {
+                midring = temp;
+            } else if (temp.ringType == 4) {
+                bigring = temp;
+            }
+        }
+
+        HashSet<DotController> smallColors = new HashSet<DotController> ();
+        HashSet<DotController> midColors = new HashSet<DotController> ();
+        HashSet<DotController> bigColors = new HashSet<DotController> ();
+        foreach (DotController item in points) {
+            if (item == clickPoint) { continue; }
+            for (int i = 0; i < item.transform.childCount; i++) {
+                RingController ring = item.transform.GetChild (i).GetComponent<RingController> ();
+                if (smallring != null && smallring.colorIndex == ring.colorIndex) {
+                    smallColors.Add (item);
+                    // continue;
+                }
+                if (midring != null && midring.colorIndex == ring.colorIndex) {
+                    midColors.Add (item);
+                    // continue;
+                }
+                if (bigring != null && bigring.colorIndex == ring.colorIndex) {
+                    bigColors.Add (item);
+                }
+            }
+        }
+        Debug.Log ("ringTotal =" + ringTotal + "small c=" + smallColors.Count + "mid c=" + midColors.Count + "big c=" + bigColors.Count);
+        switch (ringTotal) {
+            case 7:
+                if (smallring.colorIndex == midring.colorIndex && midring.colorIndex == bigring.colorIndex) {
+
+                    //remove small
+                    bool match = removeRings (smallColors, clickPoint, smallring);
+                    if (match) {
+                        clickPoint.ringTotal -= smallring.ringType;
+                        // Destroy (smallring.gameObject);
+                        smallring.destroyed = true;
+                        smallring = null;
+                    }
+                    clickPoint.ringTotal -= bigring.ringType;
+                    // Destroy (bigring.gameObject);
+                    bigring.destroyed = true;
+                    bigring = null;
+                    clickPoint.ringTotal -= midring.ringType;
+                    midring.destroyed = true;
+                    // Destroy (midring.gameObject);
+                    midring = null;
+                } else if (smallring.colorIndex == midring.colorIndex && midring.colorIndex != bigring.colorIndex) {
+                    removeRings (midColors, clickPoint, bigring);
+                    bool match = removeRings (smallColors, clickPoint, smallring);
+                    if (match) {
+                        clickPoint.ringTotal -= midring.ringType;
+                        // Destroy (midring.gameObject);
+                        midring.destroyed = true;
+                        midring = null;
+                    }
+
+                    //remove big
+                } else if (midring.colorIndex == bigring.colorIndex && midring.colorIndex != smallring.colorIndex) {
+                    removeRings (smallColors, clickPoint, smallring);
+                    bool match = removeRings (midColors, clickPoint, midring); {
+                        clickPoint.ringTotal -= bigring.ringType;
+                        // Destroy (bigring.gameObject);
+                        bigring.destroyed = true;
+                        bigring = null;
+                    }
+                    //remove big
+                } else if (smallring.colorIndex == bigring.colorIndex && smallring.colorIndex != midring.colorIndex) {
+                    removeRings (midColors, clickPoint, midring);
+                    bool match = removeRings (smallColors, clickPoint, smallring);
+                    if (match) {
+                        clickPoint.ringTotal -= bigring.ringType;
+                        // Destroy (bigring.gameObject);
+                        bigring.destroyed = true;
+                        bigring = null;
+                    }
+                } else {
+                    removeRings (midColors, clickPoint, midring);
+                    removeRings (bigColors, clickPoint, bigring);
+                    removeRings (smallColors, clickPoint, smallring);
+                }
+                break;
+            case 6:
+                if (midring.colorIndex == bigring.colorIndex) {
+                    bool match = removeRings (midColors, clickPoint, midring);
+                    if (match) {
+                        clickPoint.ringTotal -= bigring.ringType;
+                        // Destroy (bigring.gameObject);
+                        bigring.destroyed = true;
+                        bigring = null;
+                    }
+                } else {
+                    removeRings (midColors, clickPoint, midring);
+                    removeRings (bigColors, clickPoint, bigring);
+                }
+                break;
+            case 5:
+                if (bigring.colorIndex == smallring.colorIndex) {
+                    bool match = removeRings (smallColors, clickPoint, smallring);
+                    if (match) {
+                        clickPoint.ringTotal -= bigring.ringType;
+                        // Destroy (bigring.gameObject);
+                        bigring.destroyed = true;
+                        bigring = null;
+                    }
+                } else {
+                    removeRings (smallColors, clickPoint, smallring);
+                    removeRings (bigColors, clickPoint, bigring);
+                }
+                break;
+            case 4:
+                removeRings (bigColors, clickPoint, bigring);
+                break;
+            case 3:
+                if (midring.colorIndex == smallring.colorIndex) {
+                    bool match = removeRings (smallColors, clickPoint, smallring);
+                    if (match) {
+                        clickPoint.ringTotal -= midring.ringType;
+                        // Destroy (midring.gameObject);
+                        midring.destroyed = true;
+                        midring = null;
+                    }
+                } else {
+                    removeRings (smallColors, clickPoint, smallring);
+                    removeRings (midColors, clickPoint, midring);
+                }
+                break;
+            case 2:
+                removeRings (midColors, clickPoint, midring);
+                break;
+            case 1:
+                removeRings (smallColors, clickPoint, smallring);
+                break;
+            default:
+                break;
+        }
+        if (combo == 0) {
+            previousCombo = combo;
+        } else {
+            previousCombo += combo;
+        }
+
+        Debug.Log ("smallColors count" + smallColors.Count + ",midColors count" + midColors.Count + ",bigColors count" + bigColors.Count);
+
+        // }
+
+        // foreach (DotController item in points) {
+        // 	// if (item == clickPoint) { continue; }
+        // 	for (int i = 0; i < item.transform.childCount; i++) {
+        // 		RingController ring = item.transform.GetChild (i).GetComponent<RingController> ();
+        // 		if (ring.destroyed) {
+        // 			Destroy (ring.gameObject);
+        // 		}
+        // 	}
+        // }
+    }
+
+    private bool removeRings (HashSet<DotController> sameColorRings, DotController clickPoint, RingController whichRing) {
+        int x = clickPoint.x;
+        int y = clickPoint.y;
+        List<DotController> columnLine = new List<DotController> ();
+        List<DotController> rowLine = new List<DotController> ();
+        List<DotController> upLine = new List<DotController> ();
+        List<DotController> downLine = new List<DotController> ();
+        foreach (DotController item in sameColorRings) {
+            if (item.x == x && (item.y == y - 1 || item.y == y + 1 || item.y == y - 2 || item.y == y + 2)) {
+                columnLine.Add (item);
+            } else if (item.y == y && (item.x == x - 1 || item.x == x + 1 || item.x == x - 2 || item.x == x + 2)) {
+                rowLine.Add (item);
+            } else if ((item.x == x - 1 && item.y == y + 1) ||
+                (item.x == x + 1 && item.y == y - 1) ||
+                (item.x == x + 2 && item.y == y - 2) ||
+                (item.x == x - 2 && item.y == y + 2)
+            ) {
+                downLine.Add (item);
+            } else if ((item.x == x - 1 && item.y == y - 1) ||
+                (item.x == x + 1 && item.y == y + 1) ||
+                (item.x == x - 2 && item.y == y - 2) ||
+                (item.x == x + 2 && item.y == y + 2)
+            ) {
+                upLine.Add (item);
+            }
+        }
+        Debug.Log ("column count" + columnLine.Count + ",row count=" + rowLine.Count + ",up count=" + upLine.Count + ",down count=" + downLine.Count);
+
+        bool match = false, match1 = false, match2 = false, match3 = false, match4 = false;
+        match1 = checkedMatch (columnLine, 0, clickPoint, whichRing);
+        match2 = checkedMatch (rowLine, 1, clickPoint, whichRing);
+        match3 = checkedMatch (downLine, 2, clickPoint, whichRing);
+        match4 = checkedMatch (upLine, 3, clickPoint, whichRing);
+        match = match1 | match2 | match3 | match4;
+        if (match) {
+            clickPoint.ringTotal -= whichRing.ringType;
+            if (whichRing.ringType == 1) {
+                clickPoint.smallRing = null;
+            } else if (whichRing.ringType == 2) {
+                clickPoint.mediumRing = null;
+            } else if (whichRing.ringType == 4) {
+                clickPoint.bigRing = null;
+            }
+            whichRing.destroyed = true;
+        }
+        return match;
+
+    }
+
+    void AddEffectLine (int type, Transform clickPoint, int colorIndex) {
+        Line newLine = new Line ();
+        newLine.Position = clickPoint.transform.position;
+        newLine.Color = UIManager.ringColors[colorIndex];
+        if (type == 0) {
+            newLine.Angle = 0;
+        } else if (type == 1) {
+            newLine.Angle = 90;
+        } else if (type == 2) {
+            newLine.Angle = 45;
+        } else {
+            newLine.Angle = 135;
+        }
+
+        if (!listLine.Contains (newLine)) {
+            listLine.Add (newLine);
+        }
+    }
+    /// <summary>
+    /// matchtype :  0- column ,1 -row ,2 -down, 3-up
+    /// </summary>
+    /// <param name="columnLine"></param>
+    /// <param name="matchType"></param>
+    public bool checkedMatch (List<DotController> columnLine, int matchType, DotController clickPoint, RingController whichRing) {
+        bool hasMatch = false;
+        Debug.Log ("whichRing total=" + whichRing.ringType);
+        if (columnLine.Count == 2) {
+            int sum = 1;
+            foreach (DotController item in columnLine) {
+                if (matchType == 0) {
+                    sum *= (item.y - clickPoint.y);
+                } else {
+                    sum *= (item.x - clickPoint.x);
+                }
+            }
+            Debug.Log ("sum=" + sum);
+            if (sum == -1 || sum == 2) {
+                destoryRing (columnLine, whichRing.colorIndex);
+                AddEffectLine (matchType, whichRing.transform, whichRing.colorIndex);
+                combo++;
+                hasMatch = true;
+            }
+        } else if (columnLine.Count == 3) {
+            int sum = 1;
+            foreach (DotController item in columnLine) {
+                if (matchType == 0) {
+                    sum *= (item.y - clickPoint.y);
+                } else {
+                    sum *= (item.x - clickPoint.x);
+                }
+            }
+            Debug.Log ("sum=" + sum);
+            if (sum == -2 || sum == 2) {
+                destoryRing (columnLine, whichRing.colorIndex);
+                AddEffectLine (matchType, whichRing.transform, whichRing.colorIndex);
+                combo++;
+                hasMatch = true;
+            }
+        } else if (columnLine.Count == 4) {
+            destoryRing (columnLine, whichRing.colorIndex);
+            AddEffectLine (matchType, whichRing.transform, whichRing.colorIndex);
+            combo++;
+            hasMatch = true;
+        };
+
+        return hasMatch;
+    }
+
+    public void destoryRing (List<DotController> columnLine, int colorIndex) {
+        foreach (DotController item in columnLine) {
+            for (int i = 0; i < item.transform.childCount; i++) {
+                RingController ring = item.transform.GetChild (i).GetComponent<RingController> ();
+                if (ring.colorIndex == colorIndex) {
+                    item.ringTotal -= ring.ringType;
+                    if (ring.ringType == 1) {
+                        ring.destroyed = true;
+                        item.smallRing = null;
+                    } else if (ring.ringType == 2) {
+                        ring.destroyed = true;
+                        item.mediumRing = null;
+                    } else if (ring.ringType == 4) {
+                        ring.destroyed = true;
+                        item.bigRing = null;
+                    }
+                }
+            }
+        }
+    }
+
 }
