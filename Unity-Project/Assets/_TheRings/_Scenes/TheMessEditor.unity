@@ -720,6 +720,7 @@ MonoBehaviour:
   comboText: {fileID: 7400000, guid: ad16f6404446a8443a2f67f5e7f296f1, type: 2}
   dotIndex: 0
   finishCheckAfterDestroy: 0
+  gridSize: 3
 --- !u!1 &491828951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,8 +1476,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1299860969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 202.5, y: 360, z: 0}
-  m_LocalScale: {x: 0.63380283, y: 0.63380283, z: 0.63380283}
+  m_LocalPosition: {x: 281, y: 374.5, z: 0}
+  m_LocalScale: {x: 0.65933096, y: 0.65933096, z: 0.65933096}
   m_Children:
   - {fileID: 326441185}
   - {fileID: 23142653}
@@ -2137,7 +2138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38a3be2c1dcc4fdca85ee77d8129f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameType: 0
+  gameType: 3
   enablePremiumFeatures: 1
   dotManager: {fileID: 468757589}
   uIManager: {fileID: 140034734}

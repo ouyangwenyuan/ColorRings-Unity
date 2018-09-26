@@ -260,8 +260,9 @@ public class EditorLayoutRingMgr : GameManager {
 
 				if ((mouseUpPosition - theNearestDotPosition).magnitude < 1f) //The ring not far away
 				{
+					theNearestDot.GetComponent<DotController> ().CheckRing ();
 					//Check if allow drop - > drop all ring to the dot
-					if (AllowDrop (theNearestDot)) {
+					if (AllowDrop2 (theNearestDot)) {
 						// SoundManager.Instance.PlaySound (SoundManager.Instance.dropRing);
 						dotManager.dotIndex = theNearestDot.GetComponent<DotController> ().dotIndex;
 						// while (randomPoint.transform.childCount > 0) {
@@ -270,8 +271,8 @@ public class EditorLayoutRingMgr : GameManager {
 						// }
 					}
 				}
+				
 				theNearestDot = TheNearestDot (mouseUpPosition); //Find the nearest dot (place where the ring stay)
-
 				theNearestDotPosition = theNearestDot.transform.position;
 				if ((mouseUpPosition - theNearestDotPosition).magnitude < 1f) //The ring not far away
 				{

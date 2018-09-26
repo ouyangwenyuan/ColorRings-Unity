@@ -10,7 +10,7 @@ public class LayoutRingMgr : GameManager {
 	private List<GameObject> bottomRings = new List<GameObject> ();
 	MessGameLevel gamelevel;
 	public int level;
-	int currentLevel;
+	// int currentLevel;
 	void Start () {
 		// gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
 		// string[] boardRingStr = gamelevel.boardRings.Split (';');
@@ -50,7 +50,7 @@ public class LayoutRingMgr : GameManager {
 		levelTx.text = GameState.levelindex + ">" + GameState.realLevel;
 		loadLevelData ();
 	}
-	private int[] ringType = { 1, 2, 4 };
+	// private int[] ringType = { 1, 2, 4 };
 
 	public void resetGame () {
 		clearRings ();
@@ -161,7 +161,7 @@ public class LayoutRingMgr : GameManager {
 		if (Input.GetMouseButtonDown (0)) //First touch
 		{
 			Vector2 touchPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); //Tranform mouse position to world position
-			float distance = float.MaxValue;
+			// float distance = float.MaxValue;
 			// int nearestIndex = 0;
 			// for (int i = 0; i < transform.childCount; i++) {
 			// 	Vector2 p = transform.GetChild (i).position;
@@ -189,7 +189,7 @@ public class LayoutRingMgr : GameManager {
 				float y = Input.mousePosition.y;
 				clickRing.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (x, y, 1f)) + new Vector3 (0, 0.3f, 0); // lift the ring a bit for not being covered by finger.
 			}
-		}
+		} else
 
 		if (Input.GetMouseButtonUp (0)) {
 			if (allowDrag) {
@@ -201,8 +201,9 @@ public class LayoutRingMgr : GameManager {
 				Debug.Log (mouseUpPosition + " ,theNearestDotPosition = " + theNearestDotPosition);
 				if ((mouseUpPosition - theNearestDotPosition).magnitude < 1f) //The ring not far away
 				{
+					theNearestDot.GetComponent<DotController> ().CheckRing ();
 					//Check if allow drop - > drop all ring to the dot
-					if (AllowDrop (theNearestDot)) {
+					if (AllowDrop1 (theNearestDot)) {
 						// SoundManager.Instance.PlaySound (SoundManager.Instance.dropRing);
 						dotManager.dotIndex = theNearestDot.GetComponent<DotController> ().dotIndex;
 						while (clickRing.transform.childCount > 0) {
@@ -212,6 +213,7 @@ public class LayoutRingMgr : GameManager {
 						bottomRings.Remove (clickRing);
 						Destroy (clickRing);
 						finishMoveRandomPointBack = true;
+
 					} else {
 						StartCoroutine (MoveRandomPointBack (clickRing, firstRandomPointPosition));
 					}
@@ -254,6 +256,19 @@ public class LayoutRingMgr : GameManager {
 			}
 		}
 
+	}
+
+	public bool AllowDrop1 (GameObject theNearestDot) {
+
+		for (int i = 0; i < bottomRings[0].transform.childCount; i++) {
+			int ringType = bottomRings[0].transform.GetChild (i).GetComponent<RingController> ().ringType;
+			int ringTotal = theNearestDot.GetComponent<DotController> ().ringTotal;
+			if ((ringType & ringTotal) == ringType) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

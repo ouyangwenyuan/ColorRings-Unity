@@ -30,7 +30,7 @@ public class GameDirector : MonoBehaviour {
 	private RandomPoint pointGenerator;
 	int w = 5, h = 5;
 
-	int ringcoins = 0;
+	// int ringcoins = 0;
 	// Use this for initialization
 	void Start () {
 		// generateRandomRing ();

@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
     public bool allowDrag;
     public bool finishMoveRandomPointBack;
     private int totalSize = 7;
-    private int currentLevel;
+    public int currentLevel;
     public static GameManager Instance;
 
     private void Awake () {
