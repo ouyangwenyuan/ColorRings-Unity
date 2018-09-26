@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour {
 
     [Header ("Object References")]
     public GameManager gameManager;
-    public GameObject title;
+    // public GameObject title;
     public GameObject mainCanvas;
     public GameObject pauseCanvas;
     public GameObject settingsCanvas;
@@ -31,12 +31,10 @@ public class UIManager : MonoBehaviour {
     public Text txtNoMoreMoves;
     public Button btnChangeRing;
     public Button btnPause;
-    public Button btnPlay;
     public Button btnReview;
     public Button btnSoundOn;
     public Button btnSoundOff;
     public GameObject gameOverButtons;
-    public GameObject blackPanel;
 
     [Header ("Premium Features Buttons")]
     public GameObject btnWatchAd;
@@ -80,18 +78,18 @@ public class UIManager : MonoBehaviour {
         pauseCanvas.SetActive (showMenuAtStart);
 
         // Enable or disable premium stuff
-        bool enablePremium = gameManager.enablePremiumFeatures;
-        leaderboardBtn.SetActive (enablePremium);
-        leaderboardBtn2.SetActive (enablePremium);
-        shareBtn.SetActive (enablePremium);
-        removeAdsBtn.SetActive (enablePremium);
-        restorePurchaseBtn.SetActive (enablePremium);
+        // bool enablePremium = gameManager.enablePremiumFeatures;
+        // leaderboardBtn.SetActive (enablePremium);
+        // leaderboardBtn2.SetActive (enablePremium);
+        // shareBtn.SetActive (enablePremium);
+        // removeAdsBtn.SetActive (enablePremium);
+        // restorePurchaseBtn.SetActive (enablePremium);
 
         // Hidden at start
-        shareUI.SetActive (false);
-        settingsCanvas.SetActive (false);
-        gameOverButtons.SetActive (false);
-        btnWatchAd.SetActive (false);
+        // shareUI.SetActive (false);
+        // settingsCanvas.SetActive (false);
+        // gameOverButtons.SetActive (false);
+        // btnWatchAd.SetActive (false);
 
         ShowGameplayUI ();
         firstLoad = false;
@@ -142,14 +140,10 @@ public class UIManager : MonoBehaviour {
         if (!firstLoad) {
             t = t * (-1);
             if (t < 0) {
-                btnPlay.gameObject.SetActive (false);
                 gameOverButtons.SetActive (false);
-                blackPanel.gameObject.SetActive (false);
                 txtNoMoreMoves.gameObject.SetActive (false);
             } else {
-                btnPlay.gameObject.SetActive (true);
                 gameOverButtons.SetActive (true);
-                blackPanel.gameObject.SetActive (true);
                 txtNoMoreMoves.gameObject.SetActive (true);
             }
         }
@@ -161,8 +155,6 @@ public class UIManager : MonoBehaviour {
 
     public void ShowGameOverUI () {
         gameOverButtons.SetActive (true);
-        blackPanel.SetActive (true);
-        btnPlay.gameObject.SetActive (true);
         btnReview.gameObject.SetActive (true);
         btnWatchAd.gameObject.SetActive (false);
         txtNoMoreMoves.gameObject.SetActive (true);
@@ -173,10 +165,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ShowGameplayUI () {
-        title.SetActive (false);
         gameOverButtons.SetActive (false);
-        blackPanel.SetActive (false);
-        btnPlay.gameObject.SetActive (false);
         btnReview.gameObject.SetActive (false);
         txtNoMoreMoves.gameObject.SetActive (false);
         btnWatchAd.gameObject.SetActive (false);

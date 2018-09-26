@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class PauseDialogController : MonoBehaviour {
 
@@ -33,6 +34,7 @@ public class PauseDialogController : MonoBehaviour {
 			//restart game
 		} else if (index == 2) {
 			//back home or back map
+			SceneManager.LoadScene (0);
 		}
 	}
 }
