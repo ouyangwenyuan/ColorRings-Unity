@@ -481,48 +481,38 @@ public class DotManager : MonoBehaviour {
             case 7:
                 if (smallring.colorIndex == midring.colorIndex && midring.colorIndex == bigring.colorIndex) {
 
-                    //remove small
                     bool match = removeRings (smallColors, clickPoint, smallring);
-                    if (match) {
-                        clickPoint.ringTotal -= smallring.ringType;
-                        // Destroy (smallring.gameObject);
-                        smallring.destroyed = true;
-                        smallring = null;
-                    }
+                    clickPoint.ringTotal -= smallring.ringType;
+                    smallring.destroyed = true;
+                    smallring = null;
                     clickPoint.ringTotal -= bigring.ringType;
-                    // Destroy (bigring.gameObject);
                     bigring.destroyed = true;
                     bigring = null;
                     clickPoint.ringTotal -= midring.ringType;
                     midring.destroyed = true;
-                    // Destroy (midring.gameObject);
                     midring = null;
                 } else if (smallring.colorIndex == midring.colorIndex && midring.colorIndex != bigring.colorIndex) {
-                    removeRings (midColors, clickPoint, bigring);
+                    removeRings (bigColors, clickPoint, bigring);
                     bool match = removeRings (smallColors, clickPoint, smallring);
                     if (match) {
                         clickPoint.ringTotal -= midring.ringType;
-                        // Destroy (midring.gameObject);
                         midring.destroyed = true;
                         midring = null;
                     }
 
-                    //remove big
                 } else if (midring.colorIndex == bigring.colorIndex && midring.colorIndex != smallring.colorIndex) {
                     removeRings (smallColors, clickPoint, smallring);
-                    bool match = removeRings (midColors, clickPoint, midring); {
+                    bool match = removeRings (midColors, clickPoint, midring); 
+                    if(match){
                         clickPoint.ringTotal -= bigring.ringType;
-                        // Destroy (bigring.gameObject);
                         bigring.destroyed = true;
                         bigring = null;
                     }
-                    //remove big
                 } else if (smallring.colorIndex == bigring.colorIndex && smallring.colorIndex != midring.colorIndex) {
                     removeRings (midColors, clickPoint, midring);
                     bool match = removeRings (smallColors, clickPoint, smallring);
                     if (match) {
                         clickPoint.ringTotal -= bigring.ringType;
-                        // Destroy (bigring.gameObject);
                         bigring.destroyed = true;
                         bigring = null;
                     }
@@ -537,7 +527,6 @@ public class DotManager : MonoBehaviour {
                     bool match = removeRings (midColors, clickPoint, midring);
                     if (match) {
                         clickPoint.ringTotal -= bigring.ringType;
-                        // Destroy (bigring.gameObject);
                         bigring.destroyed = true;
                         bigring = null;
                     }
@@ -568,7 +557,6 @@ public class DotManager : MonoBehaviour {
                     bool match = removeRings (smallColors, clickPoint, smallring);
                     if (match) {
                         clickPoint.ringTotal -= midring.ringType;
-                        // Destroy (midring.gameObject);
                         midring.destroyed = true;
                         midring = null;
                     }

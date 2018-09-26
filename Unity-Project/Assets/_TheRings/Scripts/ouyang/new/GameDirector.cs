@@ -161,11 +161,11 @@ public class GameDirector : MonoBehaviour {
 					RingController ring = item.transform.GetChild (i).GetComponent<RingController> ();
 					if (hassmall && clickPoint.smallRing.colorIndex == ring.colorIndex) {
 						smallColors.Add (item);
-						continue;
+						// continue;
 					}
 					if (hasmid && clickPoint.mediumRing.colorIndex == ring.colorIndex) {
 						midColors.Add (item);
-						continue;
+						// continue;
 					}
 					if (hasbig && clickPoint.bigRing.colorIndex == ring.colorIndex) {
 						bigColors.Add (item);
@@ -193,7 +193,7 @@ public class GameDirector : MonoBehaviour {
 						// Destroy (clickPoint.mediumRing.gameObject);
 						clickPoint.mediumRing = null;
 					} else if (clickPoint.mediumRing.colorIndex == clickPoint.smallRing.colorIndex && clickPoint.mediumRing.colorIndex != clickPoint.bigRing.colorIndex) {
-						removeRings (midColors, clickPoint, clickPoint.bigRing);
+						removeRings (bigColors, clickPoint, clickPoint.bigRing);
 						bool match = removeRings (smallColors, clickPoint, clickPoint.smallRing);
 						if (match) {
 							clickPoint.ringTotal -= clickPoint.mediumRing.ringType;
@@ -205,7 +205,8 @@ public class GameDirector : MonoBehaviour {
 						//remove big
 					} else if (clickPoint.mediumRing.colorIndex == clickPoint.bigRing.colorIndex && clickPoint.mediumRing.colorIndex != clickPoint.smallRing.colorIndex) {
 						removeRings (smallColors, clickPoint, clickPoint.smallRing);
-						bool match = removeRings (midColors, clickPoint, clickPoint.mediumRing); {
+						bool match = removeRings (midColors, clickPoint, clickPoint.mediumRing);
+						if(match) {
 							clickPoint.ringTotal -= clickPoint.bigRing.ringType;
 							// Destroy (clickPoint.bigRing.gameObject);
 							clickPoint.bigRing.destroyed = true;
