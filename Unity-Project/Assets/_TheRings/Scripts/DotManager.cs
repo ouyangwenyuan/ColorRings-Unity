@@ -44,7 +44,7 @@ public class DotManager : MonoBehaviour {
     // Use this for initialization
     public int gridSize = 3;
     void Awake () {
-        float unitSize = 3.6f / (gridSize - 1);
+        float unitSize = 3.2f / (gridSize - 1);
         dots = new GameObject[gridSize * gridSize];
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
@@ -54,14 +54,14 @@ public class DotManager : MonoBehaviour {
                 dotc.dotIndex = index;
                 dotc.x = i;
                 dotc.y = j;
-                dotc.transform.position = new Vector3 (unitSize * i, unitSize * j, -0.2f);
+                dotc.transform.position = new Vector3 (unitSize * i, unitSize * j, 0f);
                 dotc.transform.localScale = Vector3.one;
                 dotc.transform.parent = this.transform;
                 dots[index] = dot;
                 // dot.transform.Translate(new Vector3(0,0,-0.2f));
             }
         }
-        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2, 0);
+        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2+0.5f, -0.2f);
         points = new List<DotController> ();
         for (int i = 0; i < dots.Length; i++) {
             points.Add (dots[i].GetComponent<DotController> ());
@@ -208,8 +208,8 @@ public class DotManager : MonoBehaviour {
 
                 }
             } else if (gameType == 2) {
-                UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
             }
+                UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
         }
 
         if (listDestroyRing.Count >= 5) {
@@ -395,7 +395,7 @@ public class DotManager : MonoBehaviour {
     void AddForListLine (int firstDot, int secondDot, int colorIndex) {
         Line newLine = new Line ();
         newLine.Position = dots[secondDot].transform.position;
-        newLine.Color = Color.red;//UIManager.ringColors[colorIndex];
+        newLine.Color = Color.red; //UIManager.ringColors[colorIndex];
         if (secondDot == 3 || secondDot == 5) {
             newLine.Angle = 90;
         } else if (secondDot == 1 || secondDot == 7) {
@@ -650,7 +650,7 @@ public class DotManager : MonoBehaviour {
     void AddEffectLine (int type, Transform clickPoint, int colorIndex) {
         Line newLine = new Line ();
         newLine.Position = clickPoint.transform.position;
-        newLine.Color = Color.red;//UIManager.ringColors[colorIndex];
+        newLine.Color = Color.red; //UIManager.ringColors[colorIndex];
         if (type == 0) {
             newLine.Angle = 0;
         } else if (type == 1) {
