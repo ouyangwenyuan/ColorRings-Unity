@@ -298,8 +298,8 @@ public class UIManager : MonoBehaviour {
     public void HandlePauseButton () {
         gameManager.isPaused = true;
         mainCanvas.gameObject.SetActive (false);
-        pauseCanvas.transform.Find ("BestScore").GetComponent<Text> ().text = ScoreManager.Instance.HighScore.ToString ();
         pauseCanvas.gameObject.SetActive (true);
+        // pauseCanvas.transform.Find ("BestScore").GetComponent<Text> ().text = ScoreManager.Instance.HighScore.ToString ();
 
     }
 

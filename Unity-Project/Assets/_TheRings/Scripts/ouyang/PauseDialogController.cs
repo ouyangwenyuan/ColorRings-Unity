@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PauseDialogController : MonoBehaviour {
 
 	public Button resume, restart, giveup, close;
+	public int fromScene;
 	// Use this for initialization
 	void Start () {
 		close.onClick.AddListener (delegate () {
@@ -32,9 +33,11 @@ public class PauseDialogController : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		if (index == 1) {
 			//restart game
+			UIManager.Instance.HandleRestartButton();
 		} else if (index == 2) {
 			//back home or back map
 			SceneManager.LoadScene (0);
 		}
+		UIManager.Instance.HandlePlayButtonOnPauseCanvas();
 	}
 }
