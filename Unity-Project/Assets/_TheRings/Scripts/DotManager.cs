@@ -54,10 +54,11 @@ public class DotManager : MonoBehaviour {
                 dotc.dotIndex = index;
                 dotc.x = i;
                 dotc.y = j;
-                dotc.transform.position = new Vector3 (unitSize * i, unitSize * j, 0);
+                dotc.transform.position = new Vector3 (unitSize * i, unitSize * j, -0.2f);
                 dotc.transform.localScale = Vector3.one;
                 dotc.transform.parent = this.transform;
                 dots[index] = dot;
+                // dot.transform.Translate(new Vector3(0,0,-0.2f));
             }
         }
         this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2, 0);

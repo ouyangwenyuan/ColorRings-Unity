@@ -545,7 +545,7 @@ public class GameManager : MonoBehaviour {
             randomPoint.transform.position = Vector2.Lerp (startPos, endPos, fraction);
             yield return null;
         }
-
+        randomPoint.transform.Translate (new Vector3 (0, 0,-0.2f));
         finishMoveRandomPointBack = true;
         // Debug.Log (randomPoint + " ,endPos = " + endPos);
     }
