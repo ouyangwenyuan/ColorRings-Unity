@@ -126,9 +126,20 @@ public class EditorLayoutRingMgr : GameManager {
 				ring.transform.localScale = Vector3.one;
 
 				// ring.layer = 9;
-
-				ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+				string spirtefile = "rings/" + colorIndex + "-" + ring.GetComponent<RingController> ().ringType;
+				ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+				// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 				ring.GetComponent<RingController> ().colorIndex = colorIndex;
+				float z = 0;
+				// int ringType = theRing.GetComponent<RingController> ().ringType;
+				if (ringType == 1) {
+					z = -0.5f;
+				} else if (ringType == 2) {
+					z = -0.4f;
+				} else {
+					z = -0.3f;
+				}
+				ring.transform.Translate (new Vector3 (0, 0, z));
 			}
 		}
 	}
@@ -157,9 +168,20 @@ public class EditorLayoutRingMgr : GameManager {
 			ring.transform.localScale = Vector3.one;
 
 			ring.layer = 9;
-
-			ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+			string spirtefile = "rings/" + colorIndex + "-" + ring.GetComponent<RingController> ().ringType;
+			ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+			// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 			ring.GetComponent<RingController> ().colorIndex = colorIndex;
+			float z = 0;
+			// int ringType = theRing.GetComponent<RingController> ().ringType;
+			if (ringType == 1) {
+				z = -0.5f;
+			} else if (ringType == 2) {
+				z = -0.4f;
+			} else {
+				z = -0.3f;
+			}
+			ring.transform.Translate (new Vector3 (0, 0, z));
 		}
 		// bottomRings.Add (wraper);
 
@@ -271,7 +293,7 @@ public class EditorLayoutRingMgr : GameManager {
 						// }
 					}
 				}
-				
+
 				theNearestDot = TheNearestDot (mouseUpPosition); //Find the nearest dot (place where the ring stay)
 				theNearestDotPosition = theNearestDot.transform.position;
 				if ((mouseUpPosition - theNearestDotPosition).magnitude < 1f) //The ring not far away
@@ -390,7 +412,9 @@ public class EditorLayoutRingMgr : GameManager {
 				ring = Instantiate (UIManager.Instance.bigRing);
 			}
 			int colorIndex = ringData.colorType;
-			ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+			string spirtefile = "rings/" + colorIndex + "-" + ringData.ringType;
+			ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+			// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 			ring.GetComponent<RingController> ().colorIndex = colorIndex;
 			ring.GetComponent<RingController> ().ringType = seed;
 			ring.SetActive (false);

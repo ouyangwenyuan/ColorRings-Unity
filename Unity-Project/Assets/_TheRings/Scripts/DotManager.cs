@@ -223,9 +223,11 @@ public class DotManager : MonoBehaviour {
             ParticleSystem particle = Instantiate (ringExplode, listDestroyRing[i].transform.position, Quaternion.identity) as ParticleSystem;
 #if UNITY_5_5_OR_NEWER
             var tmp = particle.main;
-            tmp.startColor = UIManager.ringColors[listDestroyRing[i].GetComponent<RingController> ().colorIndex];
+            // tmp.startColor = UIManager.ringColors[listDestroyRing[i].GetComponent<RingController> ().colorIndex];
+            tmp.startColor = Color.red;
 #else
-            particle.startColor = UIManager.ringColors[listDestroyRing[i].GetComponent<RingController> ().colorIndex];
+            // particle.startColor = UIManager.ringColors[listDestroyRing[i].GetComponent<RingController> ().colorIndex];
+            particle.startColor = Color.red;
 #endif
             particle.Play ();
             Destroy (particle.gameObject, 2f);
@@ -392,7 +394,7 @@ public class DotManager : MonoBehaviour {
     void AddForListLine (int firstDot, int secondDot, int colorIndex) {
         Line newLine = new Line ();
         newLine.Position = dots[secondDot].transform.position;
-        newLine.Color = UIManager.ringColors[colorIndex];
+        newLine.Color = Color.red;//UIManager.ringColors[colorIndex];
         if (secondDot == 3 || secondDot == 5) {
             newLine.Angle = 90;
         } else if (secondDot == 1 || secondDot == 7) {
@@ -502,8 +504,8 @@ public class DotManager : MonoBehaviour {
 
                 } else if (midring.colorIndex == bigring.colorIndex && midring.colorIndex != smallring.colorIndex) {
                     removeRings (smallColors, clickPoint, smallring);
-                    bool match = removeRings (midColors, clickPoint, midring); 
-                    if(match){
+                    bool match = removeRings (midColors, clickPoint, midring);
+                    if (match) {
                         clickPoint.ringTotal -= bigring.ringType;
                         bigring.destroyed = true;
                         bigring = null;
@@ -647,7 +649,7 @@ public class DotManager : MonoBehaviour {
     void AddEffectLine (int type, Transform clickPoint, int colorIndex) {
         Line newLine = new Line ();
         newLine.Position = clickPoint.transform.position;
-        newLine.Color = UIManager.ringColors[colorIndex];
+        newLine.Color = Color.red;//UIManager.ringColors[colorIndex];
         if (type == 0) {
             newLine.Angle = 0;
         } else if (type == 1) {

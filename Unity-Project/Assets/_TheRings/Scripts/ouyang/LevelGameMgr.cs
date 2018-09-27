@@ -109,8 +109,9 @@ public class LevelGameMgr : GameManager {
 				ring.transform.localScale = Vector3.one;
 
 				// ring.layer = 9;
-
-				ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+				string spirtefile = "rings/" + colorIndex + "-" + ring.GetComponent<RingController> ().ringType;
+				ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+				// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 				ring.GetComponent<RingController> ().colorIndex = colorIndex;
 			}
 		}
@@ -139,9 +140,10 @@ public class LevelGameMgr : GameManager {
 			ring.transform.position = wraper.transform.position; //new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
 			ring.transform.localScale = Vector3.one;
 
-			ring.layer = 9;
-
-			ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+			// ring.layer = 9;
+			string spirtefile = "rings/" + colorIndex + "-" + ring.GetComponent<RingController> ().ringType;
+			ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+			// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 			ring.GetComponent<RingController> ().colorIndex = colorIndex;
 		}
 		bottomRings.Add (wraper);

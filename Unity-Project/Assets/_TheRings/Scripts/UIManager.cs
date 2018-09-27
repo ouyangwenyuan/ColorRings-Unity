@@ -53,8 +53,8 @@ public class UIManager : MonoBehaviour {
     public GameObject dotPoint;
     public TargetItem targetItem;
     //target check
-    public static Color[] ringColors = { Color.red, Color.magenta, Color.cyan, Color.green, Color.yellow, Color.blue, Color.gray, Color.black, Color.white };
-
+    // public static Color[] ringColors = { Color.red, Color.magenta, Color.cyan, Color.green, Color.yellow, Color.blue, Color.gray, Color.black, Color.white };
+    public static Sprite[] ringSpirtes;
     Animator scoreAnimator;
     bool hasCheckedGameOver = false;
 

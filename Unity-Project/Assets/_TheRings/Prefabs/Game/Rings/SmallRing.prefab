@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212000013497679350}
   - component: {fileID: 114000012247070018}
   - component: {fileID: 95000012158435278}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SmallRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000012346992384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,6 +75,8 @@ MonoBehaviour:
   destroyed: 0
   x: 0
   y: 0
+  status: 2
+  nearestDot: {fileID: 0}
 --- !u!212 &212000013497679350
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -109,7 +111,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 90212f8d4ebbbb94bb8abcaccfda7f51, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 55dfbdd9fd2de4b8faf2c361ec2ff15e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

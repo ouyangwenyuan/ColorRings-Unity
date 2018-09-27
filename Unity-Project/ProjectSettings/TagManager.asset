@@ -17,9 +17,9 @@ TagManager:
   - 
   - 
   - map
-  - ring
-  - 
-  - 
+  - bigring
+  - midring
+  - smallring
   - 
   - 
   - 
@@ -46,4 +46,13 @@ TagManager:
     locked: 0
   - name: map
     uniqueID: 3112721465
+    locked: 0
+  - name: bigring
+    uniqueID: 3458336367
+    locked: 0
+  - name: midring
+    uniqueID: 1622915793
+    locked: 0
+  - name: smallring
+    uniqueID: 2381360453
     locked: 0

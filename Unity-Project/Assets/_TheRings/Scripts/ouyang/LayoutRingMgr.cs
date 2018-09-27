@@ -109,9 +109,20 @@ public class LayoutRingMgr : GameManager {
 				ring.transform.localScale = Vector3.one;
 
 				// ring.layer = 9;
-
-				ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+				string spirtefile = "rings/" + colorIndex + "-" + ring.GetComponent<RingController> ().ringType;
+				ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+				// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 				ring.GetComponent<RingController> ().colorIndex = colorIndex;
+				float z = 0;
+				// int ringType = theRing.GetComponent<RingController> ().ringType;
+				if (ringType == 1) {
+					z = -0.5f;
+				} else if (ringType == 2) {
+					z = -0.4f;
+				} else {
+					z = -0.3f;
+				}
+				ring.transform.Translate (new Vector3 (0, 0, z));
 			}
 		}
 	}
@@ -139,10 +150,21 @@ public class LayoutRingMgr : GameManager {
 			ring.transform.position = wraper.transform.position; //new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
 			ring.transform.localScale = Vector3.one;
 
-			ring.layer = 9;
-
-			ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+			// ring.layer = 9;
+			string spirtefile = "rings/" + colorIndex + "-" + ring.GetComponent<RingController> ().ringType;
+			ring.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+			// ring.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
 			ring.GetComponent<RingController> ().colorIndex = colorIndex;
+			float z = 0;
+			// int ringType = theRing.GetComponent<RingController> ().ringType;
+			if (ringType == 1) {
+				z = -0.5f;
+			} else if (ringType == 2) {
+				z = -0.4f;
+			} else {
+				z = -0.3f;
+			}
+			ring.transform.Translate (new Vector3 (0, 0, z));
 		}
 		bottomRings.Add (wraper);
 

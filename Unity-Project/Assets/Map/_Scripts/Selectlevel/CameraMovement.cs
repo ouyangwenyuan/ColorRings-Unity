@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour {
 
     public Sprite[] star; // arrays star of item level
 
-    public GameObject fade; // fade animation
+    // public GameObject fade; // fade animation
 
     float distance = 0.0104f; // 94.8f / 8950f; //8680f;
 
@@ -125,7 +125,7 @@ public class CameraMovement : MonoBehaviour {
 
     public void FreezeMap () {
         DataLoader.enableclick = false;
-        fade.GetComponent<CanvasGroup> ().blocksRaycasts = true;
+        // fade.GetComponent<CanvasGroup> ().blocksRaycasts = true;
     }
 
     public void UnfreezeMap () {
@@ -133,7 +133,7 @@ public class CameraMovement : MonoBehaviour {
         // PopUp.SetActive(false);
         isPopup = false;
         DataLoader.enableclick = true;
-        fade.GetComponent<CanvasGroup> ().blocksRaycasts = false;
+        // fade.GetComponent<CanvasGroup> ().blocksRaycasts = false;
 
     }
 

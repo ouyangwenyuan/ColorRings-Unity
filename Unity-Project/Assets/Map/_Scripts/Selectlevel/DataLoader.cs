@@ -32,7 +32,7 @@ public class DataLoader : MonoBehaviour {
 
     // private GameObject tmp;
 
-    public GameObject mapParent;
+    private GameObject mapParent;
 
     // public List<GameObject> listmap1;
 
@@ -42,7 +42,7 @@ public class DataLoader : MonoBehaviour {
 
     public UnityEngine.UI.Image processbar;
 
-    public GameObject fade;
+    // public GameObject fade;
 
     public Sprite[] MapSprite;
 
@@ -54,7 +54,7 @@ public class DataLoader : MonoBehaviour {
     const int PageCount = 42;
     const int PointPerPage = 24;
 
-    public GameObject Background;
+    private GameObject Background;
     LevelPoint[] pagePoints; //每个page上的相对坐标 :与真实像素比：1:100
     void Awake () {
         Data = this;
@@ -178,7 +178,7 @@ public class DataLoader : MonoBehaviour {
             PlayerPrefs.SetFloat ("LASTPOSX", listmap[CameraMovement.StarPointMoveIndex].transform.position.x);
 
         } else {
-            fade.GetComponent<CanvasGroup> ().blocksRaycasts = false;
+            // fade.GetComponent<CanvasGroup> ().blocksRaycasts = false;
             CameraMovement.mcamera.StarPoint.transform.GetChild (0).GetComponent<Animation> ().Play ("StarPoint");
         }
     }

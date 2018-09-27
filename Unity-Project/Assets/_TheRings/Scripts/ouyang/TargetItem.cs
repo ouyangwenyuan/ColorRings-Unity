@@ -25,7 +25,7 @@ public class TargetItem : MonoBehaviour {
 		if (colorType == -1) {
 			icon.gameObject.SetActive (false);
 		} else {
-			icon.color = UIManager.ringColors[colorType];
+			// icon.color = UIManager.ringColors[colorType];
 		}
 		targetTx.text = target;
 		labelTx.text = label;

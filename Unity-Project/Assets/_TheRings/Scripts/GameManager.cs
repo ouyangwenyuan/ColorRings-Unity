@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour {
             currentLevel = GameState.levelindex;
             GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
             totalSize = int.Parse (levelData.sizeCount);
-            initialColorNumber = int.Parse(levelData.totalColorCount);
+            initialColorNumber = int.Parse (levelData.totalColorCount);
         }
 
         GameUIState = GameUIState.Prepare;
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour {
 
     void UpdateColorNumber () {
         if (ScoreManager.Instance.Score > scoreCounter) {
-            if (initialColorNumber < UIManager.ringColors.Length - 1) {
+            if (initialColorNumber < 6) { //UIManager.ringColors.Length - 1
                 scoreCounter += scoreToAddNewRingColor;
                 initialColorNumber += 1;
             }
@@ -400,7 +400,11 @@ public class GameManager : MonoBehaviour {
 
         GameObject currentRing = Instantiate (ring, originalRingPostion, Quaternion.identity) as GameObject;
         int colorIndex = Random.Range (0, initialColorNumber);
-        currentRing.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
+        int ringType = currentRing.GetComponent<RingController> ().ringType;
+        string spirtefile = "rings/" + colorIndex + "-" + ringType;
+        print (spirtefile + ".png");
+        currentRing.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> (spirtefile);
+        // currentRing.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
         currentRing.GetComponent<RingController> ().colorIndex = colorIndex;
         float t = 0;
         Vector2 startPos = currentRing.transform.position;
@@ -412,6 +416,15 @@ public class GameManager : MonoBehaviour {
             yield return null;
         }
         currentRing.transform.parent = randomPoint.transform;
+        float z = 0;
+        if (ringType == 1) {
+            z = -0.5f;
+        } else if (ringType == 2) {
+            z = -0.4f;
+        } else {
+            z = -0.3f;
+        }
+        currentRing.transform.Translate (new Vector3 (0, 0, z));
 
         finishMoveRing = true;
     }
@@ -510,7 +523,16 @@ public class GameManager : MonoBehaviour {
             theRing.transform.position = Vector2.Lerp (startPos, endPos, fraction);
             yield return null;
         }
-
+        float z = 0;
+        int ringType = theRing.GetComponent<RingController> ().ringType;
+        if (ringType == 1) {
+            z = -0.5f;
+        } else if (ringType == 2) {
+            z = -0.4f;
+        } else {
+            z = -0.3f;
+        }
+        theRing.transform.Translate (new Vector3 (0, 0, z));
         finishDrop = true;
     }
 
