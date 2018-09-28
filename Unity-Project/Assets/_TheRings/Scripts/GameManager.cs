@@ -523,14 +523,14 @@ public class GameManager : MonoBehaviour {
             theRing.transform.position = Vector2.Lerp (startPos, endPos, fraction);
             yield return null;
         }
-        float z = 0;
+        float z = -0.2f;
         int ringType = theRing.GetComponent<RingController> ().ringType;
         if (ringType == 1) {
-            z = -0.5f;
+            z += -0.5f;
         } else if (ringType == 2) {
-            z = -0.4f;
+            z += -0.4f;
         } else {
-            z = -0.3f;
+            z += -0.3f;
         }
         theRing.transform.Translate (new Vector3 (0, 0, z));
         finishDrop = true;

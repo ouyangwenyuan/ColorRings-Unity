@@ -44,6 +44,7 @@ public class LayoutRingMgr : GameManager {
 		// 		ring.GetComponent<RingController> ().colorIndex = colorIndex;
 		// 	}
 		// }
+		firstRandomPointPosition = randomPoint.transform.position;
 		level = GameState.messLevel - 1;
 		// currentLevel = GameState.levelindex;
 		levelTx.text = GameState.messLevel + ">" + GameState.levelindex;
@@ -230,7 +231,7 @@ public class LayoutRingMgr : GameManager {
 				{
 					theNearestDot.GetComponent<DotController> ().CheckRing ();
 					//Check if allow drop - > drop all ring to the dot
-					if (AllowDrop (theNearestDot)) {
+					if (AllowDrop1 (theNearestDot)) {
 						// SoundManager.Instance.PlaySound (SoundManager.Instance.dropRing);
 						dotManager.dotIndex = theNearestDot.GetComponent<DotController> ().dotIndex;
 						while (clickRing.transform.childCount > 0) {
