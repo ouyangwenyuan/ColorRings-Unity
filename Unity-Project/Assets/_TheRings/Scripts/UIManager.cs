@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour {
     public GameObject passLevelCanvas;
     public GameObject failLevelCanvas;
     public Text txtScore;
+    public Image scoreProgress;
     public Text txtCombo;
     public Text txtComboText;
     public Text txtBestScore;

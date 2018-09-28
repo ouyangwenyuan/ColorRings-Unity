@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour {
         if (isPaused) {
             return;
         }
-
+       
         if (Input.GetMouseButtonDown (0)) //First touch
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); //Tranform mouse position to world position
@@ -162,7 +162,7 @@ public class GameManager : MonoBehaviour {
                 // GenerateRings ();
             } else if (gameType == 1) { }
             GenerateRings1 ();
-            uIManager.CheckAndShowWatchAdOption ();
+            UIManager.Instance.CheckAndShowWatchAdOption ();
         }
     }
 

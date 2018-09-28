@@ -178,6 +178,9 @@ public class LayoutRingMgr : GameManager {
 
 	// Update is called once per frame
 	void Update () {
+		if (isPaused) {
+			return;
+		}
 		moveRing ();
 	}
 
@@ -279,7 +282,7 @@ public class LayoutRingMgr : GameManager {
 				} else {
 					UIManager.Instance.ShowFailUI ();
 				}
-
+				isPaused = true;
 				Debug.Log ("游戏结束" + success);
 			} else {
 				moveToRandomPoint ();

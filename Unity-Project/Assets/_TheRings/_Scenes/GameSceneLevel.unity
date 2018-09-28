@@ -1278,9 +1278,20 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 161.13196
       objectReference: {fileID: 0}
+    - target: {fileID: 114611516357936298, guid: ee746126b0cf14c5db00a2b0c965cf7e,
+        type: 2}
+      propertyPath: scoreProgress
+      value: 
+      objectReference: {fileID: 2060328470}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee746126b0cf14c5db00a2b0c965cf7e, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &2060328470 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114343588007717498, guid: ee746126b0cf14c5db00a2b0c965cf7e,
+    type: 2}
+  m_PrefabInternal: {fileID: 2060328469}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &2109956878
 Prefab:
   m_ObjectHideFlags: 0

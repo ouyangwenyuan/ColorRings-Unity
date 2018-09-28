@@ -96,7 +96,7 @@ public class DotManager : MonoBehaviour {
                 ringItem.setData ("", levelData.targetRingCounts[i], int.Parse (levelData.targetRingColors[i]));
                 ringItem.transform.parent = TargetContainer.transform;
                 ringItem.transform.localPosition = Vector3.zero; //TargetContainer.transform.position;
-                ringItem.transform.Translate (100*(i * 2-5), 0, 0);
+                ringItem.transform.Translate (100 * (i * 2 - 5), 0, 0);
                 ringItems[i] = ringItem;
             }
 
@@ -194,9 +194,10 @@ public class DotManager : MonoBehaviour {
 
         if (scoreAdded > 0) {
             ScoreManager.Instance.AddScore (scoreAdded);
-
+            float maxScore = 1;
             SoundManager.Instance.PlaySound (SoundManager.Instance.lineDestroy);
             if (gameType == 0) {
+                maxScore = targetScore;
                 // scoreItem.setValue (ScoreManager.Instance.Score);
                 if (ScoreManager.Instance.Score >= targetScore) {
                     // GameManager.Instance.gameOver = true;
@@ -210,8 +211,11 @@ public class DotManager : MonoBehaviour {
                     Debug.Log (",reallevel=" + curLevel + 1);
 
                 }
-            } else if (gameType == 2) { }
+            } else if (gameType == 2) {
+                maxScore = ScoreManager.Instance.HighScore;
+            }
             UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
+            UIManager.Instance.scoreProgress.fillAmount = ScoreManager.Instance.Score/maxScore;
         }
 
         if (listDestroyRing.Count >= 5) {
