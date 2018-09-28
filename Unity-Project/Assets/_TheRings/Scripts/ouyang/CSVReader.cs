@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class CSVReader : MonoBehaviour {
 
 	public Text _display;
-	private void OnGUI () {
-		if (GUILayout.Button ("Save")) {
-			Save ();
-		}
-		if (GUILayout.Button ("Load")) {
-			Load ();
-		}
-	}
+	// private void OnGUI () {
+	// 	if (GUILayout.Button ("Save")) {
+	// 		Save ();
+	// 	}
+	// 	if (GUILayout.Button ("Load")) {
+	// 		Load ();
+	// 	}
+	// }
 
 	private string _fileName = "LevelData";
 	private string _messFileName = "MessLevelData";

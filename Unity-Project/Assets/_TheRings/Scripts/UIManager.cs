@@ -3,7 +3,6 @@ using SgLib;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 #if EASY_MOBILE
 using EasyMobile;
 #endif
@@ -163,7 +162,7 @@ public class UIManager : MonoBehaviour {
 
         btnChangeRing.gameObject.SetActive (false);
         btnPause.gameObject.SetActive (false);
-        ShowFailUI();
+        ShowFailUI ();
     }
 
     public void ShowGameplayUI () {

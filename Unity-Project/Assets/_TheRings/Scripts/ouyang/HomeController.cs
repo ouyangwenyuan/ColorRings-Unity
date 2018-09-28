@@ -73,9 +73,9 @@ public class HomeController : MonoBehaviour {
 		// }
 	}
 
-	private void OnGUI () {
-		if (GUILayout.Button ("关卡数据导入测试")) {
-			SceneManager.LoadScene ("Test");
-		}
-	}
+	// private void OnGUI () {
+	// 	if (GUILayout.Button ("关卡数据导入测试")) {
+	// 		SceneManager.LoadScene ("Test");
+	// 	}
+	// }
 }

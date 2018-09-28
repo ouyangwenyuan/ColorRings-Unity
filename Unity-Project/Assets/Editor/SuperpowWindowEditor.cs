@@ -10,21 +10,21 @@ public class SuperpowWindowEditor {
 
     [MenuItem ("Superpow/Unlock all levels")]
     static void UnlockAllLevel () {
-
+        PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 50);
         // add by zcw in 2018/05/30
         // PlayerPrefs.SetInt(PrefKeys.CURRENT_LEVEL, Const.MAX_LEVEL * Const.WORLD_NAME.Length);
 
     }
 
-    [MenuItem ("Superpow/Credit balance (ruby, hint..)")]
-    static void AddRuby () {
+    // [MenuItem ("Superpow/Credit balance (ruby, hint..)")]
+    // static void AddRuby () {
 
-    }
+    // }
 
-    [MenuItem ("Superpow/Set balance to 0")]
-    static void SetBalanceZero () {
+    // [MenuItem ("Superpow/Set balance to 0")]
+    // static void SetBalanceZero () {
 
-    }
+    // }
 
     [MenuItem ("Superpow/CreateMessLevel")]
     static void createWorldsLevel () {

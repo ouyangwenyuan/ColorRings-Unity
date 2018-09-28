@@ -9,7 +9,7 @@ public class MapController : MonoBehaviour {
 	// Use this for initialization
 	public Sprite[] icon;
 	void Start () {
-		// PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 50);
+		
 		int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
 		pagePoints = transform.childCount;
 		for (int i = 0; i < transform.childCount; i++) {
