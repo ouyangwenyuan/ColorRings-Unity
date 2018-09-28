@@ -29,6 +29,7 @@ public class DotManager : MonoBehaviour {
     public ParticleSystem ps_comboExplode;
     public UIManager uIManager;
     public CameraController cameraControler;
+    [HideInInspector]
     public GameObject[] dots;
     public AnimationClip bigRingScale;
     public AnimationClip comboText;
@@ -43,6 +44,7 @@ public class DotManager : MonoBehaviour {
     private int previousCombo;
     private List<DotController> points;
     // Use this for initialization
+    [HideInInspector]
     public int gridSize = 3;
     void Awake () {
 

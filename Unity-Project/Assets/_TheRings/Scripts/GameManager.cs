@@ -36,8 +36,7 @@ public class GameManager : MonoBehaviour {
     public int gameType = 0; // 0- level mode ,1 - mess mode , 2 - score mode
     private GameUIState _gameState = GameUIState.Prepare;
 
-    [Header ("Check to enable premium features (require EasyMobile plugin)")]
-    public bool enablePremiumFeatures = true;
+  
 
     [Header ("Gameplay Reference")]
     public DotManager dotManager;
@@ -61,6 +60,7 @@ public class GameManager : MonoBehaviour {
 
     private List<int> listCreateRings = new List<int> ();
     private GameObject currentRing;
+    [HideInInspector]
     public Vector2 firstRandomPointPosition;
     //Save the first position of random point
     private Vector2 originalRingPostion;
@@ -68,9 +68,12 @@ public class GameManager : MonoBehaviour {
     private Vector2 theLeftPosition;
     //This is end position of ring when the ring moved
     private int scoreCounter;
+    [HideInInspector]
     public bool allowDrag;
+    [HideInInspector]
     public bool finishMoveRandomPointBack;
     private int totalSize = 7;
+    [HideInInspector]
     public int currentLevel;
     public static GameManager Instance;
 
@@ -108,7 +111,7 @@ public class GameManager : MonoBehaviour {
         if (isPaused) {
             return;
         }
-       
+
         if (Input.GetMouseButtonDown (0)) //First touch
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); //Tranform mouse position to world position
@@ -545,7 +548,7 @@ public class GameManager : MonoBehaviour {
             randomPoint.transform.position = Vector2.Lerp (startPos, endPos, fraction);
             yield return null;
         }
-        randomPoint.transform.Translate (new Vector3 (0, 0,-0.2f));
+        randomPoint.transform.Translate (new Vector3 (0, 0, -0.2f));
         finishMoveRandomPointBack = true;
         // Debug.Log (randomPoint + " ,endPos = " + endPos);
     }

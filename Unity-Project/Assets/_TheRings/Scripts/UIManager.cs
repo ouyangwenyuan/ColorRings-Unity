@@ -9,10 +9,12 @@ using EasyMobile;
 
 public class UIManager : MonoBehaviour {
 
+    // [Header ("Check to enable premium features (require EasyMobile plugin)")]
+    private bool enablePremiumFeatures = true;
     public static bool firstLoad = true;
 
-    [Header ("Check to show menu when game starts")]
-    public bool showMenuAtStart = false;
+    // [Header ("Check to show menu when game starts")]
+    private bool showMenuAtStart = false;
 
     [Header ("Object References")]
     public GameManager gameManager;
@@ -306,7 +308,7 @@ public class UIManager : MonoBehaviour {
 
     public void CheckAndShowWatchAdOption () {
         if (CoinManager.Instance.Coins == 0 && !btnWatchAd.activeSelf) {
-            if (gameManager.enablePremiumFeatures) {
+            if (enablePremiumFeatures) {
                 StartCoroutine (CRShowWatchAdOption (0.5f));
             } else {
                 ShowChangeRingButton ();
@@ -327,21 +329,21 @@ public class UIManager : MonoBehaviour {
         if (CoinManager.Instance.Coins == 0) {
             // Only show "watch ad" button if a rewarded ad is loaded and premium features are enabled
 #if EASY_MOBILE
-            if (gameManager.enablePremiumFeatures && AdDisplayer.Instance.CanShowRewardedAd () && AdDisplayer.Instance.watchAdToRefillRingSwap) {
+            if (enablePremiumFeatures && AdDisplayer.Instance.CanShowRewardedAd () && AdDisplayer.Instance.watchAdToRefillRingSwap) {
                 btnWatchAd.SetActive (true);
                 btnChangeRing.gameObject.SetActive (false);
             } else {
 #if !UNITY_EDITOR
                 ShowChangeRingButton ();
 #else
-                if (gameManager.enablePremiumFeatures) {
+                if (enablePremiumFeatures) {
                     btnWatchAd.SetActive (true); // for testing in the editor
                     btnChangeRing.gameObject.SetActive (false);
                 }
 #endif
             }
 #elif UNITY_EDITOR
-            if (gameManager.enablePremiumFeatures) {
+            if (enablePremiumFeatures) {
                 btnWatchAd.SetActive (true); // for testing in the editor
                 btnChangeRing.gameObject.SetActive (false);
             }
@@ -351,7 +353,7 @@ public class UIManager : MonoBehaviour {
 
     public void WatchRewardedAd () {
 #if UNITY_EDITOR
-        if (gameManager.enablePremiumFeatures) {
+        if (enablePremiumFeatures) {
             // Give the award right away for testing in the editor
             // Show the change ring button
             ShowChangeRingButton ();
