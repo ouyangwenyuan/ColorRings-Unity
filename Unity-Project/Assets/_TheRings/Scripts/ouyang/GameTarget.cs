@@ -31,18 +31,12 @@ public class GameTarget : MonoBehaviour {
 	public IEnumerator startTime () {
 
 		while (TotalTime > 0) {
-
 			//Debug.Log(TotalTime);//打印出每一秒剩余的时间
-
 			yield return new WaitForSeconds (1); //由于开始倒计时，需要经过一秒才开始减去1秒，
 			//所以要先用yield return new WaitForSeconds(1);然后再进行TotalTime--;运算
-
 			TotalTime--;
-
 			TimeText.text = "Time:" + TotalTime;
-
 			if (TotalTime <= 0) { //如果倒计时剩余总时间为0时，就跳转场景
-
 				//游戏结束
 				GameManager.Instance.gameOver = true;
 
@@ -55,11 +49,19 @@ public class GameTarget : MonoBehaviour {
 			// string length = mumite.ToString ();
 			percentageImg.fillAmount = (float) TotalTime / (float) percentage;
 			if (second >= 10) {
-
-				TimeText.text = "0" + mumite + ":" + second;
+				if (mumite >= 10) {
+					TimeText.text =  mumite + ":" + second;
+				} else {
+					TimeText.text = "0" + mumite + ":" + second;
+				}
 			} //如果秒大于10的时候，就输出格式为 00：00
-			else
-				TimeText.text = "0" + mumite + ":0" + second; //如果秒小于10的时候，就输出格式为 00：00
+			else {
+				if (mumite >= 10) {
+					TimeText.text =  mumite + ":0" + second;
+				} else {
+					TimeText.text = "0" + mumite + ":0" + second; //如果秒小于10的时候，就输出格式为 00：00
+				}
+			}
 
 		}
 

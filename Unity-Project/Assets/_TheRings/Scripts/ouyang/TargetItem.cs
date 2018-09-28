@@ -22,10 +22,13 @@ public class TargetItem : MonoBehaviour {
 	}
 
 	public void setData (string label, string target, int colorType = -1) {
+		this.colorType = colorType;
 		if (colorType == -1) {
 			icon.gameObject.SetActive (false);
 		} else {
+			string spirtefile = "rings/" + colorType + "-1";
 			// icon.color = UIManager.ringColors[colorType];
+			icon.GetComponent<Image> ().sprite = Resources.Load<Sprite> (spirtefile);
 		}
 		targetTx.text = target;
 		labelTx.text = label;

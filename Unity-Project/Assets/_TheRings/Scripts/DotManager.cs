@@ -16,8 +16,8 @@ public class DotManager : MonoBehaviour {
     public int gameType = 0; // 0- level mode ,1 - mess mode , 2 - score mode
     public Text levelTx;
     public GameObject TargetContainer;
-    TargetItem scoreItem;
-    TargetItem comboItem;
+    // TargetItem scoreItem;
+    // TargetItem comboItem;
     TargetItem[] ringItems;
     int currentLevel;
     int targetScore;
@@ -32,6 +32,7 @@ public class DotManager : MonoBehaviour {
     public GameObject[] dots;
     public AnimationClip bigRingScale;
     public AnimationClip comboText;
+    public Text comboLabel;
     [HideInInspector]
     public int dotIndex;
     [HideInInspector]
@@ -61,7 +62,7 @@ public class DotManager : MonoBehaviour {
                 // dot.transform.Translate(new Vector3(0,0,-0.2f));
             }
         }
-        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2+0.5f, 0f);
+        this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2 + 0.5f, 0f);
         points = new List<DotController> ();
         for (int i = 0; i < dots.Length; i++) {
             points.Add (dots[i].GetComponent<DotController> ());
@@ -81,19 +82,21 @@ public class DotManager : MonoBehaviour {
             GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
             targetScore = int.Parse (levelData.targetScore);
 
-            scoreItem = Instantiate (UIManager.Instance.targetItem);
-            scoreItem.setData ("score", levelData.targetScore);
-            scoreItem.transform.parent = TargetContainer.transform;
+            // scoreItem = Instantiate (UIManager.Instance.targetItem);
+            // scoreItem.setData ("score", levelData.targetScore);
+            // scoreItem.transform.parent = TargetContainer.transform;
 
-            comboItem = Instantiate (UIManager.Instance.targetItem);
-            comboItem.setData ("combo", levelData.targetCombo);
-            comboItem.transform.parent = TargetContainer.transform;
+            // comboItem = Instantiate (UIManager.Instance.targetItem);
+            // comboItem.setData ("combo", levelData.targetCombo);
+            // comboItem.transform.parent = TargetContainer.transform;
 
             ringItems = new TargetItem[levelData.targetRingCounts.Length];
             for (int i = 0; i < levelData.targetRingCounts.Length; i++) {
                 TargetItem ringItem = Instantiate (UIManager.Instance.targetItem);
                 ringItem.setData ("", levelData.targetRingCounts[i], int.Parse (levelData.targetRingColors[i]));
                 ringItem.transform.parent = TargetContainer.transform;
+                ringItem.transform.localPosition = Vector3.zero; //TargetContainer.transform.position;
+                ringItem.transform.Translate (100*(i * 2-5), 0, 0);
                 ringItems[i] = ringItem;
             }
 
@@ -130,8 +133,8 @@ public class DotManager : MonoBehaviour {
         }
 
         if (gameType == 0) {
-            comboItem.setValue (targetComboTotalCnt);
-
+            // comboItem.setValue (targetComboTotalCnt);
+            comboLabel.text = targetComboTotalCnt + "";
         }
 
     }
@@ -168,7 +171,7 @@ public class DotManager : MonoBehaviour {
         if (gameType == 0 && listDestroyRing.Count > 0) {
             for (int j = 0; j < listDestroyRing.Count; j++) {
                 for (int i = 0; i < ringItems.Length; i++) {
-                    if (listDestroyRing[j].GetComponent<SpriteRenderer> ().color == ringItems[i].icon.color) {
+                    if (listDestroyRing[j].GetComponent<RingController> ().colorIndex == ringItems[i].colorType) {
                         ringItems[i].changeValue (1);
                     }
                 }
@@ -194,7 +197,7 @@ public class DotManager : MonoBehaviour {
 
             SoundManager.Instance.PlaySound (SoundManager.Instance.lineDestroy);
             if (gameType == 0) {
-                scoreItem.setValue (ScoreManager.Instance.Score);
+                // scoreItem.setValue (ScoreManager.Instance.Score);
                 if (ScoreManager.Instance.Score >= targetScore) {
                     // GameManager.Instance.gameOver = true;
                     // 过关进入下一关
@@ -207,9 +210,8 @@ public class DotManager : MonoBehaviour {
                     Debug.Log (",reallevel=" + curLevel + 1);
 
                 }
-            } else if (gameType == 2) {
-            }
-                UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
+            } else if (gameType == 2) { }
+            UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
         }
 
         if (listDestroyRing.Count >= 5) {
