@@ -7,6 +7,7 @@ public class GameState {
 
     public static int levelindex = 1;
     public static int realLevel = 1;
+    public static int messLevel = 1;
     public static int chosenWorld = getWorldN (realLevel);
     public static int chosenLevel = getLevelN (realLevel);
     public static bool canPlay = true;
@@ -18,6 +19,10 @@ public class GameState {
 
     public static List<Player> levelDatas;
 
+    public static void toMessScene (int messLevel) {
+        GameState.messLevel = messLevel;
+        SceneManager.LoadScene ("GameSceneTheMess");
+    }
     public static void toGameScene (int levelIndex) {
         // 进入游戏
 
@@ -27,11 +32,11 @@ public class GameState {
 
         GameState.realLevel = realLevel;
         GameState.levelindex = levelIndex;
-        if (levelindex % 5 == 0) {
-            SceneManager.LoadScene ("GameSceneTheMess");
-        } else {
-            SceneManager.LoadScene ("GameSceneLevel");
-        }
+        // if (levelindex % 5 == 0) {
+        //     SceneManager.LoadScene ("GameSceneTheMess");
+        // } else {
+        SceneManager.LoadScene ("GameSceneLevel");
+        // }
 
         // if (GameState.realLevel == 31 && !PlayerPrefs.HasKey ("completeTutorial3")) {
         //     //加载31关之前,先进红机关引导
@@ -45,11 +50,12 @@ public class GameState {
     }
 
     public static int getRealLevel (int mapIndex) {
-        if (mapIndex % 5 == 0) {
-            return mapIndex / 5 - 1;
-        }else{
-            return (mapIndex%5) + (mapIndex/5*4) -1;
-        }
+        return mapIndex -1;
+        // if (mapIndex % 5 == 0) {
+        //     return mapIndex / 5 - 1;
+        // } else {
+        //     return (mapIndex % 5) + (mapIndex / 5 * 4) - 1;
+        // }
 
         // if (mapIndex == 0) return 1;
 
@@ -67,7 +73,7 @@ public class GameState {
 
         // }
 
-        return 1;
+        // return 1;
     }
 
     public static int getMapLevel (int RealLevel) {

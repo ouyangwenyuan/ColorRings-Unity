@@ -10,7 +10,6 @@ public class LayoutRingMgr : GameManager {
 	private List<GameObject> bottomRings = new List<GameObject> ();
 	MessGameLevel gamelevel;
 	public int level;
-	// int currentLevel;
 	void Start () {
 		// gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
 		// string[] boardRingStr = gamelevel.boardRings.Split (';');
@@ -45,15 +44,15 @@ public class LayoutRingMgr : GameManager {
 		// 		ring.GetComponent<RingController> ().colorIndex = colorIndex;
 		// 	}
 		// }
-		level = GameState.realLevel;
-		currentLevel = GameState.levelindex;
-		levelTx.text = GameState.levelindex + ">" + GameState.realLevel;
+		level = GameState.messLevel - 1;
+		// currentLevel = GameState.levelindex;
+		levelTx.text = GameState.messLevel + ">" + GameState.levelindex;
 		loadLevelData ();
-		moveToRandomPoint();
+		moveToRandomPoint ();
 	}
 	// private int[] ringType = { 1, 2, 4 };
-	private void moveToRandomPoint(){
-		if(bottomRings.Count >0){
+	private void moveToRandomPoint () {
+		if (bottomRings.Count > 0) {
 			bottomRings[0].transform.parent = randomPoint.transform;
 			bottomRings[0].transform.position = randomPoint.transform.position;
 		}
@@ -271,18 +270,18 @@ public class LayoutRingMgr : GameManager {
 					}
 				}
 				if (success) {
-					int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
-					if (currentLevel == curLevel) {
-						PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
-					}
+					// int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
+					// if (currentLevel == curLevel) {
+					// 	PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
+					// }
 					UIManager.Instance.ShowSuccessUI ();
 				} else {
 					UIManager.Instance.ShowFailUI ();
 				}
 
 				Debug.Log ("游戏结束" + success);
-			}else{
-				moveToRandomPoint();
+			} else {
+				moveToRandomPoint ();
 			}
 		}
 
