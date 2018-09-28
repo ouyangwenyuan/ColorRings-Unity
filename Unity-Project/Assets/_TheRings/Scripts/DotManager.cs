@@ -45,6 +45,7 @@ public class DotManager : MonoBehaviour {
     // Use this for initialization
     public int gridSize = 3;
     void Awake () {
+
         float unitSize = 3.2f / (gridSize - 1);
         dots = new GameObject[gridSize * gridSize];
         for (int i = 0; i < gridSize; i++) {
@@ -63,6 +64,9 @@ public class DotManager : MonoBehaviour {
             }
         }
         this.transform.Translate (-unitSize * (gridSize - 1) / 2, -unitSize * (gridSize - 1) / 2 + 0.5f, 0f);
+        GameObject mige = Instantiate (uIManager.miGe);
+        mige.transform.parent = transform;
+        mige.transform.position = new Vector3 (0, 0.5f, -0.4f);
         points = new List<DotController> ();
         for (int i = 0; i < dots.Length; i++) {
             points.Add (dots[i].GetComponent<DotController> ());
@@ -215,7 +219,7 @@ public class DotManager : MonoBehaviour {
                 maxScore = ScoreManager.Instance.HighScore;
             }
             UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
-            UIManager.Instance.scoreProgress.fillAmount = ScoreManager.Instance.Score/maxScore;
+            UIManager.Instance.scoreProgress.fillAmount = ScoreManager.Instance.Score / maxScore;
         }
 
         if (listDestroyRing.Count >= 5) {

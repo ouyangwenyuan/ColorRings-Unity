@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour {
     public GameObject smallRing;
     public GameObject dotPoint;
     public TargetItem targetItem;
+    public GameObject miGe;
     //target check
     // public static Color[] ringColors = { Color.red, Color.magenta, Color.cyan, Color.green, Color.yellow, Color.blue, Color.gray, Color.black, Color.white };
     public static Sprite[] ringSpirtes;

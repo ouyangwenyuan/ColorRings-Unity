@@ -1,0 +1,474 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1820405833536498}
+  m_IsPrefabParent: 1
+--- !u!1 &1136310104134010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4793287754730938}
+  - component: {fileID: 114478000485432780}
+  m_Layer: 0
+  m_Name: CoinManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1150496950204676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4983261501374988}
+  - component: {fileID: 114660220464670596}
+  m_Layer: 0
+  m_Name: AppInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1165244610038120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4101691260424490}
+  - component: {fileID: 114433278948755626}
+  - component: {fileID: 114847008270495970}
+  - component: {fileID: 114049208214945586}
+  - component: {fileID: 114482899182559822}
+  - component: {fileID: 114602626615507638}
+  - component: {fileID: 114175835982812728}
+  m_Layer: 0
+  m_Name: PremiumFeatures
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1471678082836566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4320958689602180}
+  - component: {fileID: 114458547722101946}
+  - component: {fileID: 82065228583731324}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1618524804519108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4605693026255056}
+  - component: {fileID: 114981608161931476}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1820405833536498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4661198461438760}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4101691260424490
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4661198461438760}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4320958689602180
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471678082836566}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4661198461438760}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4605693026255056
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618524804519108}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4661198461438760}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4661198461438760
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820405833536498}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4983261501374988}
+  - {fileID: 4605693026255056}
+  - {fileID: 4793287754730938}
+  - {fileID: 4320958689602180}
+  - {fileID: 4101691260424490}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4793287754730938
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136310104134010}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4661198461438760}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4983261501374988
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150496950204676}
+  m_LocalRotation: {x: 0.0547964, y: 0.69624805, z: 0.696248, w: -0.16575535}
+  m_LocalPosition: {x: 99, y: 99, z: 99}
+  m_LocalScale: {x: 9999.006, y: 9999.003, z: 9999.004}
+  m_Children: []
+  m_Father: {fileID: 4661198461438760}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 999, y: 999, z: 999}
+--- !u!82 &82065228583731324
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471678082836566}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dce90a20357de5a4eb0aa14727e13583, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114049208214945586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbe9fd9e217e4be8b7f0593f9d77052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disable: 0
+  leaderboardName: Score
+--- !u!114 &114175835982812728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7583989556ae242e389c2ba307c25a74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114433278948755626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf4a2538c64745739e9bde27352b463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114458547722101946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1471678082836566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb546c7d8b6c4aa0a5a0d15b48c91ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSimultaneousSounds: 7
+  button:
+    clip: {fileID: 8300000, guid: f40707d3138e7d74994d4507578b2420, type: 3}
+    simultaneousPlayCount: 0
+  lineDestroy:
+    clip: {fileID: 8300000, guid: 43e16012d8f134aefb192732855f6bda, type: 3}
+    simultaneousPlayCount: 0
+  comboDestroy:
+    clip: {fileID: 8300000, guid: 1138470b971254dce90bdeea3f34221a, type: 3}
+    simultaneousPlayCount: 0
+  dropRing:
+    clip: {fileID: 8300000, guid: f6ec02a7692964380bd7d9b668b6edb3, type: 3}
+    simultaneousPlayCount: 0
+  gameOver:
+    clip: {fileID: 8300000, guid: bba2121a3a5565a4d814c8754a480df1, type: 3}
+    simultaneousPlayCount: 0
+  tick:
+    clip: {fileID: 8300000, guid: f6ec02a7692964380bd7d9b668b6edb3, type: 3}
+    simultaneousPlayCount: 0
+  rewarded:
+    clip: {fileID: 8300000, guid: 5c8a03872f4af4968a677c3a203d37d1, type: 3}
+    simultaneousPlayCount: 0
+--- !u!114 &114478000485432780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136310104134010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488dea2dd9c4740399c8aa4754ef8e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialCoins: 0
+  _coins: 0
+--- !u!114 &114482899182559822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0350242eae7d436cbc1dbc271373b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disable: 0
+  achievements:
+  - achievementName: Score_10
+    scoreToUnlock: 10
+  - achievementName: Score_20
+    scoreToUnlock: 20
+  - achievementName: Score_30
+    scoreToUnlock: 30
+  - achievementName: Score_40
+    scoreToUnlock: 40
+  - achievementName: Score_50
+    scoreToUnlock: 50
+  - achievementName: Score_60
+    scoreToUnlock: 60
+  - achievementName: Score_70
+    scoreToUnlock: 70
+  - achievementName: Score_80
+    scoreToUnlock: 80
+  - achievementName: Score_90
+    scoreToUnlock: 90
+  - achievementName: Score_100
+    scoreToUnlock: 100
+  - achievementName: Score_110
+    scoreToUnlock: 110
+  - achievementName: Score_120
+    scoreToUnlock: 120
+  - achievementName: Score_130
+    scoreToUnlock: 130
+  - achievementName: Score_140
+    scoreToUnlock: 140
+  - achievementName: Score_150
+    scoreToUnlock: 150
+  - achievementName: Score_160
+    scoreToUnlock: 160
+  - achievementName: Score_170
+    scoreToUnlock: 170
+  - achievementName: Score_180
+    scoreToUnlock: 180
+  - achievementName: Score_190
+    scoreToUnlock: 190
+  - achievementName: Score_200
+    scoreToUnlock: 200
+--- !u!114 &114602626615507638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b09fb089ace462f97d934784390a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shareMessage: Awesome! I've just scored [score] in [AppName]! [#AppName]
+  screenshotFilename: screenshot.png
+--- !u!114 &114660220464670596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150496950204676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0880f83037c764ac6b3a06b71bbea97e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  APP_NAME: '[YOUR_APP_NAME]'
+  APPSTORE_ID: '[YOUR_APPSTORE_ID'
+  BUNDLE_ID: '[YOUR_BUNDLE_ID]'
+  APPSTORE_LINK: itms-apps://itunes.apple.com/app/id
+  PLAYSTORE_LINK: market://details?id=
+  APPSTORE_SHARE_LINK: https://itunes.apple.com/app/id
+  PLAYSTORE_SHARE_LINK: https://play.google.com/store/apps/details?id=
+  APPSTORE_HOMEPAGE: '[YOUR_APPSTORE_PUBLISHER_LINK]'
+  PLAYSTORE_HOMEPAGE: '[YOUR_GOOGLEPLAY_PUBLISHER_NAME]'
+  FACEBOOK_ID: '[YOUR_FACEBOOK_PAGE_ID]'
+  TWITTER_NAME: '[YOUR_TWITTER_PAGE_NAME]'
+  SUPPORT_EMAIL: '[YOUR_SUPPORT_EMAIL]'
+  FACEBOOK_LINK: https://facebook.com/
+  TWITTER_LINK: https://twitter.com/
+  targetFrameRate: 60
+  clearPlayerPrefs: 0
+--- !u!114 &114847008270495970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47830b8d66c74670b0edccbd3721389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  removeAds: Remove_Ads
+--- !u!114 &114981608161931476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1618524804519108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305d0278e9c5c4384bd39352f851d3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
