@@ -20,7 +20,7 @@ public class GameTarget : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
 	private int TotalTime = 90; //总时间
@@ -31,6 +31,7 @@ public class GameTarget : MonoBehaviour {
 	public IEnumerator startTime () {
 
 		while (TotalTime > 0) {
+
 			//Debug.Log(TotalTime);//打印出每一秒剩余的时间
 			yield return new WaitForSeconds (1); //由于开始倒计时，需要经过一秒才开始减去1秒，
 			//所以要先用yield return new WaitForSeconds(1);然后再进行TotalTime--;运算
@@ -50,14 +51,14 @@ public class GameTarget : MonoBehaviour {
 			percentageImg.fillAmount = (float) TotalTime / (float) percentage;
 			if (second >= 10) {
 				if (mumite >= 10) {
-					TimeText.text =  mumite + ":" + second;
+					TimeText.text = mumite + ":" + second;
 				} else {
 					TimeText.text = "0" + mumite + ":" + second;
 				}
 			} //如果秒大于10的时候，就输出格式为 00：00
 			else {
 				if (mumite >= 10) {
-					TimeText.text =  mumite + ":0" + second;
+					TimeText.text = mumite + ":0" + second;
 				} else {
 					TimeText.text = "0" + mumite + ":0" + second; //如果秒小于10的时候，就输出格式为 00：00
 				}

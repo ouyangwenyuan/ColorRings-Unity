@@ -227,7 +227,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224921867449589264}
   - component: {fileID: 222815950304756438}
-  - component: {fileID: 114791966019855968}
   m_Layer: 5
   m_Name: Timer
   m_TagString: Untagged
@@ -726,22 +725,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1791617936064122
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4011771046798834}
-  - component: {fileID: 114611516357936298}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1800550274449590
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,19 +845,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4011771046798834
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791617936064122}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -562.5, y: -1218, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224074154338566406}
-  m_RootOrder: 18
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95042959527998618
 Animator:
   serializedVersion: 3
@@ -1513,7 +1483,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -1524,7 +1494,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ShowShareUI
         m_Mode: 1
         m_Arguments:
@@ -1603,7 +1573,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -1614,7 +1584,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: HandlePlayButton
         m_Mode: 1
         m_Arguments:
@@ -1699,7 +1669,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -1710,7 +1680,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ShowSettingsUI
         m_Mode: 1
         m_Arguments:
@@ -2073,52 +2043,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114611516357936298
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791617936064122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd48026e176cad48bb8710b07feb35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showMenuAtStart: 0
-  gameManager: {fileID: 0}
-  mainCanvas: {fileID: 1641952888424034}
-  pauseCanvas: {fileID: 0}
-  settingsCanvas: {fileID: 0}
-  passLevelCanvas: {fileID: 0}
-  failLevelCanvas: {fileID: 0}
-  txtScore: {fileID: 114716639641378408}
-  scoreProgress: {fileID: 114343588007717498}
-  txtCombo: {fileID: 114994805696849274}
-  txtComboText: {fileID: 114913408426548744}
-  txtBestScore: {fileID: 114548047622593182}
-  txtChangeRing: {fileID: 114972430620548712}
-  txtNoMoreMoves: {fileID: 114347565490706132}
-  btnChangeRing: {fileID: 114650401395582826}
-  btnPause: {fileID: 114819837348909192}
-  btnReview: {fileID: 114829804773084700}
-  btnSoundOn: {fileID: 0}
-  btnSoundOff: {fileID: 0}
-  gameOverButtons: {fileID: 1439715563017150}
-  btnWatchAd: {fileID: 1407711804346034}
-  leaderboardBtn: {fileID: 1763354840653292}
-  leaderboardBtn2: {fileID: 0}
-  shareBtn: {fileID: 1616557759747320}
-  removeAdsBtn: {fileID: 0}
-  restorePurchaseBtn: {fileID: 0}
-  shareUI: {fileID: 1463148143506854}
-  sharedImage: {fileID: 114464227390508788}
-  bigRing: {fileID: 1000013054469478, guid: 5d8b774ca1cfb7e4880f432abeae9a5f, type: 2}
-  normalRing: {fileID: 1000012439881286, guid: 7daed1b03ee1984489bb5b6d9958f5a4, type: 2}
-  smallRing: {fileID: 1000012346992384, guid: c0ceb8254b743f046be56421f1c0af4c, type: 2}
-  dotPoint: {fileID: 1992042277057350, guid: 9254029983e4846ec9cf6768ea47d438, type: 2}
-  targetItem: {fileID: 114237814776251172, guid: 1c0c5c24c80814a1abe65aff728b1cc9,
-    type: 2}
-  miGe: {fileID: 1277251599528128, guid: b9ff358174e3d443bb5c5b39bf3f4b2d, type: 2}
 --- !u!114 &114650401395582826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2158,7 +2082,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -2169,7 +2093,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: HandleChangeRingButton
         m_Mode: 1
         m_Arguments:
@@ -2267,7 +2191,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: HideShareUI
         m_Mode: 1
         m_Arguments:
@@ -2327,19 +2251,6 @@ MonoBehaviour:
   m_EffectColor: {r: 1, g: 1, b: 1, a: 1}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
---- !u!114 &114791966019855968
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1319321293683668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed7516f84371c4517a934915337cd762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimeText: {fileID: 114580663227430474}
-  percentageImg: {fileID: 114892439250663068}
 --- !u!114 &114793385383695710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2440,7 +2351,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -2451,7 +2362,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ShowLeaderboardUI
         m_Mode: 1
         m_Arguments:
@@ -2568,7 +2479,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: HandlePauseButton
         m_Mode: 1
         m_Arguments:
@@ -2620,7 +2531,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -2631,7 +2542,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: HandleReviewButton
         m_Mode: 1
         m_Arguments:
@@ -2683,7 +2594,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ShareScreenshot
         m_Mode: 1
         m_Arguments:
@@ -2933,7 +2844,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: ButtonClickSound
         m_Mode: 1
         m_Arguments:
@@ -2944,7 +2855,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 114611516357936298}
+      - m_Target: {fileID: 0}
         m_MethodName: WatchRewardedAd
         m_Mode: 1
         m_Arguments:
@@ -3390,7 +3301,6 @@ RectTransform:
   - {fileID: 224492051829477734}
   - {fileID: 224495844562683084}
   - {fileID: 224015655916223884}
-  - {fileID: 4011771046798834}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

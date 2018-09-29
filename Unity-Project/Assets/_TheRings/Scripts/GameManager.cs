@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour {
     [HideInInspector]
     public int currentLevel;
     public static GameManager Instance;
-
+   
     private void Awake () {
         Instance = this;
     }
@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour {
             GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
             totalSize = int.Parse (levelData.sizeCount);
             initialColorNumber = int.Parse (levelData.totalColorCount);
+   
+            // percentageImg.fillAmount = (float) TotalTime / (float) percentage;
         }
 
         GameUIState = GameUIState.Prepare;
@@ -113,7 +115,7 @@ public class GameManager : MonoBehaviour {
         if (Input.GetMouseButtonDown (0)) //First touch
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); //Tranform mouse position to world position
-            Debug.Log("touchPosition" + touchPosition + "pixel pos=" + Input.mousePosition);
+            Debug.Log ("touchPosition" + touchPosition + "pixel pos=" + Input.mousePosition);
             //If the mouse position too far away the rearest random point -> not allow drag the rings
             if ((touchPosition - firstRandomPointPosition).magnitude < 1f) {
                 allowDrag = true;
@@ -400,7 +402,7 @@ public class GameManager : MonoBehaviour {
         finishMoveRing = false;
 
         GameObject currentRing = Instantiate (ring, originalRingPostion, Quaternion.identity) as GameObject;
-        currentRing.transform.position = currentRing.transform.position + new Vector3(0,0,-0.2f);
+        currentRing.transform.position = currentRing.transform.position + new Vector3 (0, 0, -0.2f);
         int colorIndex = Random.Range (0, initialColorNumber);
         int ringType = currentRing.GetComponent<RingController> ().ringType;
         string spirtefile = "rings/" + colorIndex + "-" + ringType;
@@ -552,4 +554,6 @@ public class GameManager : MonoBehaviour {
         finishMoveRandomPointBack = true;
         // Debug.Log (randomPoint + " ,endPos = " + endPos);
     }
+
+   
 }

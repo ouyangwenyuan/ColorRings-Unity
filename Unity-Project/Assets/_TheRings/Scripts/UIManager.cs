@@ -55,6 +55,15 @@ public class UIManager : MonoBehaviour {
     public GameObject dotPoint;
     public TargetItem targetItem;
     public GameObject miGe;
+    public Text TimeText; //在UI里显示时间
+    // Use this for initialization
+    // public Image percentageImg;
+    private int percentage;
+    private int TotalTime = 90; //总时间
+
+    private int mumite; //分
+
+    private int second; //秒
     //target check
     // public static Color[] ringColors = { Color.red, Color.magenta, Color.cyan, Color.green, Color.yellow, Color.blue, Color.gray, Color.black, Color.white };
     public static Sprite[] ringSpirtes;
@@ -76,6 +85,13 @@ public class UIManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        if (gameManager.gameType == 0) {
+            int currentLevel = GameState.levelindex;
+            GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
+            TotalTime = int.Parse (levelData.usedTime);
+            percentage = TotalTime;
+            StartCoroutine (startTime ());
+        }
 
         scoreAnimator = txtScore.GetComponent<Animator> ();
         pauseCanvas.SetActive (showMenuAtStart);
@@ -296,14 +312,18 @@ public class UIManager : MonoBehaviour {
         pauseCanvas.SetActive (false);
         mainCanvas.gameObject.SetActive (true);
         gameManager.isPaused = false;
+        if (gameManager.gameType == 0)
+            StartCoroutine (startTime ());
     }
 
     public void HandlePauseButton () {
+
         gameManager.isPaused = true;
-        mainCanvas.gameObject.SetActive (false);
+        // mainCanvas.gameObject.SetActive (false);
         pauseCanvas.gameObject.SetActive (true);
         // pauseCanvas.transform.Find ("BestScore").GetComponent<Text> ().text = ScoreManager.Instance.HighScore.ToString ();
-
+        if (gameManager.gameType == 0)
+            StopAllCoroutines ();
     }
 
     public void CheckAndShowWatchAdOption () {
@@ -379,5 +399,49 @@ public class UIManager : MonoBehaviour {
     void RewardAfterWatchAd (int amount) {
         // Give the award!
         CoinManager.Instance.AddCoins (amount);
+    }
+
+    public IEnumerator startTime () {
+
+        while (!gameManager.isPaused && TotalTime > 0) {
+
+            //Debug.Log(TotalTime);//打印出每一秒剩余的时间
+            yield return new WaitForSeconds (1); //由于开始倒计时，需要经过一秒才开始减去1秒，
+            //所以要先用yield return new WaitForSeconds(1);然后再进行TotalTime--;运算
+            TotalTime--;
+            TimeText.text = "Time:" + TotalTime;
+            if (TotalTime <= 0) { //如果倒计时剩余总时间为0时，就跳转场景
+                //游戏结束
+                GameManager.Instance.gameOver = true;
+
+            }
+
+            mumite = TotalTime / 60; //输出显示分
+
+            second = TotalTime % 60; //输出显示秒
+
+            // string length = mumite.ToString ();
+            // percentageImg.fillAmount = (float) TotalTime / (float) percentage;
+            if (second >= 10) {
+                if (mumite >= 10) {
+                    TimeText.text = mumite + ":" + second;
+                } else {
+                    TimeText.text = "0" + mumite + ":" + second;
+                }
+            } //如果秒大于10的时候，就输出格式为 00：00
+            else {
+                if (mumite >= 10) {
+                    TimeText.text = mumite + ":0" + second;
+                } else {
+                    TimeText.text = "0" + mumite + ":0" + second; //如果秒小于10的时候，就输出格式为 00：00
+                }
+            }
+
+        }
+
+    }
+
+    private void OnDestroy () {
+        StopCoroutine (startTime ());
     }
 }
