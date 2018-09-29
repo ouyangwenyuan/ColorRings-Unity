@@ -36,8 +36,6 @@ public class GameManager : MonoBehaviour {
     public int gameType = 0; // 0- level mode ,1 - mess mode , 2 - score mode
     private GameUIState _gameState = GameUIState.Prepare;
 
-  
-
     [Header ("Gameplay Reference")]
     public DotManager dotManager;
     public UIManager uIManager;
@@ -146,7 +144,7 @@ public class GameManager : MonoBehaviour {
                         dotManager.dotIndex = theNearestDot.GetComponent<DotController> ().dotIndex;
                         while (randomPoint.transform.childCount > 0) {
                             StartCoroutine (MoveRingToTheDot (randomPoint.transform.GetChild (0).gameObject, theNearestDot.transform.position));
-                            randomPoint.transform.GetChild (0).transform.parent = theNearestDot.transform;
+                            randomPoint.transform.GetChild (0).transform.SetParent (theNearestDot.transform);
                         }
                     }
                 }
@@ -213,7 +211,7 @@ public class GameManager : MonoBehaviour {
         theDestroyOb.transform.position = randomPoint.transform.position;
 
         while (randomPoint.transform.childCount > 0) {
-            randomPoint.transform.GetChild (0).transform.parent = theDestroyOb.transform;
+            randomPoint.transform.GetChild (0).transform.SetParent (theDestroyOb.transform);
         }
 
         Vector2 startPos = theDestroyOb.transform.position;
@@ -402,6 +400,7 @@ public class GameManager : MonoBehaviour {
         finishMoveRing = false;
 
         GameObject currentRing = Instantiate (ring, originalRingPostion, Quaternion.identity) as GameObject;
+        currentRing.transform.position = currentRing.transform.position + new Vector3(0,0,-0.2f);
         int colorIndex = Random.Range (0, initialColorNumber);
         int ringType = currentRing.GetComponent<RingController> ().ringType;
         string spirtefile = "rings/" + colorIndex + "-" + ringType;
@@ -410,22 +409,23 @@ public class GameManager : MonoBehaviour {
         // currentRing.GetComponent<SpriteRenderer> ().color = UIManager.ringColors[colorIndex];
         currentRing.GetComponent<RingController> ().colorIndex = colorIndex;
         float t = 0;
-        Vector2 startPos = currentRing.transform.position;
-        Vector2 endPos = randomPoint.transform.position;
+        Vector3 startPos = currentRing.transform.position;
+        Vector3 endPos = randomPoint.transform.position;
+        Debug.Log ("start=" + currentRing.transform.position + " end=" + randomPoint.transform.position);
         while (t < ringMovingTime) {
             t += Time.deltaTime;
             float fraction = t / ringMovingTime;
-            currentRing.transform.position = Vector2.Lerp (startPos, endPos, fraction);
+            currentRing.transform.position = Vector3.Lerp (startPos, endPos, fraction);
             yield return null;
         }
-        currentRing.transform.parent = randomPoint.transform;
-        float z = 0;
+        currentRing.transform.SetParent (randomPoint.transform);
+        float z = -0.2f;
         if (ringType == 1) {
-            z = -0.5f;
+            z += -0.5f;
         } else if (ringType == 2) {
-            z = -0.4f;
+            z += -0.4f;
         } else {
-            z = -0.3f;
+            z += -0.3f;
         }
         currentRing.transform.Translate (new Vector3 (0, 0, z));
 
@@ -517,13 +517,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public IEnumerator MoveRingToTheDot (GameObject theRing, Vector2 endPos) {
-        Vector2 startPos = theRing.transform.position;
+    public IEnumerator MoveRingToTheDot (GameObject theRing, Vector3 endPos) {
+        Vector3 startPos = theRing.transform.position;
         float t = 0;
         while (t < 0.1f) {
             t += Time.deltaTime;
             float fraction = t / 0.1f;
-            theRing.transform.position = Vector2.Lerp (startPos, endPos, fraction);
+            theRing.transform.position = Vector3.Lerp (startPos, endPos, fraction);
             yield return null;
         }
         float z = -0.2f;
@@ -539,13 +539,13 @@ public class GameManager : MonoBehaviour {
         finishDrop = true;
     }
 
-    public IEnumerator MoveRandomPointBack (GameObject randomPoint, Vector2 endPos) {
-        Vector2 startPos = randomPoint.transform.position;
+    public IEnumerator MoveRandomPointBack (GameObject randomPoint, Vector3 endPos) {
+        Vector3 startPos = randomPoint.transform.position;
         float t = 0;
         while (t < 0.1f) {
             t += Time.deltaTime;
             float fraction = t / 0.1f;
-            randomPoint.transform.position = Vector2.Lerp (startPos, endPos, fraction);
+            randomPoint.transform.position = Vector3.Lerp (startPos, endPos, fraction);
             yield return null;
         }
         randomPoint.transform.Translate (new Vector3 (0, 0, -0.2f));
