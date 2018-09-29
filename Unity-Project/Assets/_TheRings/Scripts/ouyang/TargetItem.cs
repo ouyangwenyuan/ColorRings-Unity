@@ -11,7 +11,7 @@ public class TargetItem : MonoBehaviour {
 	public Text valueTx;
 	// Use this for initialization
 	public int colorType;
-	int total;
+	public int total;
 	void Start () {
 
 	}
