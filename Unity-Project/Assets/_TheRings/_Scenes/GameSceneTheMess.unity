@@ -2247,7 +2247,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 577041220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 562.5, y: -100, z: 0}
+  m_LocalPosition: {x: 1125, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1984642728}
@@ -3545,7 +3545,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1220452240}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -3901,6 +3901,14 @@ Prefab:
     - target: {fileID: 4960822114987144, guid: 121ad0f04641148b5a9666e8308b98fa, type: 2}
       propertyPath: m_LocalPosition.z
       value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4960822114987144, guid: 121ad0f04641148b5a9666e8308b98fa, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027598922663468, guid: 121ad0f04641148b5a9666e8308b98fa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 121ad0f04641148b5a9666e8308b98fa, type: 2}
@@ -5127,7 +5135,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -562.0676, y: 0}
-  m_SizeDelta: {x: 1125, y: 200}
+  m_SizeDelta: {x: 2250, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2103763109
 GameObject:
@@ -5362,6 +5370,7 @@ MonoBehaviour:
   levelTx: {fileID: 1158459633}
   level: 0
   container: {fileID: 1984642728}
+  scrollView: {fileID: 0}
 --- !u!1 &2122961512
 GameObject:
   m_ObjectHideFlags: 0

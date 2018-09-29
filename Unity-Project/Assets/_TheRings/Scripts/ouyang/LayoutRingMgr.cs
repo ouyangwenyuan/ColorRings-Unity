@@ -11,6 +11,7 @@ public class LayoutRingMgr : GameManager {
 	MessGameLevel gamelevel;
 	public int level;
 	public RectTransform container;
+	public  ScrollRect scrollView;
 	private float distance = 0.01f; // 世界坐标每单位像素为100，转换规则 屏幕坐标*0.01 = 世界坐标。
 	void Start () {
 
@@ -52,9 +53,9 @@ public class LayoutRingMgr : GameManager {
 		// currentLevel = GameState.levelindex;
 		levelTx.text = GameState.messLevel + ">" + GameState.levelindex;
 		loadLevelData ();
-		transform.position += new Vector3 (0, 0);
+		// transform.position += new Vector3 (0, 0);
 		// container.anchoredPosition = new Vector2 (0, container.anchoredPosition.y);
-		moveToRandomPoint ();
+		// moveToRandomPoint ();
 
 	}
 	public void CameraPosUpdate () {
@@ -298,7 +299,7 @@ public class LayoutRingMgr : GameManager {
 				isPaused = true;
 				Debug.Log ("游戏结束" + success);
 			} else {
-				moveToRandomPoint ();
+				// moveToRandomPoint ();
 			}
 		}
 
