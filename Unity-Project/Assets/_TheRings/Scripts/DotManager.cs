@@ -21,6 +21,8 @@ public class DotManager : MonoBehaviour {
     TargetItem[] ringItems;
     int currentLevel;
     int targetScore;
+    int targetCombo;
+    int tragetRingCount;
     int targetComboTotalCnt;
     public GameObject lineObject;
     [HideInInspector]
@@ -87,6 +89,7 @@ public class DotManager : MonoBehaviour {
             levelTx.text = GameState.levelindex + ">" + GameState.realLevel;
             GameLevelData levelData = CSVReader.gameLevelDatas[GameState.realLevel];
             targetScore = int.Parse (levelData.targetScore);
+            targetCombo = int.Parse (levelData.targetCombo);
 
             // scoreItem = Instantiate (UIManager.Instance.targetItem);
             // scoreItem.setData ("score", levelData.targetScore);
@@ -103,9 +106,9 @@ public class DotManager : MonoBehaviour {
                 ringItem.transform.SetParent (TargetContainer.transform);
                 ringItem.transform.position = TargetContainer.transform.position;
                 ringItem.transform.localScale = Vector3.one;
-                ringItem.transform.localPosition +=  new Vector3 (i * 250, ringItem.transform.localPosition.y, ringItem.transform.localPosition.z); //TargetContainer.transform.position;
+                ringItem.transform.localPosition += new Vector3 (i * 250, ringItem.transform.localPosition.y, ringItem.transform.localPosition.z); //TargetContainer.transform.position;
                 // ringItem.transform.Translate (100 * (i * 2 - 5), 0, 0);
-
+                tragetRingCount += int.Parse (levelData.targetRingCounts[i]);
                 ringItems[i] = ringItem;
             }
 
@@ -212,8 +215,16 @@ public class DotManager : MonoBehaviour {
                     // GameManager.Instance.gameOver = true;
                     // 过关进入下一关
                     // GameRunState.currentLevel.ChangeValue (1);
+                    int rate = 1;
+                    if (targetComboTotalCnt >= targetCombo) { rate++; }
+                    int sum = 0;
+                    for (int j = 0; j < ringItems.Length; j++) {
+                        sum += ringItems[j].total;
+                    }
+                    if (sum >= tragetRingCount) { rate++; }
                     int curLevel = PlayerPrefs.GetInt (CommonConst.PrefKeys.CURRENT_LEVEL, 1);
                     if (currentLevel == curLevel) {
+                        PlayerPrefs.SetInt ("sp_level_" + curLevel, rate);
                         PlayerPrefs.SetInt (CommonConst.PrefKeys.CURRENT_LEVEL, curLevel + 1);
                     }
                     UIManager.Instance.ShowSuccessUI ();
