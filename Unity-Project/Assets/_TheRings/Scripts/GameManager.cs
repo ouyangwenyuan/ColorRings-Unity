@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
         if (Input.GetMouseButtonDown (0)) //First touch
         {
             Vector2 touchPosition = Camera.main.ScreenToWorldPoint (Input.mousePosition); //Tranform mouse position to world position
-
+            Debug.Log("touchPosition" + touchPosition + "pixel pos=" + Input.mousePosition);
             //If the mouse position too far away the rearest random point -> not allow drag the rings
             if ((touchPosition - firstRandomPointPosition).magnitude < 1f) {
                 allowDrag = true;

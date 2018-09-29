@@ -10,7 +10,10 @@ public class LayoutRingMgr : GameManager {
 	private List<GameObject> bottomRings = new List<GameObject> ();
 	MessGameLevel gamelevel;
 	public int level;
+	public RectTransform container;
+	private float distance = 0.01f; // 世界坐标每单位像素为100，转换规则 屏幕坐标*0.01 = 世界坐标。
 	void Start () {
+
 		// gamelevel = Resources.Load<MessGameLevel> ("Levels/Mess/level_" + level);
 		// string[] boardRingStr = gamelevel.boardRings.Split (';');
 		// string[] bottomRingStr = gamelevel.bottomRings.Split (';');
@@ -49,13 +52,23 @@ public class LayoutRingMgr : GameManager {
 		// currentLevel = GameState.levelindex;
 		levelTx.text = GameState.messLevel + ">" + GameState.levelindex;
 		loadLevelData ();
+		transform.position += new Vector3 (0, 0);
+		// container.anchoredPosition = new Vector2 (0, container.anchoredPosition.y);
 		moveToRandomPoint ();
+
 	}
-	// private int[] ringType = { 1, 2, 4 };
+	public void CameraPosUpdate () {
+		// if (container.anchoredPosition.x >= 0 && container.anchoredPosition.x <= 3600) {
+		transform.position = new Vector3 ((container.anchoredPosition.x + 320) * distance, transform.position.y, transform.position.z);
+		// }
+	}
 	private void moveToRandomPoint () {
 		if (bottomRings.Count > 0) {
 			bottomRings[0].transform.parent = randomPoint.transform;
-			bottomRings[0].transform.position = randomPoint.transform.position;
+			// bottomRings[0].transform.position = randomPoint.transform.position;
+			iTween.MoveTo (bottomRings[0].gameObject, randomPoint.transform.position, 1);
+			// this.transform.Translate(-1.5f,0,0);
+			iTween.MoveTo (this.gameObject, this.transform.position + new Vector3 (-1.5f, 0, 0), 1);
 		}
 	}
 	public void resetGame () {

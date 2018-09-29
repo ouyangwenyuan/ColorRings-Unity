@@ -403,7 +403,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd48026e176cad48bb8710b07feb35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showMenuAtStart: 0
   gameManager: {fileID: 2110752149}
   mainCanvas: {fileID: 1299860969}
   pauseCanvas: {fileID: 2124692370}
@@ -1200,7 +1199,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2110752150}
+      - m_Target: {fileID: 2110752149}
         m_MethodName: CameraPosUpdate
         m_Mode: 1
         m_Arguments:
@@ -2247,7 +2246,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 577041220}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2250, y: -100, z: 0}
+  m_LocalPosition: {x: 562.5, y: -100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1984642728}
@@ -5117,7 +5116,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1984642727}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -734, y: 0, z: 0}
+  m_LocalPosition: {x: -562.0676, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 577041221}
@@ -5126,8 +5125,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -734, y: 0}
-  m_SizeDelta: {x: 4500, y: 200}
+  m_AnchoredPosition: {x: -562.0676, y: 0}
+  m_SizeDelta: {x: 1125, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2103763109
 GameObject:
@@ -5313,7 +5312,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2110752148}
   - component: {fileID: 2110752149}
-  - component: {fileID: 2110752150}
   m_Layer: 9
   m_Name: RingList
   m_TagString: RandomPoint
@@ -5346,7 +5344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameType: 2
-  enablePremiumFeatures: 0
   dotManager: {fileID: 507942688}
   uIManager: {fileID: 140034734}
   randomPoint: {fileID: 180721828}
@@ -5363,17 +5360,6 @@ MonoBehaviour:
     type: 2}
   levelTx: {fileID: 1158459633}
   level: 0
---- !u!114 &2110752150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2110752147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1291ebce47794c818a951bd1ea7494f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   container: {fileID: 1984642728}
 --- !u!1 &2122961512
 GameObject:
