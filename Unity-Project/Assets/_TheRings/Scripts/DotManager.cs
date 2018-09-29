@@ -100,9 +100,12 @@ public class DotManager : MonoBehaviour {
             for (int i = 0; i < levelData.targetRingCounts.Length; i++) {
                 TargetItem ringItem = Instantiate (UIManager.Instance.targetItem);
                 ringItem.setData ("", levelData.targetRingCounts[i], int.Parse (levelData.targetRingColors[i]));
-                ringItem.transform.SetParent (TargetContainer.transform,false);
-                ringItem.transform.localPosition = Vector3.zero; //TargetContainer.transform.position;
-                ringItem.transform.Translate (100 * (i * 2 - 5), 0, 0);
+                ringItem.transform.SetParent (TargetContainer.transform);
+                ringItem.transform.position = TargetContainer.transform.position;
+                ringItem.transform.localScale = Vector3.one;
+                ringItem.transform.localPosition +=  new Vector3 (i * 250, ringItem.transform.localPosition.y, ringItem.transform.localPosition.z); //TargetContainer.transform.position;
+                // ringItem.transform.Translate (100 * (i * 2 - 5), 0, 0);
+
                 ringItems[i] = ringItem;
             }
 

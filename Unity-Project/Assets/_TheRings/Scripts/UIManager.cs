@@ -419,23 +419,24 @@ public class UIManager : MonoBehaviour {
             mumite = TotalTime / 60; //输出显示分
 
             second = TotalTime % 60; //输出显示秒
-
+            string time = string.Format("{0:D2}:{1:D2}",mumite,second);
+            TimeText.text = time;
             // string length = mumite.ToString ();
             // percentageImg.fillAmount = (float) TotalTime / (float) percentage;
-            if (second >= 10) {
-                if (mumite >= 10) {
-                    TimeText.text = mumite + ":" + second;
-                } else {
-                    TimeText.text = "0" + mumite + ":" + second;
-                }
-            } //如果秒大于10的时候，就输出格式为 00：00
-            else {
-                if (mumite >= 10) {
-                    TimeText.text = mumite + ":0" + second;
-                } else {
-                    TimeText.text = "0" + mumite + ":0" + second; //如果秒小于10的时候，就输出格式为 00：00
-                }
-            }
+            // if (second >= 10) {
+            //     if (mumite >= 10) {
+            //         TimeText.text = mumite + ":" + second;
+            //     } else {
+            //         TimeText.text = "0" + mumite + ":" + second;
+            //     }
+            // } //如果秒大于10的时候，就输出格式为 00：00
+            // else {
+            //     if (mumite >= 10) {
+            //         TimeText.text = mumite + ":0" + second;
+            //     } else {
+            //         TimeText.text = "0" + mumite + ":0" + second; //如果秒小于10的时候，就输出格式为 00：00
+            //     }
+            // }
 
         }
 
