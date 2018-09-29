@@ -33,11 +33,17 @@ public class PauseDialogController : MonoBehaviour {
 		this.gameObject.SetActive (false);
 		if (index == 1) {
 			//restart game
-			UIManager.Instance.HandleRestartButton();
+			UIManager.Instance.HandleRestartButton ();
 		} else if (index == 2) {
 			//back home or back map
-			SceneManager.LoadScene (0);
+			if (fromScene == 0) {
+				SceneManager.LoadScene (1);
+			} else if (fromScene == 1) {
+				SceneManager.LoadScene (2);
+			} else {
+				SceneManager.LoadScene (0);
+			}
 		}
-		UIManager.Instance.HandlePlayButtonOnPauseCanvas();
+		UIManager.Instance.HandlePlayButtonOnPauseCanvas ();
 	}
 }

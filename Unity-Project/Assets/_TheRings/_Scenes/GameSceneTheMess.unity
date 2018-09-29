@@ -437,6 +437,7 @@ MonoBehaviour:
   targetItem: {fileID: 114237814776251172, guid: 1c0c5c24c80814a1abe65aff728b1cc9,
     type: 2}
   miGe: {fileID: 1277251599528128, guid: b9ff358174e3d443bb5c5b39bf3f4b2d, type: 2}
+  TimeText: {fileID: 0}
 --- !u!4 &140034735
 Transform:
   m_ObjectHideFlags: 0
@@ -5583,6 +5584,11 @@ Prefab:
     - target: {fileID: 1810044806889290, guid: 7d9cc89b4e2354318a9f4f0b0332a1ee, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114357490826783318, guid: 7d9cc89b4e2354318a9f4f0b0332a1ee,
+        type: 2}
+      propertyPath: fromScene
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d9cc89b4e2354318a9f4f0b0332a1ee, type: 2}

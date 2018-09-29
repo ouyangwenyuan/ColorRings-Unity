@@ -11,38 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1820405833536498}
   m_IsPrefabParent: 1
---- !u!1 &1136310104134010
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4793287754730938}
-  - component: {fileID: 114478000485432780}
-  m_Layer: 0
-  m_Name: CoinManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1150496950204676
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4983261501374988}
-  - component: {fileID: 114660220464670596}
-  m_Layer: 0
-  m_Name: AppInfo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1165244610038120
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,39 +32,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1471678082836566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4320958689602180}
-  - component: {fileID: 114458547722101946}
-  - component: {fileID: 82065228583731324}
-  m_Layer: 0
-  m_Name: SoundManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1618524804519108
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4605693026255056}
-  - component: {fileID: 114981608161931476}
-  m_Layer: 0
-  m_Name: ScoreManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1820405833536498
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +40,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4661198461438760}
+  - component: {fileID: 114559424684906452}
+  - component: {fileID: 114727193305970088}
+  - component: {fileID: 114551203015941158}
+  - component: {fileID: 82371403432431198}
+  - component: {fileID: 114016944092914706}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -123,33 +63,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4661198461438760}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4320958689602180
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1471678082836566}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4661198461438760}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4605693026255056
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1618524804519108}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4661198461438760}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4661198461438760
 Transform:
@@ -161,51 +75,21 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4983261501374988}
-  - {fileID: 4605693026255056}
-  - {fileID: 4793287754730938}
-  - {fileID: 4320958689602180}
   - {fileID: 4101691260424490}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4793287754730938
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136310104134010}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4661198461438760}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4983261501374988
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1150496950204676}
-  m_LocalRotation: {x: 0.0547964, y: 0.69624805, z: 0.696248, w: -0.16575535}
-  m_LocalPosition: {x: 99, y: 99, z: 99}
-  m_LocalScale: {x: 9999.006, y: 9999.003, z: 9999.004}
-  m_Children: []
-  m_Father: {fileID: 4661198461438760}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 999, y: 999, z: 999}
---- !u!82 &82065228583731324
+--- !u!82 &82371403432431198
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1471678082836566}
+  m_GameObject: {fileID: 1820405833536498}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dce90a20357de5a4eb0aa14727e13583, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -262,7 +146,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -275,6 +159,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114016944092914706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820405833536498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb546c7d8b6c4aa0a5a0d15b48c91ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSimultaneousSounds: 7
+  button:
+    clip: {fileID: 8300000, guid: f40707d3138e7d74994d4507578b2420, type: 3}
+    simultaneousPlayCount: 0
+  lineDestroy:
+    clip: {fileID: 8300000, guid: 43e16012d8f134aefb192732855f6bda, type: 3}
+    simultaneousPlayCount: 0
+  comboDestroy:
+    clip: {fileID: 8300000, guid: 1138470b971254dce90bdeea3f34221a, type: 3}
+    simultaneousPlayCount: 0
+  dropRing:
+    clip: {fileID: 8300000, guid: f6ec02a7692964380bd7d9b668b6edb3, type: 3}
+    simultaneousPlayCount: 0
+  gameOver:
+    clip: {fileID: 8300000, guid: bba2121a3a5565a4d814c8754a480df1, type: 3}
+    simultaneousPlayCount: 0
+  tick:
+    clip: {fileID: 8300000, guid: f6ec02a7692964380bd7d9b668b6edb3, type: 3}
+    simultaneousPlayCount: 0
+  rewarded:
+    clip: {fileID: 8300000, guid: 5c8a03872f4af4968a677c3a203d37d1, type: 3}
+    simultaneousPlayCount: 0
 --- !u!114 &114049208214945586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -310,52 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf4a2538c64745739e9bde27352b463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114458547722101946
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1471678082836566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb546c7d8b6c4aa0a5a0d15b48c91ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSimultaneousSounds: 7
-  button:
-    clip: {fileID: 8300000, guid: f40707d3138e7d74994d4507578b2420, type: 3}
-    simultaneousPlayCount: 0
-  lineDestroy:
-    clip: {fileID: 8300000, guid: 43e16012d8f134aefb192732855f6bda, type: 3}
-    simultaneousPlayCount: 0
-  comboDestroy:
-    clip: {fileID: 8300000, guid: 1138470b971254dce90bdeea3f34221a, type: 3}
-    simultaneousPlayCount: 0
-  dropRing:
-    clip: {fileID: 8300000, guid: f6ec02a7692964380bd7d9b668b6edb3, type: 3}
-    simultaneousPlayCount: 0
-  gameOver:
-    clip: {fileID: 8300000, guid: bba2121a3a5565a4d814c8754a480df1, type: 3}
-    simultaneousPlayCount: 0
-  tick:
-    clip: {fileID: 8300000, guid: f6ec02a7692964380bd7d9b668b6edb3, type: 3}
-    simultaneousPlayCount: 0
-  rewarded:
-    clip: {fileID: 8300000, guid: 5c8a03872f4af4968a677c3a203d37d1, type: 3}
-    simultaneousPlayCount: 0
---- !u!114 &114478000485432780
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1136310104134010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 488dea2dd9c4740399c8aa4754ef8e08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialCoins: 0
-  _coins: 0
 --- !u!114 &114482899182559822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -409,25 +280,25 @@ MonoBehaviour:
     scoreToUnlock: 190
   - achievementName: Score_200
     scoreToUnlock: 200
---- !u!114 &114602626615507638
+--- !u!114 &114551203015941158
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1165244610038120}
+  m_GameObject: {fileID: 1820405833536498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7b09fb089ace462f97d934784390a38, type: 3}
+  m_Script: {fileID: 11500000, guid: 488dea2dd9c4740399c8aa4754ef8e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shareMessage: Awesome! I've just scored [score] in [AppName]! [#AppName]
-  screenshotFilename: screenshot.png
---- !u!114 &114660220464670596
+  initialCoins: 0
+  _coins: 0
+--- !u!114 &114559424684906452
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1150496950204676}
+  m_GameObject: {fileID: 1820405833536498}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0880f83037c764ac6b3a06b71bbea97e, type: 3}
@@ -449,6 +320,30 @@ MonoBehaviour:
   TWITTER_LINK: https://twitter.com/
   targetFrameRate: 60
   clearPlayerPrefs: 0
+--- !u!114 &114602626615507638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1165244610038120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b09fb089ace462f97d934784390a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shareMessage: Awesome! I've just scored [score] in [AppName]! [#AppName]
+  screenshotFilename: screenshot.png
+--- !u!114 &114727193305970088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820405833536498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 305d0278e9c5c4384bd39352f851d3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114847008270495970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -461,14 +356,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   removeAds: Remove_Ads
---- !u!114 &114981608161931476
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1618524804519108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 305d0278e9c5c4384bd39352f851d3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class HomeController : MonoBehaviour {
 
 	public GameObject[] homeCanvas;
-	public GameObject playBtn;
-	public GameObject settingBtn;
-	public GameObject homeBtn;
-	public GameObject closeSetting;
+	// public GameObject playBtn;
+	// public GameObject settingBtn;
+	// public GameObject homeBtn;
+	// public GameObject closeSetting;
 	public Transform BtnWrapper;
 	// Use this for initialization
 	void Start () {
@@ -21,30 +21,18 @@ public class HomeController : MonoBehaviour {
 				switchScene (x);
 			});
 		}
-		playBtn.GetComponent<Button> ().onClick.AddListener (delegate () {
-			switchCanvas (1);
-		});
-		settingBtn.GetComponent<Button> ().onClick.AddListener (delegate () {
-			switchCanvas (2);
-		});
-		homeBtn.GetComponent<Button> ().onClick.AddListener (delegate () {
-			switchCanvas (0);
-		});
-		closeSetting.GetComponent<Button> ().onClick.AddListener (delegate () {
-			switchCanvas (0);
-		});
-	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-	public void showSelectGameMode () {
-
-	}
-	public void showSetting () {
-
+		// playBtn.GetComponent<Button> ().onClick.AddListener (delegate () {
+		// 	switchCanvas (1);
+		// });
+		// settingBtn.GetComponent<Button> ().onClick.AddListener (delegate () {
+		// 	switchCanvas (2);
+		// });
+		// homeBtn.GetComponent<Button> ().onClick.AddListener (delegate () {
+		// 	switchCanvas (0);
+		// });
+		// closeSetting.GetComponent<Button> ().onClick.AddListener (delegate () {
+		// 	switchCanvas (0);
+		// });
 	}
 
 	public void switchCanvas (int index) {
