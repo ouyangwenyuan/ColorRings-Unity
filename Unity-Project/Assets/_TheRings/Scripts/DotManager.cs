@@ -231,11 +231,14 @@ public class DotManager : MonoBehaviour {
                     Debug.Log (",reallevel=" + curLevel + 1);
 
                 }
+                UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
+                UIManager.Instance.scoreProgress.fillAmount = ScoreManager.Instance.Score / maxScore;
             } else if (gameType == 2) {
                 maxScore = ScoreManager.Instance.HighScore;
+                UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
+                UIManager.Instance.scoreProgress.fillAmount = ScoreManager.Instance.Score / maxScore;
             }
-            UIManager.Instance.txtScore.text = ScoreManager.Instance.Score.ToString ();
-            UIManager.Instance.scoreProgress.fillAmount = ScoreManager.Instance.Score / maxScore;
+
         }
 
         if (listDestroyRing.Count >= 5) {

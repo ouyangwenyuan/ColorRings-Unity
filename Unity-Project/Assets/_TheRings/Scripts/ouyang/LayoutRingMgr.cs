@@ -237,7 +237,7 @@ public class LayoutRingMgr : GameManager {
 			if (allowDrag) {
 				float x = Input.mousePosition.x;
 				float y = Input.mousePosition.y;
-				clickRing.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (x, y, 1f)) + new Vector3 (0, 0.3f, 0); // lift the ring a bit for not being covered by finger.
+				clickRing.transform.position = Camera.main.ScreenToWorldPoint (new Vector3 (x, y, 2f)) + new Vector3 (0, 0.3f, 0); // lift the ring a bit for not being covered by finger.
 			}
 		} else
 
