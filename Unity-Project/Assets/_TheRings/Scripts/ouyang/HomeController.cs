@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class HomeController : MonoBehaviour {
 
 	public GameObject[] homeCanvas;
-	// public GameObject playBtn;
 	// public GameObject settingBtn;
 	// public GameObject homeBtn;
 	// public GameObject closeSetting;

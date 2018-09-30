@@ -11,6 +11,7 @@ public class LayoutRingMgr : GameManager {
 	MessGameLevel gamelevel;
 	public int level;
 	public RectTransform container;
+	public ScrollRect scrollView;
 	private float distance = 0.01f; // 世界坐标每单位像素为100，转换规则 屏幕坐标*0.01 = 世界坐标。
 	void Start () {
 
@@ -65,8 +66,10 @@ public class LayoutRingMgr : GameManager {
 	private void moveToRandomPoint () {
 		if (bottomRings.Count > 0) {
 			bottomRings[0].transform.parent = randomPoint.transform;
+			// bottomRings[0].transform.localScale = Vector3.one;
 			// bottomRings[0].transform.position = randomPoint.transform.position;
 			iTween.MoveTo (bottomRings[0].gameObject, randomPoint.transform.position, 1);
+			iTween.ScaleTo (bottomRings[0].gameObject, Vector3.one, 1);
 			// this.transform.Translate(-1.5f,0,0);
 			iTween.MoveTo (this.gameObject, this.transform.position + new Vector3 (-1.5f, 0, 0), 1);
 		}
@@ -150,19 +153,21 @@ public class LayoutRingMgr : GameManager {
 		string[] ringStrs = bottomRingStr.Split (',');
 		GameObject wraper = Instantiate (BottomdotPoint);
 		wraper.transform.parent = transform;
-		wraper.transform.position = new Vector3 (transform.position.x + i * 1.5f, transform.position.y, transform.position.z);
-		wraper.transform.localScale = Vector3.one;
+		wraper.transform.position = new Vector3 (transform.position.x + i * 1.0f, transform.position.y, transform.position.z);
+
 		wraper.layer = 9;
 		// wraper.GetComponent<DotController> ().dotIndex = i;
 		for (int j = 0; j < (ringStrs.Length) / 2; j++) {
 			int ringType = int.Parse (ringStrs[2 * j]);
 			int colorIndex = int.Parse (ringStrs[2 * j + 1]);
 			GameObject ring = null;
+			// float newy  = 0;
 			if (ringType == 1) {
 				ring = Instantiate (UIManager.Instance.smallRing);
 			} else if (ringType == 2) {
 				ring = Instantiate (UIManager.Instance.normalRing);
 			} else if (ringType == 4) {
+				// newy = -0.4f;
 				ring = Instantiate (UIManager.Instance.bigRing);
 			}
 			ring.transform.parent = wraper.transform;
@@ -184,6 +189,7 @@ public class LayoutRingMgr : GameManager {
 				z = -0.3f;
 			}
 			ring.transform.Translate (new Vector3 (0, 0, z));
+			wraper.transform.localScale = Vector3.one * 0.7f;
 		}
 		bottomRings.Add (wraper);
 
