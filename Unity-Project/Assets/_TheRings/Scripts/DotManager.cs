@@ -512,7 +512,6 @@ public class DotManager : MonoBehaviour {
         switch (ringTotal) {
             case 7:
                 if (smallring.colorIndex == midring.colorIndex && midring.colorIndex == bigring.colorIndex) {
-
                     bool match = removeRings (smallColors, clickPoint, smallring);
                     clickPoint.ringTotal -= smallring.ringType;
                     smallring.destroyed = true;
@@ -523,6 +522,7 @@ public class DotManager : MonoBehaviour {
                     clickPoint.ringTotal -= midring.ringType;
                     midring.destroyed = true;
                     midring = null;
+                    combo++;
                 } else if (smallring.colorIndex == midring.colorIndex && midring.colorIndex != bigring.colorIndex) {
                     removeRings (bigColors, clickPoint, bigring);
                     bool match = removeRings (smallColors, clickPoint, smallring);
