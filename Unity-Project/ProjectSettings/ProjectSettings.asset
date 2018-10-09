@@ -150,6 +150,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Android: com.fotoable.colormaze
     iOS: com.fotoable.colormaze
   buildNumber: {}
   AndroidBundleVersionCode: 1
@@ -226,8 +227,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: colormaze.keystore
+  AndroidKeyaliasName: colormaze
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   AndroidEnableTango: 0

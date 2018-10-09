@@ -29,7 +29,12 @@ public class CSVReader : MonoBehaviour {
 
 	// Bind Component
 	void Awake () {
+		// #if UNITY_IOS
 		_loadPath = Application.streamingAssetsPath + "/Load/";
+#if UNITY_ANDROID
+		_loadPath = "jar:file://" + Application.dataPath + "/!/assets" + "/Load/";
+#endif
+
 		_savePath = Application.streamingAssetsPath + "/Save/";
 		Load ();
 		// DontDestroyOnLoad (this);
@@ -44,27 +49,48 @@ public class CSVReader : MonoBehaviour {
 			return;
 		}
 
+		if (Application.platform == RuntimePlatform.Android) {
+			StartCoroutine (LoadWWW ());
+			StartCoroutine (LoadWWW1 ());
+		} else {
+			string fullFileName = _loadPath + _fileName + EXTENSION;
+			StreamReader sr;
+			sr = File.OpenText (fullFileName);
+			string content = sr.ReadToEnd ();
+			sr.Close ();
+			sr.Dispose ();
+			_table = CSVTable.CreateTable (_fileName, content);
+			// 添加测试
+			toObject ();
+
+			sr = File.OpenText (_loadPath + _messFileName + EXTENSION);
+			content = sr.ReadToEnd ();
+			sr.Close ();
+			sr.Dispose ();
+			_messTable = CSVTable.CreateTable (_messFileName, content);
+			print ("content1  =" + _messTable.ToString ());
+			// Test ();
+			toMessObject ();
+		}
+	}
+	IEnumerator LoadWWW () {
 		string fullFileName = _loadPath + _fileName + EXTENSION;
-		StreamReader sr;
-		sr = File.OpenText (fullFileName);
-		string content = sr.ReadToEnd ();
-		sr.Close ();
-		sr.Dispose ();
+		WWW www = new WWW (fullFileName);
+		yield return www;
+		string content = www.text; //System.Text.Encoding.Default.GetString (www.bytes);
 		_table = CSVTable.CreateTable (_fileName, content);
 		// 添加测试
-
 		toObject ();
-
-		sr = File.OpenText (_loadPath + _messFileName + EXTENSION);
-		content = sr.ReadToEnd ();
-		sr.Close ();
-		sr.Dispose ();
+	}
+	IEnumerator LoadWWW1 () {
+		string fullFileName = _loadPath + _messFileName + EXTENSION;
+		WWW www = new WWW (fullFileName);
+		yield return www;
+		string content = www.text; //System.Text.Encoding.Default.GetString (www.bytes);
 		_messTable = CSVTable.CreateTable (_messFileName, content);
 		print ("content1  =" + _messTable.ToString ());
-		// Test ();
 		toMessObject ();
 	}
-
 	//cloumnName
 	private string[] cloumnName = { "_id", "Levelname", "targetScore", "targetCombo", "targetRingColor", "targetRingCount", "totalColorCount", "usedTime" };
 	public static List<GameLevelData> gameLevelDatas = new List<GameLevelData> ();
