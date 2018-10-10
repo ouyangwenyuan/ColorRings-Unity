@@ -30,65 +30,86 @@ public class CSVReader : MonoBehaviour {
 	// Bind Component
 	void Awake () {
 		// #if UNITY_IOS
-		_loadPath = Application.streamingAssetsPath + "/Load/";
-#if UNITY_ANDROID
-		_loadPath = "jar:file://" + Application.dataPath + "/!/assets" + "/Load/";
-#endif
+		_loadPath = Application.streamingAssetsPath + "/";
+		// #if UNITY_ANDROID
+		// 		_loadPath = "jar:file://" + Application.dataPath + "/!/assets/";
+		// #endif
 
-		_savePath = Application.streamingAssetsPath + "/Save/";
+		_savePath = Application.streamingAssetsPath + "/";
 		Load ();
-		// DontDestroyOnLoad (this);
+		DontDestroyOnLoad (this);
 	}
 
 	/// <summary>
 	/// 加载文件
 	/// </summary>
 	private void Load () {
-		if (!Directory.Exists (_loadPath)) {
-			Debug.LogError ("The file not be found in this path. path:" + _loadPath);
-			return;
-		}
+		// if (!Directory.Exists (_loadPath)) {
+		// 	Debug.LogError ("The file not be found in this path. path:" + _loadPath);
+		// 	return;
+		// }
 
-		if (Application.platform == RuntimePlatform.Android) {
-			StartCoroutine (LoadWWW ());
-			StartCoroutine (LoadWWW1 ());
-		} else {
-			string fullFileName = _loadPath + _fileName + EXTENSION;
-			StreamReader sr;
-			sr = File.OpenText (fullFileName);
-			string content = sr.ReadToEnd ();
-			sr.Close ();
-			sr.Dispose ();
-			_table = CSVTable.CreateTable (_fileName, content);
-			// 添加测试
-			toObject ();
-
-			sr = File.OpenText (_loadPath + _messFileName + EXTENSION);
-			content = sr.ReadToEnd ();
-			sr.Close ();
-			sr.Dispose ();
-			_messTable = CSVTable.CreateTable (_messFileName, content);
-			print ("content1  =" + _messTable.ToString ());
-			// Test ();
-			toMessObject ();
-		}
-	}
-	IEnumerator LoadWWW () {
+		// if (Application.platform == RuntimePlatform.Android) {
+		// LoadWWW ();
+		// LoadWWW1 ();
+		// } else {
 		string fullFileName = _loadPath + _fileName + EXTENSION;
-		WWW www = new WWW (fullFileName);
-		yield return www;
-		string content = www.text; //System.Text.Encoding.Default.GetString (www.bytes);
+		// StreamReader sr;
+		// sr = File.OpenText (fullFileName);
+		// string content = sr.ReadToEnd ();
+		// sr.Close ();
+		// sr.Dispose ();
+		string content = LoadFile (fullFileName);
+		print ("content  =" + content);
 		_table = CSVTable.CreateTable (_fileName, content);
 		// 添加测试
 		toObject ();
-	}
-	IEnumerator LoadWWW1 () {
-		string fullFileName = _loadPath + _messFileName + EXTENSION;
-		WWW www = new WWW (fullFileName);
-		yield return www;
-		string content = www.text; //System.Text.Encoding.Default.GetString (www.bytes);
+
+		// sr = File.OpenText (_loadPath + _messFileName + EXTENSION);
+		// content = sr.ReadToEnd ();
+		// sr.Close ();
+		// sr.Dispose ();
+		content = LoadFile (_loadPath + _messFileName + EXTENSION);
 		_messTable = CSVTable.CreateTable (_messFileName, content);
-		print ("content1  =" + _messTable.ToString ());
+		print ("content1  =" + content);
+		// Test ();
+		toMessObject ();
+		// }
+	}
+	public  string  LoadFile (string  url) {
+		// string  url  =  Application.streamingAssetsPath  +  "/"  +  filePath;
+#if UNITY_ANDROID
+		WWW www  =  new  WWW (url);
+		while  (!www.isDone)  { }
+		return  www.text;
+#else
+		return  File.ReadAllText (url);
+#endif
+	}
+
+	void LoadWWW () {
+		string fullFileName = _loadPath + _fileName + EXTENSION;
+		WWW www = new WWW (fullFileName); //("jar:file://" + Application.dataPath + "/!/assets" + "/Load/" + _fileName + EXTENSION);
+		// yield return www;
+		while (!www.isDone) {
+
+		}
+		string content = www.text; // System.Text.Encoding.Default.GetString (www.bytes);
+		_table = CSVTable.CreateTable (_fileName, content);
+		print (fullFileName + "content1  =" + content);
+		// 添加测试
+		toObject ();
+	}
+	void LoadWWW1 () {
+		string fullFileName = _loadPath + _messFileName + EXTENSION;
+		WWW www = new WWW (fullFileName); //("jar:file://" + Application.dataPath + "/!/assets" + "/Load/" + _messFileName + EXTENSION);
+		while (!www.isDone) {
+
+		}
+		// yield return www;
+		string content = System.Text.Encoding.Default.GetString (www.bytes);
+		_messTable = CSVTable.CreateTable (_messFileName, content);
+		print (fullFileName + "content1  =" + _messTable.ToString ());
 		toMessObject ();
 	}
 	//cloumnName
