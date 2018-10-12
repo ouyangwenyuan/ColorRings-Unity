@@ -37,7 +37,7 @@ public class CSVReader : MonoBehaviour {
 
 		_savePath = Application.streamingAssetsPath + "/";
 		Load ();
-		DontDestroyOnLoad (this);
+		// DontDestroyOnLoad (this);
 	}
 
 	/// <summary>
