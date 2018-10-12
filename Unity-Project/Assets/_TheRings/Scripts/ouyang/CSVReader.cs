@@ -113,7 +113,7 @@ public class CSVReader : MonoBehaviour {
 		toMessObject ();
 	}
 	//cloumnName
-	private string[] cloumnName = { "_id", "Levelname", "targetScore", "targetCombo", "targetRingColor", "targetRingCount", "totalColorCount", "usedTime" };
+	// private string[] cloumnName = { "_id", "Levelname", "targetScore", "targetCombo", "targetRingColor", "targetRingCount", "totalColorCount", "usedTime" };
 	public static List<GameLevelData> gameLevelDatas = new List<GameLevelData> ();
 	public static List<GameLevelData> gameMessLevelDatas = new List<GameLevelData> ();
 	private void toObject () {
