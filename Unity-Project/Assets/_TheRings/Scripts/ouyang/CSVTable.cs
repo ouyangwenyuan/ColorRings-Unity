@@ -200,6 +200,7 @@ public class CSVTable : IEnumerable {
 		CSVTable table = new CSVTable (tableName, keys);
 
 		for (int i = 1; i < lines.Length; i++) {
+			if(string.IsNullOrEmpty(lines[i])){continue;}
 			string[] values = lines[i].Split (',');
 			string major = values[0].Trim ();
 			Dictionary<string, string> tempAttributeDic = new Dictionary<string, string> ();
