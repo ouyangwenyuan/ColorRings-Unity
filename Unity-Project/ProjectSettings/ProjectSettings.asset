@@ -150,7 +150,8 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.fotoable.colormaze
     iOS: com.fotoable.colormaze
-  buildNumber: {}
+  buildNumber:
+    iOS: 3
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
@@ -218,7 +219,7 @@ PlayerSettings:
   metalEditorSupport: 0
   metalAPIValidation: 1
   iOSRenderExtraFrameOnPause: 0
-  appleDeveloperTeamID: 
+  appleDeveloperTeamID: SIYUAN YIN
   iOSManualSigningProvisioningProfileID: 
   tvOSManualSigningProvisioningProfileID: 
   appleEnableAutomaticSigning: 0
